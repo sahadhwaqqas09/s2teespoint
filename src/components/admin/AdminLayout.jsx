@@ -61,7 +61,7 @@ export default function AdminLayout() {
           height: '100%',
           width: '240px',
           backgroundColor: '#0a0a0a',
-          borderRight: '1px solid #FFD700',
+          borderRight: '1px solid #FFFFFF',
           display: 'flex',
           flexDirection: 'column',
           zIndex: 30,
@@ -72,7 +72,7 @@ export default function AdminLayout() {
         {/* Sidebar Brand */}
         <div style={{
           padding: '20px 18px 14px',
-          borderBottom: '1px solid rgba(255, 215, 0, 0.15)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -80,7 +80,7 @@ export default function AdminLayout() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
               width: '36px', height: '36px',
-              background: '#FFD700',
+              background: '#FFFFFF',
               borderRadius: '10px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontWeight: 900, fontSize: '14px', color: '#000',
@@ -88,7 +88,7 @@ export default function AdminLayout() {
               flexShrink: 0,
             }}>S2</div>
             <div>
-              <p style={{ color: '#FFD700', fontWeight: 700, fontSize: '13px', margin: 0, letterSpacing: '0.05em' }}>
+              <p style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '13px', margin: 0, letterSpacing: '0.05em' }}>
                 S2 Teespoint
               </p>
               <p style={{ color: '#666', fontSize: '10px', margin: 0, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
@@ -99,7 +99,7 @@ export default function AdminLayout() {
           <button
             onClick={closeSidebar}
             className="sidebar-close-btn"
-            style={{ background: 'none', border: 'none', color: '#FFD700', cursor: 'pointer', display: 'none' }}
+            style={{ background: 'none', border: 'none', color: '#FFFFFF', cursor: 'pointer', display: 'none' }}
             aria-label="Close sidebar"
           >
             <X size={18} />
@@ -124,16 +124,16 @@ export default function AdminLayout() {
                 fontWeight: isActive ? 700 : 500,
                 fontSize: '13px',
                 color: isActive ? '#000' : '#aaa',
-                backgroundColor: isActive ? '#FFD700' : 'transparent',
+                backgroundColor: isActive ? '#FFFFFF' : 'transparent',
                 border: isActive ? 'none' : '1px solid transparent',
                 transition: 'all 0.15s ease',
                 letterSpacing: '0.02em',
               })}
               onMouseEnter={(e) => {
                 if (!e.currentTarget.style.backgroundColor.includes('255, 215')) {
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 215, 0, 0.1)'
-                  e.currentTarget.style.color = '#FFD700'
-                  e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.25)'
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'
+                  e.currentTarget.style.color = '#FFFFFF'
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)'
                 }
               }}
               onMouseLeave={(e) => {
@@ -151,8 +151,8 @@ export default function AdminLayout() {
                   {label === 'Orders' && unconfirmedCount > 0 && (
                     <span
                       style={{
-                        backgroundColor: isActive ? '#000' : '#FFD700',
-                        color: isActive ? '#FFD700' : '#111',
+                        backgroundColor: isActive ? '#000' : '#FFFFFF',
+                        color: isActive ? '#FFFFFF' : '#111',
                         fontSize: '10px',
                         fontWeight: 900,
                         padding: '2px 7px',
@@ -180,18 +180,18 @@ export default function AdminLayout() {
               display: 'flex', alignItems: 'center', gap: '10px',
               padding: '10px 12px', borderRadius: '8px',
               textDecoration: 'none',
-              background: 'rgba(255, 215, 0, 0.06)',
-              border: '1px solid rgba(255, 215, 0, 0.3)',
-              color: '#FFD700', fontSize: '13px', fontWeight: 600,
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              color: '#FFFFFF', fontSize: '13px', fontWeight: 600,
               transition: 'all 0.15s ease',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.background = 'rgba(255, 215, 0, 0.15)'
-              e.currentTarget.style.borderColor = '#FFD700'
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'
+              e.currentTarget.style.borderColor = '#FFFFFF'
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(255, 215, 0, 0.06)'
-              e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)'
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)'
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)'
             }}
           >
             <ExternalLink size={15} />
@@ -200,7 +200,7 @@ export default function AdminLayout() {
         </div>
 
         {/* Logout */}
-        <div style={{ padding: '0 10px 16px', borderTop: '1px solid rgba(255,215,0,0.1)', paddingTop: '8px', marginTop: '4px' }}>
+        <div style={{ padding: '0 10px 16px', borderTop: '1px solid rgba(255, 255, 255,0.1)', paddingTop: '8px', marginTop: '4px' }}>
           <button
             onClick={handleLogout}
             style={{
@@ -234,7 +234,7 @@ export default function AdminLayout() {
         <header style={{
           height: '58px',
           backgroundColor: '#0a0a0a',
-          borderBottom: '1px solid #FFD700',
+          borderBottom: '1px solid #FFFFFF',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -242,12 +242,12 @@ export default function AdminLayout() {
           position: 'sticky',
           top: 0,
           zIndex: 10,
-          boxShadow: '0 2px 20px rgba(255, 215, 0, 0.06)',
+          boxShadow: '0 2px 20px rgba(255, 255, 255, 0.06)',
         }}>
           {/* Hamburger */}
           <button
             onClick={() => setSidebarOpen(prev => !prev)}
-            style={{ background: 'none', border: 'none', color: '#FFD700', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '4px' }}
+            style={{ background: 'none', border: 'none', color: '#FFFFFF', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '4px' }}
             aria-label="Toggle sidebar"
           >
             <Menu size={22} />
@@ -255,7 +255,7 @@ export default function AdminLayout() {
 
           {/* Title */}
           <h1 style={{
-            color: '#FFD700',
+            color: '#FFFFFF',
             fontSize: '15px',
             fontWeight: 700,
             margin: 0,
@@ -272,20 +272,20 @@ export default function AdminLayout() {
             style={{
               display: 'flex', alignItems: 'center', gap: '6px',
               padding: '6px 14px', borderRadius: '6px',
-              background: 'rgba(255, 215, 0, 0.08)',
-              border: '1px solid rgba(255, 215, 0, 0.4)',
-              color: '#FFD700', fontSize: '12px', fontWeight: 600,
+              background: 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              color: '#FFFFFF', fontSize: '12px', fontWeight: 600,
               textDecoration: 'none',
               letterSpacing: '0.04em',
               transition: 'all 0.15s ease',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.background = '#FFD700'
+              e.currentTarget.style.background = '#FFFFFF'
               e.currentTarget.style.color = '#000'
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(255, 215, 0, 0.08)'
-              e.currentTarget.style.color = '#FFD700'
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'
+              e.currentTarget.style.color = '#FFFFFF'
             }}
           >
             <ExternalLink size={13} />

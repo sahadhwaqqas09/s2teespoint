@@ -218,7 +218,7 @@ export default function AdminProducts() {
       {/* Header */}
       <div style={styles.header}>
         <div style={styles.titleRow}>
-          <Package size={26} color="#D4AF37" />
+          <Package size={26} color="#FFFFFF" />
           <h1 style={styles.title}>Manage Products</h1>
         </div>
         <button
@@ -310,8 +310,8 @@ export default function AdminProducts() {
                   <label
                     style={{
                       backgroundColor: '#1E1E1E',
-                      border: '1px dashed #D4AF37',
-                      color: '#D4AF37',
+                      border: '1px dashed #FFFFFF',
+                      color: '#FFFFFF',
                       padding: '8px 14px',
                       borderRadius: '8px',
                       fontSize: '0.8rem',
@@ -411,8 +411,8 @@ export default function AdminProducts() {
                           style={{
                             padding: '6px 14px',
                             borderRadius: '4px',
-                            border: `1px solid ${isActive ? '#D4AF37' : '#333'}`,
-                            backgroundColor: isActive ? '#D4AF37' : '#1a1a1a',
+                            border: `1px solid ${isActive ? '#FFFFFF' : '#333'}`,
+                            backgroundColor: isActive ? '#FFFFFF' : '#1a1a1a',
                             color: isActive ? '#111' : '#aaa',
                             fontSize: '0.82rem',
                             fontWeight: isActive ? '700' : '500',
@@ -493,7 +493,7 @@ export default function AdminProducts() {
 
         {loading ? (
           <div style={styles.emptyState}>
-            <Package size={40} color="#D4AF37" />
+            <Package size={40} color="#FFFFFF" />
             <p>Loading products…</p>
           </div>
         ) : products.length === 0 ? (
@@ -565,9 +565,9 @@ export default function AdminProducts() {
                             borderRadius: '4px',
                             fontSize: '0.75rem',
                             fontWeight: '600',
-                            backgroundColor: 'rgba(212,175,55,0.12)',
-                            border: '1px solid rgba(212,175,55,0.3)',
-                            color: '#D4AF37',
+                            backgroundColor: 'rgba(255, 255, 255,0.12)',
+                            border: '1px solid rgba(255, 255, 255,0.3)',
+                            color: '#FFFFFF',
                           }}
                         >
                           {product.tshirt_type}
@@ -629,7 +629,7 @@ export default function AdminProducts() {
             <h3 style={styles.dialogTitle}>Delete Product?</h3>
             <p style={styles.dialogBody}>
               Are you sure you want to delete{' '}
-              <strong style={{ color: '#D4AF37' }}>{deleteTarget.name}</strong>?
+              <strong style={{ color: '#FFFFFF' }}>{deleteTarget.name}</strong>?
               This action cannot be undone.
             </p>
             <div style={styles.dialogActions}>
@@ -682,7 +682,7 @@ const styles = {
   title: {
     fontSize: '1.8rem',
     fontWeight: 700,
-    color: '#D4AF37',
+    color: '#FFFFFF',
     margin: 0,
     letterSpacing: '0.04em',
   },
@@ -690,7 +690,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '0.4rem',
-    backgroundColor: '#D4AF37',
+    backgroundColor: '#FFFFFF',
     color: '#0a0a0a',
     border: 'none',
     borderRadius: '8px',
@@ -710,7 +710,7 @@ const styles = {
   formTitle: {
     fontSize: '1.1rem',
     fontWeight: 700,
-    color: '#D4AF37',
+    color: '#FFFFFF',
     marginTop: 0,
     marginBottom: '1.2rem',
     display: 'flex',
@@ -775,15 +775,15 @@ const styles = {
     fontSize: '0.82rem',
     fontWeight: 700,
     cursor: 'pointer',
-    border: `2px solid ${checked ? '#D4AF37' : '#333'}`,
-    backgroundColor: checked ? '#D4AF37' : 'transparent',
+    border: `2px solid ${checked ? '#FFFFFF' : '#333'}`,
+    backgroundColor: checked ? '#FFFFFF' : 'transparent',
     color: checked ? '#0a0a0a' : '#aaa',
     transition: 'all 0.15s',
     userSelect: 'none',
   }),
   saveBtn: {
     gridColumn: '1 / -1',
-    backgroundColor: '#D4AF37',
+    backgroundColor: '#FFFFFF',
     color: '#0a0a0a',
     border: 'none',
     borderRadius: '8px',
@@ -800,7 +800,7 @@ const styles = {
     padding: '1.8rem',
   },
   countBadge: {
-    backgroundColor: '#D4AF37',
+    backgroundColor: '#FFFFFF',
     color: '#0a0a0a',
     borderRadius: '12px',
     padding: '0.1rem 0.55rem',
@@ -820,7 +820,7 @@ const styles = {
     textAlign: 'left',
     padding: '0.75rem 1rem',
     borderBottom: '2px solid #2a2a2a',
-    color: '#D4AF37',
+    color: '#FFFFFF',
     fontWeight: 700,
     fontSize: '0.78rem',
     textTransform: 'uppercase',
@@ -879,15 +879,15 @@ const styles = {
   },
   sizeChip: {
     backgroundColor: '#1e1e1e',
-    border: '1px solid #D4AF37',
+    border: '1px solid #FFFFFF',
     borderRadius: '12px',
     padding: '0.18rem 0.55rem',
     fontSize: '0.72rem',
     fontWeight: 700,
-    color: '#D4AF37',
+    color: '#FFFFFF',
   },
   priceText: {
-    color: '#D4AF37',
+    color: '#FFFFFF',
     fontWeight: 700,
     whiteSpace: 'nowrap',
   },
@@ -909,7 +909,7 @@ const styles = {
     alignItems: 'center',
     gap: '0.8rem',
     padding: '3rem 1rem',
-    color: '#D4AF37',
+    color: '#FFFFFF',
   },
   /* Delete Dialog */
   overlay: {

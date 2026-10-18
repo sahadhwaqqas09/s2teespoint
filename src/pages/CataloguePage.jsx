@@ -28,18 +28,18 @@ export default function CataloguePage() {
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Page Header */}
         <div className="max-w-3xl mx-auto text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center gap-1.5 text-[#FFD700] text-xs uppercase tracking-widest glass-badge px-3 py-1 rounded-md mb-3">
+          <div className="inline-flex items-center justify-center gap-1.5 text-[#FFFFFF] text-xs uppercase tracking-widest glass-badge px-3 py-1 rounded-md mb-3">
             <Grid3X3 size={13} />
             <span>Islamic T-Shirt Collection</span>
           </div>
           <h1 className="font-serif text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-2 sm:mb-3">
-            Browse by <span className="text-[#FFD700]">Category</span>
+            Browse by <span className="text-[#FFFFFF]">Category</span>
           </h1>
           <p className="text-gray-300 text-xs sm:text-sm leading-relaxed max-w-xl mx-auto">
             Find the perfect t-shirt for every member of your family. Browse through our handpicked
             categories, each filled with meaningful designs crafted with love and devotion.
           </p>
-          <div className="w-12 h-0.5 bg-[#FFD700] mx-auto mt-4" />
+          <div className="w-12 h-0.5 bg-[#FFFFFF] mx-auto mt-4" />
         </div>
 
         {/* Loading State */}
@@ -60,7 +60,7 @@ export default function CataloguePage() {
         {/* Empty State */}
         {!loading && categories.length === 0 && (
           <div className="glass-panel rounded-xl p-6 sm:p-8 text-center max-w-md mx-auto">
-            <Grid3X3 size={28} className="text-[#FFD700] mx-auto mb-3 drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]" />
+            <Grid3X3 size={28} className="text-[#FFFFFF] mx-auto mb-3 drop-shadow-[0_0_10px_rgba(255, 255, 255,0.3)]" />
             <h2 className="font-serif text-lg sm:text-xl font-bold text-white mb-2">
               No categories available yet
             </h2>
@@ -74,7 +74,7 @@ export default function CataloguePage() {
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#FFD700] text-[#111111] font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-lg hover:bg-[#FFB800] transition-colors shadow-md"
+                className="inline-flex items-center justify-center gap-2 bg-[#FFFFFF] text-[#111111] font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-lg hover:bg-[#E5E5E5] transition-colors shadow-md"
               >
                 <MessageCircle size={16} />
                 Message on WhatsApp
@@ -102,7 +102,7 @@ export default function CataloguePage() {
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#202020] to-[#111111] text-gray-500">
-                      <Layers size={32} className="text-[#FFD700]/40 mb-1" />
+                      <Layers size={32} className="text-[#FFFFFF]/40 mb-1" />
                       <span className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400">
                         {category.name}
                       </span>
@@ -114,7 +114,7 @@ export default function CataloguePage() {
 
                   {/* Badge */}
                   <div className="absolute top-2 right-2 sm:top-3 sm:right-3 glass-badge px-2 py-0.5 rounded-md">
-                    <span className="text-[9px] sm:text-[10px] font-semibold text-[#FFD700] uppercase tracking-wider">
+                    <span className="text-[9px] sm:text-[10px] font-semibold text-[#FFFFFF] uppercase tracking-wider">
                       {category.item_count || 'View'}
                     </span>
                   </div>
@@ -123,7 +123,7 @@ export default function CataloguePage() {
                 {/* Content */}
                 <div className="p-2.5 sm:p-5 flex flex-col flex-1 justify-between bg-[#141414]/40 backdrop-blur-sm">
                   <div>
-                    <h2 className="text-sm sm:text-xl font-bold text-white group-hover:text-[#FFD700] transition-colors mb-0.5 sm:mb-1 truncate font-serif">
+                    <h2 className="text-sm sm:text-xl font-bold text-white group-hover:text-[#FFFFFF] transition-colors mb-0.5 sm:mb-1 truncate font-serif">
                       {category.name}
                     </h2>
                     <p className="hidden sm:block text-gray-400 text-xs sm:text-sm line-clamp-2 leading-relaxed">
@@ -131,9 +131,9 @@ export default function CataloguePage() {
                     </p>
                   </div>
 
-                  <div className="mt-2 pt-2 sm:mt-4 sm:pt-3 border-t border-white/10 flex items-center justify-between text-[11px] sm:text-sm font-semibold text-[#FFD700]">
+                  <div className="mt-2 pt-2 sm:mt-4 sm:pt-3 border-t border-white/10 flex items-center justify-between text-[11px] sm:text-sm font-semibold text-[#FFFFFF]">
                     <span>Enter Collection</span>
-                    <ArrowRight size={14} className="text-[#FFD700] group-hover:translate-x-1 transition-transform duration-200" />
+                    <ArrowRight size={14} className="text-[#FFFFFF] group-hover:translate-x-1 transition-transform duration-200" />
                   </div>
                 </div>
               </Link>

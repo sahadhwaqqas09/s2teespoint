@@ -45,7 +45,7 @@ export default function AdminLogin() {
         <div className="mb-6">
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-[#FFD700] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-[#FFFFFF] transition-colors"
           >
             <ArrowLeft size={14} />
             Visit Main Site
@@ -56,7 +56,7 @@ export default function AdminLogin() {
         <div className="bg-[#111111] border border-[#2a2a2a] rounded-2xl shadow-2xl p-8">
           {/* Logo / Header */}
           <div className="flex flex-col items-center mb-8 text-center">
-            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-[#FFD700] text-[#111111] font-black text-xl mb-3 shadow-lg">
+            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-[#FFFFFF] text-[#111111] font-black text-xl mb-3 shadow-lg">
               S2
             </div>
             <h1 className="text-2xl font-bold text-white tracking-tight">
@@ -65,7 +65,7 @@ export default function AdminLogin() {
             <p className="text-gray-400 text-xs uppercase tracking-widest mt-1">
               Store &amp; Inventory Management
             </p>
-            <div className="w-12 h-1 bg-[#FFD700] rounded-full mt-3" />
+            <div className="w-12 h-1 bg-[#FFFFFF] rounded-full mt-3" />
           </div>
 
           {/* Form */}
@@ -81,7 +81,7 @@ export default function AdminLogin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@s2teespoint.com"
-                className="w-full bg-[#1A1A1A] border border-[#333333] text-white placeholder-gray-500 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#FFD700] transition-colors"
+                className="w-full bg-[#1A1A1A] border border-[#333333] text-white placeholder-gray-500 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#FFFFFF] transition-colors"
               />
             </div>
 
@@ -96,14 +96,14 @@ export default function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-[#1A1A1A] border border-[#333333] text-white placeholder-gray-500 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#FFD700] transition-colors"
+                className="w-full bg-[#1A1A1A] border border-[#333333] text-white placeholder-gray-500 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#FFFFFF] transition-colors"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 py-3 px-6 rounded-lg font-semibold text-sm text-[#111111] bg-[#FFD700] hover:bg-[#FFB800] active:scale-98 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              className="w-full mt-2 py-3 px-6 rounded-lg font-semibold text-sm text-[#111111] bg-[#FFFFFF] hover:bg-[#E5E5E5] active:scale-98 transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-md"
             >
               {loading ? 'Authenticating...' : 'Sign In with Supabase'}
             </button>
@@ -117,7 +117,7 @@ export default function AdminLogin() {
             <button
               type="button"
               onClick={handleDemoAccess}
-              className="w-full py-2.5 px-4 rounded-lg text-xs font-medium border border-[#FFD700]/50 text-[#FFD700] hover:bg-[#FFD700] hover:text-[#111111] transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-2.5 px-4 rounded-lg text-xs font-medium border border-[#FFFFFF]/50 text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#111111] transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <ShieldCheck size={16} />
               Instant Admin Preview Mode

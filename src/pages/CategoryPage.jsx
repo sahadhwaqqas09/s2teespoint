@@ -95,11 +95,11 @@ export default function CategoryPage() {
 
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs sm:text-sm mb-4 text-gray-400">
-          <Link to="/" className="hover:text-[#FFD700] transition-colors">Home</Link>
+          <Link to="/" className="hover:text-[#FFFFFF] transition-colors">Home</Link>
           <ChevronRight size={13} />
-          <Link to="/catalogue" className="hover:text-[#FFD700] transition-colors">Shop</Link>
+          <Link to="/catalogue" className="hover:text-[#FFFFFF] transition-colors">Shop</Link>
           <ChevronRight size={13} />
-          <span className="text-[#FFD700] font-medium">
+          <span className="text-[#FFFFFF] font-medium">
             {loading ? 'Loading...' : category?.name ?? 'Category'}
           </span>
         </nav>
@@ -107,7 +107,7 @@ export default function CategoryPage() {
         {/* Back Link */}
         <Link
           to="/catalogue"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium mb-5 text-gray-300 hover:text-[#FFD700] transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium mb-5 text-gray-300 hover:text-[#FFFFFF] transition-colors"
         >
           <ChevronLeft size={15} />
           Back to all categories
@@ -142,9 +142,9 @@ export default function CategoryPage() {
                 className="transition-all duration-150 text-xs sm:text-sm font-semibold px-4 py-1.5 border"
                 style={{
                   borderRadius: '0.25rem',
-                  backgroundColor: activeType === null ? '#FFD700' : 'transparent',
+                  backgroundColor: activeType === null ? '#FFFFFF' : 'transparent',
                   color: activeType === null ? '#111111' : '#aaaaaa',
-                  borderColor: activeType === null ? '#FFD700' : '#333333',
+                  borderColor: activeType === null ? '#FFFFFF' : '#333333',
                 }}
               >
                 All
@@ -160,9 +160,9 @@ export default function CategoryPage() {
                     className="transition-all duration-150 text-xs sm:text-sm font-semibold px-4 py-1.5 border"
                     style={{
                       borderRadius: '0.25rem',
-                      backgroundColor: isActive ? '#FFD700' : 'transparent',
+                      backgroundColor: isActive ? '#FFFFFF' : 'transparent',
                       color: isActive ? '#111111' : '#aaaaaa',
-                      borderColor: isActive ? '#FFD700' : '#333333',
+                      borderColor: isActive ? '#FFFFFF' : '#333333',
                     }}
                   >
                     {type}
@@ -175,7 +175,7 @@ export default function CategoryPage() {
             {activeType && (
               <p className="text-[11px] text-gray-500 mt-2">
                 Showing {visibleProducts.length} product{visibleProducts.length !== 1 ? 's' : ''} for{' '}
-                <span className="text-[#FFD700] font-medium">{activeType}</span>
+                <span className="text-[#FFFFFF] font-medium">{activeType}</span>
                 <button
                   type="button"
                   onClick={() => setActiveType(null)}
@@ -213,7 +213,7 @@ export default function CategoryPage() {
             </p>
             <Link
               to="/catalogue"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold bg-[#FFD700] text-[#111111] hover:bg-[#e6c200] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold bg-[#FFFFFF] text-[#111111] hover:bg-[#e6c200] transition-colors"
               style={{ borderRadius: '0.25rem' }}
             >
               <ChevronLeft size={15} /> View Categories
@@ -224,14 +224,14 @@ export default function CategoryPage() {
         {/* Empty state — no products at all */}
         {!loading && category && products.length === 0 && (
           <div className="flex flex-col items-center justify-center py-12 text-center bg-[#111111] border border-[#2a2a2a] rounded px-4 max-w-md mx-auto">
-            <ShoppingCart size={30} className="text-[#FFD700] mx-auto mb-3" />
+            <ShoppingCart size={30} className="text-[#FFFFFF] mx-auto mb-3" />
             <h2 className="font-serif text-lg font-semibold mb-2 text-white">No products in this section yet</h2>
             <p className="text-gray-400 text-xs sm:text-sm max-w-sm mb-5 leading-relaxed">
               Our team is actively printing new designs for this collection. Check back shortly or browse other categories.
             </p>
             <Link
               to="/catalogue"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold bg-[#FFD700] text-[#111111] hover:bg-[#e6c200] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold bg-[#FFFFFF] text-[#111111] hover:bg-[#e6c200] transition-colors"
               style={{ borderRadius: '0.25rem' }}
             >
               <ChevronLeft size={15} /> Explore Other Categories
@@ -252,7 +252,7 @@ export default function CategoryPage() {
             <button
               type="button"
               onClick={() => setActiveType(null)}
-              className="text-xs sm:text-sm font-semibold px-5 py-2 bg-[#FFD700] text-[#111111] hover:bg-[#e6c200] transition-colors"
+              className="text-xs sm:text-sm font-semibold px-5 py-2 bg-[#FFFFFF] text-[#111111] hover:bg-[#e6c200] transition-colors"
               style={{ borderRadius: '0.25rem' }}
             >
               Show All Products
@@ -274,7 +274,7 @@ export default function CategoryPage() {
               return (
                 <div
                   key={product.id}
-                  className="flex flex-col bg-[#111111] border border-[#1e1e1e] overflow-hidden transition-all duration-200 hover:border-[#FFD700]/30"
+                  className="flex flex-col bg-[#111111] border border-[#1e1e1e] overflow-hidden transition-all duration-200 hover:border-[#FFFFFF]/30"
                   style={{ borderRadius: '0.375rem' }}
                 >
                   {/* Product Image */}
@@ -294,10 +294,10 @@ export default function CategoryPage() {
 
                     {/* Price tag — solid, no glass */}
                     <div
-                      className="absolute top-2 right-2 bg-[#0a0a0a] border border-[#FFD700]/40 px-2 py-0.5"
+                      className="absolute top-2 right-2 bg-[#0a0a0a] border border-[#FFFFFF]/40 px-2 py-0.5"
                       style={{ borderRadius: '0.2rem' }}
                     >
-                      <span className="text-[10px] sm:text-xs font-bold text-[#FFD700]">
+                      <span className="text-[10px] sm:text-xs font-bold text-[#FFFFFF]">
                         Rs.&nbsp;{Number(product.price).toLocaleString('en-IN')}
                       </span>
                     </div>
@@ -345,9 +345,9 @@ export default function CategoryPage() {
                                 className="px-1.5 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs font-semibold border transition-all duration-150"
                                 style={{
                                   borderRadius: '0.2rem',
-                                  backgroundColor: isSelected ? '#FFD700' : 'transparent',
+                                  backgroundColor: isSelected ? '#FFFFFF' : 'transparent',
                                   color: isSelected ? '#111111' : '#aaaaaa',
-                                  borderColor: isSelected ? '#FFD700' : '#333333',
+                                  borderColor: isSelected ? '#FFFFFF' : '#333333',
                                   fontWeight: isSelected ? '700' : '600',
                                 }}
                               >
@@ -369,11 +369,11 @@ export default function CategoryPage() {
                       style={{
                         borderRadius: '0.25rem',
                         backgroundColor:
-                          sel.size || sizes.length === 0 ? '#FFD700' : '#1a1a1a',
+                          sel.size || sizes.length === 0 ? '#FFFFFF' : '#1a1a1a',
                         color:
                           sel.size || sizes.length === 0 ? '#111111' : '#666666',
                         border: `1px solid ${
-                          sel.size || sizes.length === 0 ? '#FFD700' : '#2a2a2a'
+                          sel.size || sizes.length === 0 ? '#FFFFFF' : '#2a2a2a'
                         }`,
                       }}
                     >

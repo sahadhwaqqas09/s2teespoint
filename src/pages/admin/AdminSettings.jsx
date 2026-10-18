@@ -62,7 +62,7 @@ export default function AdminSettings() {
       {/* Page Title */}
       <div className="mb-6 border-b border-[#222222] pb-4 flex items-center justify-between">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold font-serif text-[#FFD700] flex items-center gap-2">
+          <h1 className="text-xl sm:text-2xl font-bold font-serif text-[#FFFFFF] flex items-center gap-2">
             <Settings size={22} />
             Store Contact &amp; Business Info
           </h1>
@@ -78,7 +78,7 @@ export default function AdminSettings() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* WhatsApp & Phone Card */}
           <div className="bg-[#111111] border border-[#222222] p-5 sm:p-6 space-y-4">
-            <h2 className="text-sm sm:text-base font-semibold text-[#FFD700] flex items-center gap-2 border-b border-[#1f1f1f] pb-2">
+            <h2 className="text-sm sm:text-base font-semibold text-[#FFFFFF] flex items-center gap-2 border-b border-[#1f1f1f] pb-2">
               <MessageCircle size={18} />
               WhatsApp &amp; Phone Contact
             </h2>
@@ -99,7 +99,7 @@ export default function AdminSettings() {
                     onChange={handleChange}
                     placeholder="e.g. 8056234337 or +91 80562 34337"
                     required
-                    className="w-full bg-[#181818] border border-[#333333] pl-9 pr-3 py-2 text-sm text-white focus:border-[#FFD700] outline-none"
+                    className="w-full bg-[#181818] border border-[#333333] pl-9 pr-3 py-2 text-sm text-white focus:border-[#FFFFFF] outline-none"
                   />
                 </div>
                 <p className="text-[11px] text-gray-500 mt-1">Displayed in footer for phone calls.</p>
@@ -120,7 +120,7 @@ export default function AdminSettings() {
                     onChange={handleChange}
                     placeholder="e.g. 918056234337"
                     required
-                    className="w-full bg-[#181818] border border-[#333333] pl-9 pr-3 py-2 text-sm text-white focus:border-[#FFD700] outline-none"
+                    className="w-full bg-[#181818] border border-[#333333] pl-9 pr-3 py-2 text-sm text-white focus:border-[#FFFFFF] outline-none"
                   />
                 </div>
                 <p className="text-[11px] text-gray-500 mt-1">
@@ -139,7 +139,7 @@ export default function AdminSettings() {
                   href={`https://wa.me/${previewWaNumber}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[#FFD700] hover:underline"
+                  className="text-[#FFFFFF] hover:underline"
                 >
                   Test Link &rarr;
                 </a>
@@ -149,7 +149,7 @@ export default function AdminSettings() {
 
           {/* Email & Address Card */}
           <div className="bg-[#111111] border border-[#222222] p-5 sm:p-6 space-y-4">
-            <h2 className="text-sm sm:text-base font-semibold text-[#FFD700] flex items-center gap-2 border-b border-[#1f1f1f] pb-2">
+            <h2 className="text-sm sm:text-base font-semibold text-[#FFFFFF] flex items-center gap-2 border-b border-[#1f1f1f] pb-2">
               <Mail size={18} />
               Email &amp; Physical Store Address
             </h2>
@@ -169,7 +169,7 @@ export default function AdminSettings() {
                   onChange={handleChange}
                   placeholder="e.g. s2teespoint@gmail.com"
                   required
-                  className="w-full bg-[#181818] border border-[#333333] pl-9 pr-3 py-2 text-sm text-white focus:border-[#FFD700] outline-none"
+                  className="w-full bg-[#181818] border border-[#333333] pl-9 pr-3 py-2 text-sm text-white focus:border-[#FFFFFF] outline-none"
                 />
               </div>
             </div>
@@ -186,7 +186,7 @@ export default function AdminSettings() {
                   rows={3}
                   placeholder="e.g. 11/91, Kamarajar Street, Thiruvalluvar Nagar, Ayanavaram, Chennai - 600023"
                   required
-                  className="w-full bg-[#181818] border border-[#333333] p-3 text-sm text-white focus:border-[#FFD700] outline-none"
+                  className="w-full bg-[#181818] border border-[#333333] p-3 text-sm text-white focus:border-[#FFFFFF] outline-none"
                 />
               </div>
               <p className="text-[11px] text-gray-500 mt-1">Displayed in the footer under Shop Location.</p>
@@ -198,7 +198,7 @@ export default function AdminSettings() {
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-2 bg-[#FFD700] text-[#111111] font-bold text-sm px-6 py-2.5 hover:bg-[#FFB800] transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-2 bg-[#FFFFFF] text-[#111111] font-bold text-sm px-6 py-2.5 hover:bg-[#E5E5E5] transition-colors disabled:opacity-50"
             >
               <Save size={16} />
               {saving ? 'Saving...' : 'Save & Update Everywhere'}

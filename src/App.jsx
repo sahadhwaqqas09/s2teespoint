@@ -23,7 +23,7 @@ export default function App() {
           style: {
             background: '#1A1A1A',
             color: '#fff',
-            border: '1px solid #FFD700',
+            border: '1px solid #FFFFFF',
           },
         }}
       />

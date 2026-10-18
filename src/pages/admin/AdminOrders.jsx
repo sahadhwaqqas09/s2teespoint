@@ -109,7 +109,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
   let cardBg = 'bg-[#111111]'
 
   if (isPriority) {
-    cardBorder = 'border-[#FFD700] shadow-[0_0_20px_rgba(255,215,0,0.18)]'
+    cardBorder = 'border-[#FFFFFF] shadow-[0_0_20px_rgba(255, 255, 255,0.18)]'
     cardBg = 'bg-[#16140c]'
   } else if (order.payment_status === 'confirmed') {
     cardBorder = 'border-green-500/30'
@@ -126,7 +126,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
     <div className={`rounded-xl overflow-hidden shadow-lg transition-all border ${cardBorder} ${cardBg} relative`}>
       {/* Top Bar for Priority Badge */}
       {isPriority && (
-        <div className="bg-[#FFD700] text-[#111111] px-4 py-0.5 text-[10px] font-black uppercase tracking-widest flex items-center justify-between">
+        <div className="bg-[#FFFFFF] text-[#111111] px-4 py-0.5 text-[10px] font-black uppercase tracking-widest flex items-center justify-between">
           <span className="flex items-center gap-1.5">
             <Star size={11} className="fill-current" />
             HIGH PRIORITY ORDER
@@ -148,14 +148,14 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
                 title={isPriority ? 'Remove Priority' : 'Mark as Priority'}
                 className={`p-1 rounded-md transition-all ${
                   isPriority
-                    ? 'text-[#FFD700] hover:text-yellow-300'
-                    : 'text-gray-500 hover:text-[#FFD700]'
+                    ? 'text-[#FFFFFF] hover:text-yellow-300'
+                    : 'text-gray-500 hover:text-[#FFFFFF]'
                 }`}
               >
-                <Star size={14} className={isPriority ? 'fill-[#FFD700]' : ''} />
+                <Star size={14} className={isPriority ? 'fill-[#FFFFFF]' : ''} />
               </button>
             </div>
-            <p className="text-xs font-mono text-[#FFD700] font-semibold">
+            <p className="text-xs font-mono text-[#FFFFFF] font-semibold">
               #{String(order.id).slice(0, 8).toUpperCase()}
             </p>
             <p className="text-[11px] text-gray-500 mt-1">{formattedDate}</p>
@@ -186,7 +186,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
           {/* Totals */}
           <div>
             <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Total</p>
-            <p className="text-sm font-bold text-[#FFD700]">
+            <p className="text-sm font-bold text-[#FFFFFF]">
               Rs. {Number(order.total || 0).toLocaleString('en-IN')}
             </p>
             <p className="text-[11px] text-gray-500 mt-1">
@@ -302,7 +302,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
             <button
               type="button"
               onClick={() => setExpanded((prev) => !prev)}
-              className="flex items-center gap-1 text-xs text-[#FFD700] hover:text-yellow-300 transition-colors font-medium ml-1"
+              className="flex items-center gap-1 text-xs text-[#FFFFFF] hover:text-yellow-300 transition-colors font-medium ml-1"
             >
               <Package size={13} />
               <span>{expanded ? 'Hide' : 'Items'}</span>
@@ -334,7 +334,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
                       </td>
                       <td className="py-2 pr-4">{item.size || '—'}</td>
                       <td className="py-2 pr-4">{item.quantity}</td>
-                      <td className="py-2 text-right text-[#FFD700] font-semibold">
+                      <td className="py-2 text-right text-[#FFFFFF] font-semibold">
                         Rs. {(item.price * item.quantity).toLocaleString('en-IN')}
                       </td>
                     </tr>
@@ -611,7 +611,7 @@ export default function AdminOrders() {
       {/* ── Page Header ─────────────────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#FFD700] tracking-wide font-display">
+          <h1 className="text-2xl font-bold text-[#FFFFFF] tracking-wide font-display">
             Customer Orders
           </h1>
           <p className="text-gray-400 text-xs sm:text-sm mt-0.5">
@@ -625,9 +625,9 @@ export default function AdminOrders() {
             type="button"
             onClick={handleManualPrune}
             title="Clean Sent and Cancelled orders older than 14 days"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-white/10 hover:border-[#FFD700]/40 text-gray-300 hover:text-white text-xs font-medium transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-white/10 hover:border-[#FFFFFF]/40 text-gray-300 hover:text-white text-xs font-medium transition-colors"
           >
-            <Calendar size={13} className="text-[#FFD700]" />
+            <Calendar size={13} className="text-[#FFFFFF]" />
             <span>Auto-Clear: 2 Weeks</span>
           </button>
         </div>
@@ -635,13 +635,13 @@ export default function AdminOrders() {
 
       {/* ── LIVE NEW ORDER ALERT BANNER ─────────────────────────── */}
       {newOrderAlert && (
-        <div className="rounded-xl border border-yellow-500/50 bg-gradient-to-r from-yellow-950/60 via-[#1e1708] to-yellow-950/40 p-4 shadow-[0_0_30px_rgba(255,215,0,0.25)] flex items-center justify-between gap-3 animate-pulse">
+        <div className="rounded-xl border border-yellow-500/50 bg-gradient-to-r from-yellow-950/60 via-[#1e1708] to-yellow-950/40 p-4 shadow-[0_0_30px_rgba(255, 255, 255,0.25)] flex items-center justify-between gap-3 animate-pulse">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-full bg-[#FFD700] text-[#111111] flex items-center justify-center shrink-0 font-bold shadow-md">
+            <div className="w-9 h-9 rounded-full bg-[#FFFFFF] text-[#111111] flex items-center justify-center shrink-0 font-bold shadow-md">
               <Bell size={18} />
             </div>
             <div className="min-w-0">
-              <p className="text-xs uppercase tracking-widest text-[#FFD700] font-black">
+              <p className="text-xs uppercase tracking-widest text-[#FFFFFF] font-black">
                 New Order Received Just Now!
               </p>
               <p className="text-sm text-white font-medium truncate">
@@ -656,7 +656,7 @@ export default function AdminOrders() {
                 handleTabSelect('Not Confirmed')
                 setNewOrderAlert(null)
               }}
-              className="bg-[#FFD700] text-[#111111] font-bold text-xs px-3.5 py-1.5 rounded-lg hover:bg-yellow-400 transition-colors shadow-sm"
+              className="bg-[#FFFFFF] text-[#111111] font-bold text-xs px-3.5 py-1.5 rounded-lg hover:bg-yellow-400 transition-colors shadow-sm"
             >
               View Order
             </button>
@@ -678,7 +678,7 @@ export default function AdminOrders() {
         <div className="flex flex-wrap items-center gap-2">
           {STATUS_TABS.map((tab) => {
             const isActive = activeTab === tab
-            let activeStyle = 'bg-[#FFD700] border-[#FFD700] text-[#111111]'
+            let activeStyle = 'bg-[#FFFFFF] border-[#FFFFFF] text-[#111111]'
 
             if (tab === 'Pending') {
               activeStyle = 'bg-amber-400 border-amber-400 text-black font-bold shadow-[0_0_12px_rgba(251,191,36,0.35)]'
@@ -700,7 +700,7 @@ export default function AdminOrders() {
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all ${
                   isActive
                     ? activeStyle
-                    : 'bg-transparent border-[#2a2a2a] text-gray-400 hover:border-[#FFD700] hover:text-[#FFD700]'
+                    : 'bg-transparent border-[#2a2a2a] text-gray-400 hover:border-[#FFFFFF] hover:text-[#FFFFFF]'
                 }`}
               >
                 <span>{tab}</span>
@@ -721,8 +721,8 @@ export default function AdminOrders() {
             onClick={() => handleTabSelect(activeTab === 'Priority' ? 'All' : 'Priority')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${
               activeTab === 'Priority'
-                ? 'bg-[#FFD700] border-[#FFD700] text-[#111111]'
-                : 'bg-[#1a170a] border-yellow-500/40 text-yellow-400 hover:border-[#FFD700]'
+                ? 'bg-[#FFFFFF] border-[#FFFFFF] text-[#111111]'
+                : 'bg-[#1a170a] border-yellow-500/40 text-yellow-400 hover:border-[#FFFFFF]'
             }`}
           >
             <Star size={12} className={activeTab === 'Priority' ? 'fill-current' : 'fill-yellow-400'} />
@@ -741,7 +741,7 @@ export default function AdminOrders() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="bg-[#141414] border border-[#2a2a2a] text-xs text-gray-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#FFD700] cursor-pointer"
+            className="bg-[#141414] border border-[#2a2a2a] text-xs text-gray-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#FFFFFF] cursor-pointer"
           >
             <option value="priority">Priority First</option>
             <option value="newest">Newest First</option>
@@ -753,7 +753,7 @@ export default function AdminOrders() {
       {/* ── Auto-Prune 2-Week Notice ────────────────────────────── */}
       <div className="bg-[#121212] border border-white/5 rounded-lg px-3.5 py-2 flex items-center justify-between text-[11px] text-gray-400">
         <span className="flex items-center gap-1.5">
-          <AlertCircle size={13} className="text-[#FFD700]" />
+          <AlertCircle size={13} className="text-[#FFFFFF]" />
           <span>Notice: Completed <strong>Sent</strong> &amp; <strong>Cancelled</strong> orders are automatically cleared after 14 days.</span>
         </span>
         <span className="text-gray-500 hidden sm:inline">Clean database retention active</span>
@@ -762,7 +762,7 @@ export default function AdminOrders() {
       {/* ── Loading State ───────────────────────────────────────── */}
       {loading && (
         <div className="flex flex-col items-center justify-center py-20 gap-3">
-          <div className="w-9 h-9 rounded-full border-2 border-[#FFD700] border-t-transparent animate-spin" />
+          <div className="w-9 h-9 rounded-full border-2 border-[#FFFFFF] border-t-transparent animate-spin" />
           <p className="text-gray-500 text-xs tracking-wider uppercase">Loading orders...</p>
         </div>
       )}
@@ -771,7 +771,7 @@ export default function AdminOrders() {
       {!loading && sortedOrders.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 gap-3 text-center rounded-xl border border-white/5 bg-[#101010]">
           <div className="w-14 h-14 rounded-full bg-[#181818] flex items-center justify-center text-gray-600">
-            <Package size={26} className="text-[#FFD700]/60" />
+            <Package size={26} className="text-[#FFFFFF]/60" />
           </div>
           <p className="text-gray-300 text-sm font-semibold">No orders in this view</p>
           <p className="text-gray-500 text-xs max-w-sm">

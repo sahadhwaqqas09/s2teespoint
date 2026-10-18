@@ -68,7 +68,7 @@ export default function CartPage() {
 
       <main className="flex-1 max-w-5xl mx-auto w-full px-3.5 sm:px-6 py-5 sm:py-8">
         <div className="mb-4 sm:mb-6">
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold mb-1 text-[#FFD700]">
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold mb-1 text-[#FFFFFF]">
             Your Shopping Cart
           </h1>
           <p className="text-xs sm:text-sm text-gray-400">
@@ -79,14 +79,14 @@ export default function CartPage() {
         {items.length === 0 ? (
           /* ── Empty State ── */
           <div className="flex flex-col items-center justify-center py-12 text-center glass-panel rounded-xl p-6 sm:p-8 max-w-md mx-auto">
-            <ShoppingBag size={38} className="text-[#FFD700] mb-3 drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]" />
+            <ShoppingBag size={38} className="text-[#FFFFFF] mb-3 drop-shadow-[0_0_10px_rgba(255, 255, 255,0.3)]" />
             <p className="text-xs sm:text-sm text-gray-300 max-w-xs mb-5 leading-relaxed">
               Your cart is empty right now. Head over to the shop and find something
               that speaks to your heart.
             </p>
             <Link
               to="/catalogue"
-              className="px-5 py-2.5 rounded-lg font-semibold text-xs sm:text-sm bg-[#FFD700] text-[#111111] hover:bg-[#FFB800] transition-colors shadow-md"
+              className="px-5 py-2.5 rounded-lg font-semibold text-xs sm:text-sm bg-[#FFFFFF] text-[#111111] hover:bg-[#E5E5E5] transition-colors shadow-md"
             >
               Browse the Collection
             </Link>
@@ -109,7 +109,7 @@ export default function CartPage() {
                       />
                     ) : (
                       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg glass-card border border-white/10 flex items-center justify-center shrink-0">
-                        <ShoppingBag size={20} className="text-[#FFD700]/50" />
+                        <ShoppingBag size={20} className="text-[#FFFFFF]/50" />
                       </div>
                     )}
 
@@ -119,11 +119,11 @@ export default function CartPage() {
                       </p>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-[11px] text-gray-400">Size:</span>
-                        <span className="text-xs glass-badge text-[#FFD700] font-semibold px-2 py-0.5 rounded border border-[#FFD700]/30">
+                        <span className="text-xs glass-badge text-[#FFFFFF] font-semibold px-2 py-0.5 rounded border border-[#FFFFFF]/30">
                           {item.size}
                         </span>
                       </div>
-                      <p className="text-xs sm:text-sm font-bold text-[#FFD700] mt-1 sm:hidden">
+                      <p className="text-xs sm:text-sm font-bold text-[#FFFFFF] mt-1 sm:hidden">
                         Rs. {(item.price * item.quantity).toLocaleString('en-IN')}
                       </p>
                     </div>
@@ -143,7 +143,7 @@ export default function CartPage() {
                       <button
                         type="button"
                         onClick={() => decreaseQuantity(item.id, item.size)}
-                        className="w-8 h-8 flex items-center justify-center rounded text-[#FFD700] hover:bg-white/5 active:scale-95 transition-all"
+                        className="w-8 h-8 flex items-center justify-center rounded text-[#FFFFFF] hover:bg-white/5 active:scale-95 transition-all"
                         aria-label="Decrease quantity"
                       >
                         <Minus size={14} />
@@ -154,14 +154,14 @@ export default function CartPage() {
                       <button
                         type="button"
                         onClick={() => increaseQuantity(item.id, item.size)}
-                        className="w-8 h-8 flex items-center justify-center rounded text-[#FFD700] hover:bg-white/5 active:scale-95 transition-all"
+                        className="w-8 h-8 flex items-center justify-center rounded text-[#FFFFFF] hover:bg-white/5 active:scale-95 transition-all"
                         aria-label="Increase quantity"
                       >
                         <Plus size={14} />
                       </button>
                     </div>
 
-                    <p className="hidden sm:block text-sm sm:text-base font-bold text-[#FFD700] min-w-[90px] text-right">
+                    <p className="hidden sm:block text-sm sm:text-base font-bold text-[#FFFFFF] min-w-[90px] text-right">
                       Rs. {(item.price * item.quantity).toLocaleString('en-IN')}
                     </p>
 
@@ -180,7 +180,7 @@ export default function CartPage() {
               <div className="mt-2 text-center sm:text-left">
                 <Link
                   to="/catalogue"
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#FFD700] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#FFFFFF] hover:underline"
                 >
                   <span>&larr;</span>
                   <span>Continue browsing other collections</span>
@@ -194,8 +194,8 @@ export default function CartPage() {
               {/* Pincode / Delivery Rate Box */}
               <div className="rounded-xl p-3.5 sm:p-4 glass-panel">
                 <div className="flex items-center gap-1.5 mb-1.5">
-                  <MapPin size={15} className="text-[#FFD700]" />
-                  <h2 className="font-semibold text-xs uppercase tracking-wider text-[#FFD700]">
+                  <MapPin size={15} className="text-[#FFFFFF]" />
+                  <h2 className="font-semibold text-xs uppercase tracking-wider text-[#FFFFFF]">
                     Check Delivery Charge
                   </h2>
                 </div>
@@ -213,11 +213,11 @@ export default function CartPage() {
                     value={pincode}
                     onChange={handlePincodeChange}
                     maxLength={6}
-                    className="w-full px-3 py-2.5 pr-10 rounded-lg text-xs glass-input text-white outline-none border border-white/10 focus:border-[#FFD700]/50 transition-colors"
+                    className="w-full px-3 py-2.5 pr-10 rounded-lg text-xs glass-input text-white outline-none border border-white/10 focus:border-[#FFFFFF]/50 transition-colors"
                   />
                   {/* Inline status icon */}
                   <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                    {checking && <Loader2 size={15} className="text-[#FFD700] animate-spin" />}
+                    {checking && <Loader2 size={15} className="text-[#FFFFFF] animate-spin" />}
                     {!checking && deliveryInfo?.serviceable === true && <CheckCircle2 size={15} className="text-emerald-400" />}
                     {!checking && deliveryInfo?.serviceable === false && <XCircle size={15} className="text-red-400" />}
                   </span>
@@ -247,7 +247,7 @@ export default function CartPage() {
                         </p>
                         <p className="text-gray-300">
                           Courier charge:{' '}
-                          <span className="font-bold text-[#FFD700] text-sm">
+                          <span className="font-bold text-[#FFFFFF] text-sm">
                             Rs. {deliveryInfo.charge.toLocaleString('en-IN')}
                           </span>
                         </p>
@@ -269,7 +269,7 @@ export default function CartPage() {
 
               {/* Price Summary */}
               <div className="rounded-xl p-3.5 sm:p-4 glass-panel">
-                <h2 className="font-semibold text-xs uppercase tracking-wider mb-2.5 text-[#FFD700]">
+                <h2 className="font-semibold text-xs uppercase tracking-wider mb-2.5 text-[#FFFFFF]">
                   Order Total
                 </h2>
 
@@ -301,7 +301,7 @@ export default function CartPage() {
                   <div className="flex justify-between font-bold text-sm sm:text-base">
                     <span className="text-white">Grand Total</span>
                     <div className="text-right">
-                      <span className="text-[#FFD700]">
+                      <span className="text-[#FFFFFF]">
                         Rs. {grandTotal.toLocaleString('en-IN')}
                       </span>
                       {!deliveryInfo?.serviceable && (
@@ -323,7 +323,7 @@ export default function CartPage() {
                   disabled={!canProceed}
                   className="mt-4 w-full py-3 rounded-lg font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200 shadow-md"
                   style={{
-                    backgroundColor: canProceed ? '#FFD700' : '#2A2A2A',
+                    backgroundColor: canProceed ? '#FFFFFF' : '#2A2A2A',
                     color: canProceed ? '#111111' : '#666',
                     cursor: canProceed ? 'pointer' : 'not-allowed',
                   }}

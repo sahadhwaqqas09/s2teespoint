@@ -8,7 +8,7 @@ const StatCard = ({ icon: Icon, label, value, to }) => {
     <div
       style={{
         background: 'linear-gradient(135deg, #181818 0%, #0f0f0f 100%)',
-        border: '1px solid rgba(255, 215, 0, 0.25)',
+        border: '1px solid rgba(255, 255, 255, 0.25)',
         borderRadius: '12px',
         padding: '22px 24px',
         display: 'flex',
@@ -18,11 +18,11 @@ const StatCard = ({ icon: Icon, label, value, to }) => {
         transition: 'all 0.2s ease',
         cursor: to ? 'pointer' : 'default',
       }}
-      className="hover:border-[#FFD700] hover:scale-[1.02]"
+      className="hover:border-[#FFFFFF] hover:scale-[1.02]"
     >
       <div
         style={{
-          background: 'rgba(255, 215, 0, 0.12)',
+          background: 'rgba(255, 255, 255, 0.12)',
           borderRadius: '10px',
           padding: '14px',
           display: 'flex',
@@ -31,14 +31,14 @@ const StatCard = ({ icon: Icon, label, value, to }) => {
           flexShrink: 0,
         }}
       >
-        <Icon size={26} color="#FFD700" strokeWidth={1.8} />
+        <Icon size={26} color="#FFFFFF" strokeWidth={1.8} />
       </div>
       <div>
         <div
           style={{
             fontSize: '2rem',
             fontWeight: '700',
-            color: '#FFD700',
+            color: '#FFFFFF',
             lineHeight: 1,
             marginBottom: '6px',
             fontFamily: 'monospace',

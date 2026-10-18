@@ -271,7 +271,7 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
       <main className="flex-1 px-4 sm:px-6 py-6 sm:py-8 max-w-6xl mx-auto w-full">
         {/* Page heading */}
         <div className="mb-5 sm:mb-6">
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#FFD700] flex items-center gap-2">
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#FFFFFF] flex items-center gap-2">
             <CreditCard size={24} />
             Billing &amp; Delivery
           </h1>
@@ -290,7 +290,7 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
             {/* Full Name */}
             <div>
               <label className="block text-xs text-gray-400 mb-1">
-                Full Name <span className="text-[#FFD700]">*</span>
+                Full Name <span className="text-[#FFFFFF]">*</span>
               </label>
               <input
                 type="text"
@@ -308,7 +308,7 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
             {/* Mobile Number */}
             <div>
               <label className="block text-xs text-gray-400 mb-1">
-                Mobile Number <span className="text-[#FFD700]">*</span>
+                Mobile Number <span className="text-[#FFFFFF]">*</span>
               </label>
               <input
                 type="tel"
@@ -327,7 +327,7 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
             {/* Full Address */}
             <div>
               <label className="block text-xs text-gray-400 mb-1">
-                Full Address <span className="text-[#FFD700]">*</span>
+                Full Address <span className="text-[#FFFFFF]">*</span>
               </label>
               <textarea
                 name="address"
@@ -346,7 +346,7 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs text-gray-400 mb-1">
-                  Pincode <span className="text-[#FFD700]">*</span>
+                  Pincode <span className="text-[#FFFFFF]">*</span>
                 </label>
                 <input
                   type="text"
@@ -402,7 +402,7 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
                           Size: {item.size} &nbsp;&middot;&nbsp; Qty: {item.quantity}
                         </p>
                       </div>
-                      <span className="text-[#FFD700] font-semibold text-xs sm:text-sm whitespace-nowrap">
+                      <span className="text-[#FFFFFF] font-semibold text-xs sm:text-sm whitespace-nowrap">
                         Rs. {(item.price * item.quantity).toLocaleString('en-IN')}
                       </span>
                     </li>
@@ -429,7 +429,7 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
                 <div className="flex justify-between text-white font-bold text-sm sm:text-base pt-2 border-t border-white/10">
                   <span>Grand Total</span>
                   <div className="text-right">
-                    <span className="text-[#FFD700]">
+                    <span className="text-[#FFFFFF]">
                       Rs. {grandTotal.toLocaleString('en-IN')}
                     </span>
                     <p className="text-[10px] text-gray-500 italic font-normal mt-0.5">
@@ -480,7 +480,7 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
                       <CreditCard size={18} />
                       Pay Online
                     </button>
-                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#FFD700] text-[#111111] text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full shadow-md whitespace-nowrap">
+                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#FFFFFF] text-[#111111] text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full shadow-md whitespace-nowrap">
                       Coming Soon
                     </span>
                   </div>
@@ -490,7 +490,7 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
               {/* Note */}
               <div className="glass-card border border-white/10 rounded-lg p-2.5">
                 <p className="text-gray-400 text-xs leading-relaxed">
-                  <span className="text-[#FFD700] font-medium">WhatsApp Ordering:</span>{' '}
+                  <span className="text-[#FFFFFF] font-medium">WhatsApp Ordering:</span>{' '}
                   Clicking "Order with WhatsApp" opens WhatsApp with your complete itemized bill and delivery address pre-filled for immediate confirmation.
                 </p>
               </div>

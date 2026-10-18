@@ -82,24 +82,24 @@ export default function Navbar() {
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
         borderBottom: scrolled
-          ? '1px solid rgba(255, 215, 0, 0.2)'
+          ? '1px solid rgba(255, 255, 255, 0.2)'
           : '1px solid rgba(255, 255, 255, 0.07)',
         boxShadow: scrolled
-          ? '0 4px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(255,215,0,0.08)'
+          ? '0 4px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(255, 255, 255,0.08)'
           : '0 2px 12px rgba(0,0,0,0.3)',
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
         {/* Left: Brand Logo */}
         <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-          <div className="w-9 h-9 bg-[#FFD700] rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(255,215,0,0.3)] group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 bg-[#FFFFFF] rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(255, 255, 255,0.3)] group-hover:scale-105 transition-transform">
             <span className="text-[#111111] font-display font-black text-lg leading-none">S2</span>
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-white font-display font-bold text-sm tracking-wider group-hover:text-[#FFD700] transition-colors">
+            <span className="text-white font-display font-bold text-sm tracking-wider group-hover:text-[#FFFFFF] transition-colors">
               Teespoint
             </span>
-            <span className="text-[#FFD700] text-[9px] font-semibold tracking-[0.2em] uppercase">
+            <span className="text-[#FFFFFF] text-[9px] font-semibold tracking-[0.2em] uppercase">
               Islamic Wear
             </span>
           </div>
@@ -166,12 +166,12 @@ export default function Navbar() {
           {/* Cart Icon */}
           <Link
             to="/cart"
-            className="relative p-2 rounded-xl glass-card text-gray-200 hover:text-[#FFD700] hover:border-[#FFD700]/50 transition-all shadow-sm"
+            className="relative p-2 rounded-xl glass-card text-gray-200 hover:text-[#FFFFFF] hover:border-[#FFFFFF]/50 transition-all shadow-sm"
             aria-label="Shopping Cart"
           >
             <ShoppingCart size={19} />
             {count > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-[#FFD700] text-[#111111] text-[11px] font-black min-w-5 h-5 px-1 rounded-md flex items-center justify-center shadow-md">
+              <span className="absolute -top-1.5 -right-1.5 bg-[#FFFFFF] text-[#111111] text-[11px] font-black min-w-5 h-5 px-1 rounded-md flex items-center justify-center shadow-md">
                 {count > 9 ? '9+' : count}
               </span>
             )}
@@ -196,7 +196,7 @@ export default function Navbar() {
           style={{
             background: 'rgba(12, 12, 12, 0.99)',
             backdropFilter: 'blur(24px)',
-            borderColor: 'rgba(255, 215, 0, 0.15)',
+            borderColor: 'rgba(255, 255, 255, 0.15)',
           }}
         >
           {navLinks.map((link) => {
@@ -207,11 +207,11 @@ export default function Navbar() {
                 href={link.type === 'hash' ? `/${link.to}` : link.to}
                 onClick={(e) => handleNavClick(link, e)}
                 className={`text-xs font-semibold tracking-[0.18em] uppercase py-2 transition-colors flex items-center justify-between ${
-                  active ? 'text-[#FFD700] font-bold' : 'text-gray-300 hover:text-white'
+                  active ? 'text-[#FFFFFF] font-bold' : 'text-gray-300 hover:text-white'
                 }`}
               >
                 <span>{link.label}</span>
-                {active && <span className="w-1.5 h-1.5 rounded-full bg-[#FFD700]" />}
+                {active && <span className="w-1.5 h-1.5 rounded-full bg-[#FFFFFF]" />}
               </a>
             );
           })}

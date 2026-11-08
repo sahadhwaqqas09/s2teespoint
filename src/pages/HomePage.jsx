@@ -1,44 +1,14 @@
 import { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import HeroSlider from '../components/HeroSlider'
 import { Link } from 'react-router-dom'
 import { getCategories } from '../lib/data'
 import { useSiteSettings } from '../hooks/useSiteSettings'
 import { ShoppingBag, Heart, CheckCircle, Truck, MessageCircle, Layers } from 'lucide-react'
 
-// Inline SVG Islamic geometric pattern for Hero background in warm earth tones
-const IslamicPattern = () => (
-  <svg
-    className="absolute inset-0 w-full h-full opacity-25 pointer-events-none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <defs>
-      <pattern id="islamic-geo" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
-        <rect x="5" y="5" width="70" height="70" fill="none" stroke="#8C5E43" strokeWidth="0.6" />
-        <line x1="5" y1="5" x2="75" y2="75" stroke="#8C5E43" strokeWidth="0.4" />
-        <line x1="75" y1="5" x2="5" y2="75" stroke="#8C5E43" strokeWidth="0.4" />
-        <polygon points="40,8 72,40 40,72 8,40" fill="none" stroke="#8C5E43" strokeWidth="0.6" />
-        <circle cx="40" cy="40" r="8" fill="none" stroke="#8C5E43" strokeWidth="0.6" />
-        <circle cx="5" cy="5" r="2" fill="none" stroke="#8C5E43" strokeWidth="0.5" />
-        <circle cx="75" cy="5" r="2" fill="none" stroke="#8C5E43" strokeWidth="0.5" />
-        <circle cx="5" cy="75" r="2" fill="none" stroke="#8C5E43" strokeWidth="0.5" />
-        <circle cx="75" cy="75" r="2" fill="none" stroke="#8C5E43" strokeWidth="0.5" />
-        <circle cx="40" cy="5" r="1.5" fill="none" stroke="#8C5E43" strokeWidth="0.5" />
-        <circle cx="40" cy="75" r="1.5" fill="none" stroke="#8C5E43" strokeWidth="0.5" />
-        <circle cx="5" cy="40" r="1.5" fill="none" stroke="#8C5E43" strokeWidth="0.5" />
-        <circle cx="75" cy="40" r="1.5" fill="none" stroke="#8C5E43" strokeWidth="0.5" />
-      </pattern>
-    </defs>
-    <rect width="100%" height="100%" fill="url(#islamic-geo)" />
-  </svg>
-)
-
 export default function HomePage() {
   const settings = useSiteSettings()
-  const heroWhatsAppLink = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(
-    'Assalamu Alaikum S2 Teespoint, I would like to know more about your custom Islamic t-shirts and collections.'
-  )}`
   const customDesignWhatsAppLink = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(
     'Assalamu Alaikum S2 Teespoint, I have a custom design in mind and would like to discuss creating a personalized t-shirt.'
   )}`
@@ -76,70 +46,9 @@ export default function HomePage() {
       <Navbar />
 
       {/* ─────────────────────────────────────────
-          SECTION 1 — HERO (Warm Beige & Roasted Espresso)
+          SECTION 1 — HERO IMAGE SLIDER (Managed from Admin)
       ───────────────────────────────────────── */}
-      <section className="relative flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 py-14 sm:py-20 text-center">
-        <IslamicPattern />
-
-        {/* Ambient Warm Sand Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[620px] h-[350px] bg-[#E5D2BE]/60 rounded-full blur-[130px] pointer-events-none" />
-
-        {/* Top subtle caramel accent line */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#8C5E43]/40 to-transparent" />
-
-        {/* Bismillah in Amiri font */}
-        <p
-          className="text-[#3D261C] text-3xl sm:text-4xl md:text-5xl mb-4 leading-relaxed tracking-wider font-normal font-arabic relative z-10"
-          style={{ fontFamily: "'Amiri', serif", direction: 'rtl' }}
-          lang="ar"
-        >
-          بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
-        </p>
-
-        {/* Brand badge */}
-        <span className="inline-block glass-badge text-[#6F4935] text-[11px] uppercase tracking-[0.25em] font-display font-bold px-4 py-1 mb-4 relative z-10 border border-[#D5C2AE] bg-[#EFE7DC]">
-          S2 Teespoint
-        </span>
-
-        {/* Headline */}
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-[#261710] max-w-4xl mb-4 tracking-tight relative z-10">
-          Wear Your Faith,{' '}
-          <span className="text-[#784E38] italic font-serif font-normal">Express Your Soul</span>
-        </h1>
-
-        {/* Subheadline */}
-        <p className="text-[#5C4537] text-sm sm:text-base md:text-lg max-w-2xl mb-8 leading-relaxed relative z-10">
-          S2 Teespoint brings you custom Islamic t-shirts crafted with care, meaning, and a love for
-          the deen. Every piece is made to help you carry your belief close to your heart.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3.5 items-center justify-center relative z-10">
-          <Link
-            to="/catalogue"
-            className="inline-flex items-center gap-2 bg-[#3D261C] text-[#F7F3EC] font-semibold text-sm sm:text-base px-7 py-3 hover:bg-[#543729] transition-all duration-300 shadow-md"
-          >
-            <ShoppingBag size={18} />
-            Browse Collection
-          </Link>
-          <a
-            href={heroWhatsAppLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#FFFFFF] border border-[#D5C2AE] text-[#3D261C] font-semibold text-sm sm:text-base px-6 py-3 hover:bg-[#FAF6F0] transition-all duration-300"
-          >
-            <MessageCircle size={18} className="text-[#784E38]" />
-            Message on WhatsApp
-          </a>
-        </div>
-
-        {/* Decorative divider */}
-        <div className="mt-10 flex items-center justify-center relative z-10">
-          <div className="w-12 h-px bg-[#8C5E43] opacity-40" />
-          <div className="w-1.5 h-1.5 bg-[#8C5E43] mx-2 opacity-70 rotate-45" />
-          <div className="w-12 h-px bg-[#8C5E43] opacity-40" />
-        </div>
-      </section>
+      <HeroSlider />
 
       {/* ─────────────────────────────────────────
           SECTION 2 — OUR STORY

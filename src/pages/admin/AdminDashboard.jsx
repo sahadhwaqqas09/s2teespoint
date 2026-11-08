@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
-import { ShoppingBag, Package, Tag, LayoutDashboard, TrendingUp } from 'lucide-react'
+import { ShoppingBag, Package, Tag, LayoutDashboard, TrendingUp, Image as ImageIcon } from 'lucide-react'
 
 const StatCard = ({ icon: Icon, label, value, to }) => {
   const content = (
@@ -202,6 +202,12 @@ export default function AdminDashboard() {
       label: 'Total Categories',
       value: loadingStats ? null : stats.totalCategories,
       to: '/admin/categories',
+    },
+    {
+      icon: ImageIcon,
+      label: 'Hero Slides',
+      value: 'Edit',
+      to: '/admin/banners',
     },
   ]
 

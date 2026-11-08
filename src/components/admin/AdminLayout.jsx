@@ -1,10 +1,11 @@
 import { Outlet, NavLink, useNavigate, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { LayoutDashboard, Tag, Package, ShoppingBag, Settings, LogOut, Menu, X, ExternalLink } from 'lucide-react'
+import { LayoutDashboard, Image as ImageIcon, Tag, Package, ShoppingBag, Settings, LogOut, Menu, X, ExternalLink } from 'lucide-react'
 
 const navItems = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/admin/banners', label: 'Hero Slides', icon: ImageIcon },
   { to: '/admin/categories', label: 'Categories', icon: Tag },
   { to: '/admin/products', label: 'Products', icon: Package },
   { to: '/admin/orders', label: 'Orders', icon: ShoppingBag },

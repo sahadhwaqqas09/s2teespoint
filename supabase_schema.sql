@@ -115,6 +115,29 @@ ON storage.objects FOR INSERT
 WITH CHECK (bucket_id = 'product-images' AND auth.role() = 'authenticated');
 
 -- ============================================================
+-- BANNERS / HERO SLIDES TABLE
+-- ============================================================
+CREATE TABLE IF NOT EXISTS banners (
+  id           UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  image_url    TEXT NOT NULL,
+  title        TEXT,
+  subtitle     TEXT,
+  button_text  TEXT DEFAULT 'Explore Collection',
+  link         TEXT DEFAULT '/catalogue',
+  sort_order   INTEGER DEFAULT 0,
+  is_active    BOOLEAN DEFAULT true,
+  created_at   TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE banners ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public can read banners"
+  ON banners FOR SELECT USING (true);
+
+CREATE POLICY "Authenticated can manage banners"
+  ON banners FOR ALL USING (auth.role() = 'authenticated');
+
+-- ============================================================
 -- NOTE: No categories are pre-seeded. 
 -- The store admin adds all categories and products via /admin
 -- ============================================================

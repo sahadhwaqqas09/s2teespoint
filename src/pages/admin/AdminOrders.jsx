@@ -23,11 +23,11 @@ import {
 const STATUS_TABS = ['All', 'Pending', 'Not Confirmed', 'Confirmed', 'Sent', 'Cancelled']
 
 const STATUS_STYLES = {
-  not_confirmed: 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/40',
-  confirmed:     'bg-green-500/20 text-green-400 border border-green-500/40',
-  sent:          'bg-blue-500/20 text-blue-400 border border-blue-500/40',
-  cancelled:     'bg-red-500/20 text-red-400 border border-red-500/40',
-  pending:       'bg-amber-500/20 text-amber-400 border border-amber-500/40',
+  not_confirmed: 'bg-[#FDF5E6] text-[#9A6700] border border-[#E6CD97]',
+  confirmed:     'bg-[#EAF2EB] text-[#20522B] border border-[#BCD4BF]',
+  sent:          'bg-[#EBF2FA] text-[#1D4ED8] border border-[#BFDBFE]',
+  cancelled:     'bg-[#FDF0ED] text-[#8C2E24] border border-[#F3C4BE]',
+  pending:       'bg-[#FDF5E6] text-[#9A6700] border border-[#E6CD97]',
 }
 
 const STATUS_LABELS = {
@@ -41,7 +41,7 @@ const STATUS_LABELS = {
 // 14 days in milliseconds
 const FOURTEEN_DAYS_MS = 14 * 24 * 60 * 60 * 1000
 
-// Pleasant sound chime using native browser Web Audio API (zero audio file downloads)
+// Pleasant sound chime using native browser Web Audio API
 function playOrderChime() {
   try {
     const AudioContext = window.AudioContext || window.webkitAudioContext
@@ -68,9 +68,9 @@ function playOrderChime() {
 }
 
 function StatusBadge({ status }) {
-  const style = STATUS_STYLES[status] || 'bg-gray-500/20 text-gray-400 border border-gray-500/40'
+  const style = STATUS_STYLES[status] || 'bg-[#FAF6F0] text-[#5C4537] border border-[#DECFC0]'
   return (
-    <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${style}`}>
+    <span className={`inline-block px-3 py-1 text-xs font-semibold ${style}`}>
       {STATUS_LABELS[status] || status}
     </span>
   )
@@ -105,28 +105,28 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
   })
 
   // Border & background based on status and priority
-  let cardBorder = 'border-[#2a2a2a]'
-  let cardBg = 'bg-[#111111]'
+  let cardBorder = 'border-[#E8DED1]'
+  let cardBg = 'bg-[#FFFFFF]'
 
   if (isPriority) {
-    cardBorder = 'border-[#FFFFFF] shadow-[0_0_20px_rgba(255, 255, 255,0.18)]'
-    cardBg = 'bg-[#16140c]'
+    cardBorder = 'border-[#8C5E43] shadow-md'
+    cardBg = 'bg-[#FAF6F0]'
   } else if (order.payment_status === 'confirmed') {
-    cardBorder = 'border-green-500/30'
-    cardBg = 'bg-[#0d160f]'
+    cardBorder = 'border-[#BCD4BF]'
+    cardBg = 'bg-[#FAFDFB]'
   } else if (order.payment_status === 'sent') {
-    cardBorder = 'border-blue-500/30'
-    cardBg = 'bg-[#0b121b]'
+    cardBorder = 'border-[#BFDBFE]'
+    cardBg = 'bg-[#F8FAFC]'
   } else if (order.payment_status === 'cancelled') {
-    cardBorder = 'border-red-500/25 opacity-75'
-    cardBg = 'bg-[#150d0d]'
+    cardBorder = 'border-[#F3C4BE] opacity-80'
+    cardBg = 'bg-[#FDFBFB]'
   }
 
   return (
-    <div className={`rounded-xl overflow-hidden shadow-lg transition-all border ${cardBorder} ${cardBg} relative`}>
+    <div className={`overflow-hidden shadow-sm transition-all border ${cardBorder} ${cardBg} relative`}>
       {/* Top Bar for Priority Badge */}
       {isPriority && (
-        <div className="bg-[#FFFFFF] text-[#111111] px-4 py-0.5 text-[10px] font-black uppercase tracking-widest flex items-center justify-between">
+        <div className="bg-[#3D261C] text-[#F7F3EC] px-4 py-1 text-[10px] font-black uppercase tracking-widest flex items-center justify-between">
           <span className="flex items-center gap-1.5">
             <Star size={11} className="fill-current" />
             HIGH PRIORITY ORDER
@@ -141,55 +141,55 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
           {/* Order ID + Date */}
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <p className="text-[10px] uppercase tracking-widest text-gray-500">Order ID</p>
+              <p className="text-[10px] uppercase tracking-widest text-[#784E38] font-semibold">Order ID</p>
               <button
                 type="button"
                 onClick={() => onTogglePriority(order.id)}
                 title={isPriority ? 'Remove Priority' : 'Mark as Priority'}
-                className={`p-1 rounded-md transition-all ${
+                className={`p-1 transition-all ${
                   isPriority
-                    ? 'text-[#FFFFFF] hover:text-yellow-300'
-                    : 'text-gray-500 hover:text-[#FFFFFF]'
+                    ? 'text-[#784E38]'
+                    : 'text-[#8A7465] hover:text-[#784E38]'
                 }`}
               >
-                <Star size={14} className={isPriority ? 'fill-[#FFFFFF]' : ''} />
+                <Star size={14} className={isPriority ? 'fill-[#784E38]' : ''} />
               </button>
             </div>
-            <p className="text-xs font-mono text-[#FFFFFF] font-semibold">
+            <p className="text-xs font-mono text-[#261710] font-bold">
               #{String(order.id).slice(0, 8).toUpperCase()}
             </p>
-            <p className="text-[11px] text-gray-500 mt-1">{formattedDate}</p>
+            <p className="text-[11px] text-[#8A7465] mt-1">{formattedDate}</p>
           </div>
 
           {/* Customer */}
           <div>
-            <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Customer</p>
-            <p className="text-sm text-white font-medium">{order.customer_name || '—'}</p>
+            <p className="text-[10px] uppercase tracking-widest text-[#784E38] font-semibold mb-1">Customer</p>
+            <p className="text-sm text-[#261710] font-medium">{order.customer_name || '—'}</p>
             <div className="flex items-center gap-1 mt-1">
-              <Phone size={11} className="text-gray-500" />
-              <p className="text-[11px] text-gray-400">{order.contact || '—'}</p>
+              <Phone size={11} className="text-[#784E38]" />
+              <p className="text-[11px] text-[#5C4537]">{order.contact || '—'}</p>
             </div>
           </div>
 
           {/* Address */}
           <div>
-            <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Delivery Address</p>
-            <p className="text-xs text-gray-300 leading-snug">
+            <p className="text-[10px] uppercase tracking-widest text-[#784E38] font-semibold mb-1">Delivery Address</p>
+            <p className="text-xs text-[#5C4537] leading-snug">
               {order.address || '—'}
               {order.pincode ? `, ${order.pincode}` : ''}
             </p>
             {order.landmark && (
-              <p className="text-[11px] text-gray-500 mt-0.5">Near: {order.landmark}</p>
+              <p className="text-[11px] text-[#8A7465] mt-0.5">Near: {order.landmark}</p>
             )}
           </div>
 
           {/* Totals */}
           <div>
-            <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Total</p>
-            <p className="text-sm font-bold text-[#FFFFFF]">
+            <p className="text-[10px] uppercase tracking-widest text-[#784E38] font-semibold mb-1">Total</p>
+            <p className="text-sm font-bold text-[#261710]">
               Rs. {Number(order.total || 0).toLocaleString('en-IN')}
             </p>
-            <p className="text-[11px] text-gray-500 mt-1">
+            <p className="text-[11px] text-[#8A7465] mt-1">
               Delivery: Rs. {Number(order.delivery_charge || 0).toLocaleString('en-IN')}
             </p>
           </div>
@@ -210,7 +210,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
                   type="button"
                   onClick={() => handleUpdateStatus('confirmed', 'Order confirmed!')}
                   disabled={updating}
-                  className="flex items-center gap-1 bg-green-600 hover:bg-green-500 disabled:opacity-50 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all shadow-sm"
+                  className="flex items-center gap-1 bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white text-xs font-bold px-3 py-1.5 transition-all shadow-sm"
                 >
                   <Check size={13} />
                   <span>Confirm</span>
@@ -219,7 +219,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
                   type="button"
                   onClick={() => handleUpdateStatus('cancelled', 'Order cancelled')}
                   disabled={updating}
-                  className="flex items-center gap-1 bg-red-950/70 hover:bg-red-900 border border-red-500/40 text-red-400 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-all"
+                  className="flex items-center gap-1 bg-[#FDF0ED] hover:bg-red-100 border border-[#F3C4BE] text-[#8C2E24] text-xs font-semibold px-2.5 py-1.5 transition-all"
                 >
                   <Ban size={12} />
                   <span>Cancel</span>
@@ -234,7 +234,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
                   type="button"
                   onClick={() => handleUpdateStatus('sent', 'Order marked as Sent!')}
                   disabled={updating}
-                  className="flex items-center gap-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all shadow-sm"
+                  className="flex items-center gap-1 bg-[#3D261C] hover:bg-[#543729] disabled:opacity-50 text-[#F7F3EC] text-xs font-bold px-3 py-1.5 transition-all shadow-sm"
                 >
                   <Truck size={13} />
                   <span>Mark as Sent</span>
@@ -243,7 +243,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
                   type="button"
                   onClick={() => handleUpdateStatus('cancelled', 'Order cancelled')}
                   disabled={updating}
-                  className="flex items-center gap-1 bg-red-950/70 hover:bg-red-900 border border-red-500/40 text-red-400 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-all"
+                  className="flex items-center gap-1 bg-[#FDF0ED] hover:bg-red-100 border border-[#F3C4BE] text-[#8C2E24] text-xs font-semibold px-2.5 py-1.5 transition-all"
                 >
                   <Ban size={12} />
                   <span>Cancel</span>
@@ -253,7 +253,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
                   onClick={() => handleUpdateStatus('not_confirmed', 'Moved back to Not Confirmed')}
                   disabled={updating}
                   title="Undo to Not Confirmed"
-                  className="p-1.5 text-gray-500 hover:text-gray-300 rounded-lg hover:bg-white/5"
+                  className="p-1.5 text-[#8A7465] hover:text-[#261710] hover:bg-[#FAF6F0]"
                 >
                   <RotateCcw size={13} />
                 </button>
@@ -263,14 +263,14 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
             {/* If SENT */}
             {order.payment_status === 'sent' && (
               <>
-                <span className="text-[11px] text-blue-400 flex items-center gap-1 mr-1">
+                <span className="text-[11px] text-[#1D4ED8] font-semibold flex items-center gap-1 mr-1">
                   <Truck size={12} /> Dispatched
                 </span>
                 <button
                   type="button"
                   onClick={() => handleUpdateStatus('confirmed', 'Moved back to Confirmed')}
                   disabled={updating}
-                  className="text-xs text-gray-400 hover:text-white px-2.5 py-1 rounded bg-[#1e1e1e] border border-white/10"
+                  className="text-xs text-[#5C4537] hover:text-[#261710] px-2.5 py-1 bg-[#FAF6F0] border border-[#D5C2AE]"
                 >
                   Back to Confirmed
                 </button>
@@ -278,7 +278,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
                   type="button"
                   onClick={() => handleUpdateStatus('cancelled', 'Order cancelled')}
                   disabled={updating}
-                  className="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded bg-red-950/50"
+                  className="text-xs text-red-700 hover:text-red-800 px-2 py-1 bg-red-50 border border-red-200"
                 >
                   Cancel
                 </button>
@@ -291,7 +291,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
                 type="button"
                 onClick={() => handleUpdateStatus('not_confirmed', 'Order reopened!')}
                 disabled={updating}
-                className="flex items-center gap-1 bg-[#222] hover:bg-[#333] border border-white/20 text-gray-300 hover:text-white text-xs font-medium px-3 py-1.5 rounded-lg transition-all"
+                className="flex items-center gap-1 bg-[#FAF6F0] hover:bg-[#EFE7DC] border border-[#D5C2AE] text-[#3D261C] text-xs font-medium px-3 py-1.5 transition-all"
               >
                 <RotateCcw size={12} />
                 <span>Reopen Order</span>
@@ -302,7 +302,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
             <button
               type="button"
               onClick={() => setExpanded((prev) => !prev)}
-              className="flex items-center gap-1 text-xs text-[#FFFFFF] hover:text-yellow-300 transition-colors font-medium ml-1"
+              className="flex items-center gap-1 text-xs text-[#784E38] hover:text-[#261710] transition-colors font-semibold ml-1"
             >
               <Package size={13} />
               <span>{expanded ? 'Hide' : 'Items'}</span>
@@ -314,27 +314,27 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
 
       {/* Expandable Items Section */}
       {expanded && (
-        <div className="border-t border-[#2a2a2a] bg-[#0c0c0c] px-4 sm:px-5 py-4">
+        <div className="border-t border-[#E8DED1] bg-[#FAF6F0] px-4 sm:px-5 py-4">
           {order.order_items && order.order_items.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left">
                 <thead>
-                  <tr className="text-gray-500 uppercase tracking-widest border-b border-[#1f1f1f]">
+                  <tr className="text-[#784E38] uppercase tracking-widest border-b border-[#DECFC0] font-semibold">
                     <th className="pb-2 pr-4">Product</th>
                     <th className="pb-2 pr-4">Size</th>
                     <th className="pb-2 pr-4">Qty</th>
                     <th className="pb-2 text-right">Price</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1a1a1a]">
+                <tbody className="divide-y divide-[#E8DED1]">
                   {order.order_items.map((item, idx) => (
-                    <tr key={idx} className="text-gray-300">
-                      <td className="py-2 pr-4 font-medium text-white">
+                    <tr key={idx} className="text-[#5C4537]">
+                      <td className="py-2.5 pr-4 font-semibold text-[#261710]">
                         {item.product_name || item.products?.name || 'Custom T-Shirt'}
                       </td>
-                      <td className="py-2 pr-4">{item.size || '—'}</td>
-                      <td className="py-2 pr-4">{item.quantity}</td>
-                      <td className="py-2 text-right text-[#FFFFFF] font-semibold">
+                      <td className="py-2.5 pr-4">{item.size || '—'}</td>
+                      <td className="py-2.5 pr-4">{item.quantity}</td>
+                      <td className="py-2.5 text-right text-[#261710] font-bold">
                         Rs. {(item.price * item.quantity).toLocaleString('en-IN')}
                       </td>
                     </tr>
@@ -343,7 +343,7 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
               </table>
             </div>
           ) : (
-            <p className="text-gray-500 text-xs text-center py-2">No item breakdown found.</p>
+            <p className="text-[#8A7465] text-xs text-center py-2">No item breakdown found.</p>
           )}
         </div>
       )}
@@ -353,34 +353,10 @@ function OrderCard({ order, onStatusChange, isPriority, onTogglePriority }) {
 
 export default function AdminOrders() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const tabFromQuery = searchParams.get('tab')
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState(() => {
-    const fromParam = searchParams.get('tab')
-    return (fromParam && (STATUS_TABS.includes(fromParam) || fromParam === 'Priority')) ? fromParam : 'All'
-  })
-
-  // Synchronize activeTab if URL query param changes
-  useEffect(() => {
-    const tabParam = searchParams.get('tab')
-    if (tabParam && (STATUS_TABS.includes(tabParam) || tabParam === 'Priority')) {
-      setActiveTab(tabParam)
-    }
-  }, [searchParams])
-
-  const handleTabSelect = (tab) => {
-    setActiveTab(tab)
-    if (tab === 'All') {
-      const nextParams = new URLSearchParams(searchParams)
-      nextParams.delete('tab')
-      setSearchParams(nextParams)
-    } else {
-      const nextParams = new URLSearchParams(searchParams)
-      nextParams.set('tab', tab)
-      setSearchParams(nextParams)
-    }
-  }
-  const [sortBy, setSortBy] = useState('priority') // 'priority' | 'newest' | 'highest'
+  const [activeTab, setActiveTab] = useState(tabFromQuery || 'Pending')
   const [priorities, setPriorities] = useState(() => {
     try {
       const stored = localStorage.getItem('s2_order_priorities')
@@ -389,168 +365,126 @@ export default function AdminOrders() {
       return {}
     }
   })
-
-  // Live alert banner state
+  const [sortBy, setSortBy] = useState('priority')
   const [newOrderAlert, setNewOrderAlert] = useState(null)
-  const knownOrderIdsRef = useRef(new Set())
+  const previousOrderCount = useRef(null)
 
-  // Save priority changes to localStorage
+  // Persist priorities
+  useEffect(() => {
+    try {
+      localStorage.setItem('s2_order_priorities', JSON.stringify(priorities))
+    } catch (_) {}
+  }, [priorities])
+
   const togglePriority = (orderId) => {
     setPriorities((prev) => {
-      const next = { ...prev, [orderId]: !prev[orderId] }
-      try {
-        localStorage.setItem('s2_order_priorities', JSON.stringify(next))
-      } catch (_) {}
+      const next = { ...prev }
+      if (next[orderId]) {
+        delete next[orderId]
+        toast.success('Priority removed')
+      } else {
+        next[orderId] = true
+        toast.success('Marked as High Priority!')
+      }
       return next
     })
   }
 
-  // ── Prune Sent & Cancelled orders older than 14 days ──────────────────────
-  const purgeStaleOrders = async (allOrders) => {
-    const twoWeeksAgo = Date.now() - FOURTEEN_DAYS_MS
-    const staleOrders = (allOrders || []).filter((o) => {
-      const isStaleStatus = o.payment_status === 'sent' || o.payment_status === 'cancelled'
-      const orderDate = new Date(o.created_at).getTime()
-      return isStaleStatus && orderDate < twoWeeksAgo
+  // 14-day auto retention cleanup helper
+  const pruneStaleOrders = async (currentOrders) => {
+    const now = Date.now()
+    const staleOrders = currentOrders.filter((o) => {
+      const isTerminal = o.payment_status === 'sent' || o.payment_status === 'cancelled'
+      if (!isTerminal) return false
+      const createdTime = new Date(o.created_at).getTime()
+      return now - createdTime > FOURTEEN_DAYS_MS
     })
 
-    if (staleOrders.length > 0) {
-      const staleIds = staleOrders.map((o) => o.id)
-      try {
-        // Attempt to clean from Supabase
-        await supabase.from('orders').delete().in('id', staleIds)
-      } catch (err) {
-        console.warn('Auto-pruning database notice:', err)
-      }
-      // Return list excluding stale orders
-      return allOrders.filter((o) => !staleIds.includes(o.id))
-    }
-    return allOrders
-  }
+    if (staleOrders.length === 0) return currentOrders
 
-  // Manual cleanup button
-  const handleManualPrune = async () => {
-    const twoWeeksAgo = Date.now() - FOURTEEN_DAYS_MS
-    const staleOrders = orders.filter((o) => {
-      const isStale = o.payment_status === 'sent' || o.payment_status === 'cancelled'
-      return isStale && new Date(o.created_at).getTime() < twoWeeksAgo
-    })
-
-    if (staleOrders.length === 0) {
-      toast.success('No Sent or Cancelled orders older than 2 weeks found.')
-      return
-    }
-
-    const toastId = toast.loading(`Clearing ${staleOrders.length} stale order(s)...`)
+    const staleIds = staleOrders.map((o) => o.id)
     try {
-      const staleIds = staleOrders.map((o) => o.id)
+      await supabase.from('order_items').delete().in('order_id', staleIds)
       await supabase.from('orders').delete().in('id', staleIds)
-      setOrders((prev) => prev.filter((o) => !staleIds.includes(o.id)))
-      toast.success(`Cleared ${staleOrders.length} orders older than 2 weeks!`, { id: toastId })
-    } catch {
-      toast.error('Could not clean old orders from database.', { id: toastId })
+      return currentOrders.filter((o) => !staleIds.includes(o.id))
+    } catch (err) {
+      console.warn('Auto cleanup notice:', err)
+      return currentOrders
     }
   }
 
-  // ── Fetch Orders ─────────────────────────────────────────────────────────
-  const fetchOrders = async (showLoading = true, isBackground = false) => {
-    if (showLoading) setLoading(true)
+  const fetchOrders = async (isInitial = false) => {
+    if (isInitial) setLoading(true)
     try {
-      const { data: ordersData, error: ordersError } = await supabase
+      const { data, error } = await supabase
         .from('orders')
-        .select('*')
+        .select(`
+          id,
+          customer_name,
+          contact,
+          address,
+          landmark,
+          pincode,
+          delivery_charge,
+          total,
+          payment_status,
+          created_at,
+          order_items (
+            id,
+            size,
+            quantity,
+            price,
+            product_id,
+            products (
+              name
+            )
+          )
+        `)
         .order('created_at', { ascending: false })
 
-      if (ordersError || !ordersData || ordersData.length === 0) {
-        setOrders([])
-        if (showLoading) setLoading(false)
-        return
-      }
+      if (error) throw error
 
-      // Check for newly arrived orders during background polling
-      if (isBackground && knownOrderIdsRef.current.size > 0) {
-        const brandNewOrders = ordersData.filter(
-          (o) => !knownOrderIdsRef.current.has(o.id) && o.payment_status === 'not_confirmed'
-        )
-        if (brandNewOrders.length > 0) {
-          const newest = brandNewOrders[0]
-          playOrderChime()
-          setNewOrderAlert(newest)
-          toast.success(
-            `New Order! #${String(newest.id).slice(0, 8).toUpperCase()} from ${newest.customer_name || 'Customer'}`,
-            { duration: 8000 }
-          )
-        }
-      }
+      const cleaned = await pruneStaleOrders(data || [])
 
-      // Update known IDs
-      ordersData.forEach((o) => knownOrderIdsRef.current.add(o.id))
-
-      // Clean out orders in Sent / Cancelled older than 14 days
-      const cleanedOrders = await purgeStaleOrders(ordersData)
-
-      // Fetch items in parallel
-      const ordersWithItems = await Promise.all(
-        cleanedOrders.map(async (order) => {
-          const { data: items } = await supabase
-            .from('order_items')
-            .select('*, products(name)')
-            .eq('order_id', order.id)
-
-          const normalizedItems = (items || []).map((item) => ({
-            ...item,
-            product_name: item.product_name || item.products?.name || 'Custom T-Shirt',
-          }))
-
-          return { ...order, order_items: normalizedItems }
+      // Detect newly received orders during polling
+      if (!isInitial && previousOrderCount.current !== null && cleaned.length > previousOrderCount.current) {
+        const newest = cleaned[0]
+        setNewOrderAlert(newest)
+        playOrderChime()
+        toast.success(`New order received from ${newest.customer_name || 'customer'}!`, {
+          duration: 7000,
+          icon: '📦',
         })
-      )
+      }
 
-      setOrders(ordersWithItems)
-    } catch {
-      setOrders([])
+      previousOrderCount.current = cleaned.length
+      setOrders(cleaned)
+    } catch (err) {
+      console.error('Error fetching orders:', err)
     } finally {
-      if (showLoading) setLoading(false)
+      if (isInitial) setLoading(false)
     }
   }
 
-  // Initial load + Realtime listener + Polling fallback
   useEffect(() => {
     fetchOrders(true)
-
-    // 1. Supabase Realtime Channel
-    let channel = null
-    try {
-      channel = supabase
-        .channel('admin_realtime_orders')
-        .on(
-          'postgres_changes',
-          { event: 'INSERT', schema: 'public', table: 'orders' },
-          (payload) => {
-            playOrderChime()
-            setNewOrderAlert(payload.new)
-            toast.success(
-              `New Order Received! #${String(payload.new.id).slice(0, 8).toUpperCase()} from ${payload.new.customer_name || 'Customer'}`,
-              { duration: 9000 }
-            )
-            fetchOrders(false)
-          }
-        )
-        .subscribe()
-    } catch (_) {
-      // Realtime setup fallback
-    }
-
-    // 2. Periodic polling every 15s to guarantee fresh notifications
-    const pollInterval = setInterval(() => {
-      fetchOrders(false, true)
-    }, 15000)
-
-    return () => {
-      clearInterval(pollInterval)
-      if (channel) supabase.removeChannel(channel)
-    }
+    const interval = setInterval(() => {
+      fetchOrders(false)
+    }, 10000)
+    return () => clearInterval(interval)
   }, [])
+
+  // Sync tab with URL query parameter
+  useEffect(() => {
+    if (tabFromQuery) {
+      setActiveTab(tabFromQuery)
+    }
+  }, [tabFromQuery])
+
+  const handleTabSelect = (tab) => {
+    setActiveTab(tab)
+    setSearchParams(tab === 'All' ? {} : { tab })
+  }
 
   const handleStatusChange = (orderId, newStatus) => {
     setOrders((prev) =>
@@ -558,44 +492,53 @@ export default function AdminOrders() {
     )
   }
 
-  // Filter by Active Tab
-  const tabFiltered = orders.filter((o) => {
+  const handleManualPrune = async () => {
+    const beforeCount = orders.length
+    const pruned = await pruneStaleOrders(orders)
+    const removedCount = beforeCount - pruned.length
+    setOrders(pruned)
+    if (removedCount > 0) {
+      toast.success(`Cleaned up ${removedCount} completed orders older than 14 days.`)
+    } else {
+      toast.success('No orders older than 14 days found to clean up.')
+    }
+  }
+
+  // Filter based on active tab
+  const filteredOrders = orders.filter((order) => {
     if (activeTab === 'All') return true
     if (activeTab === 'Pending') {
-      // Must only be in pending if confirmed by admin (awaiting dispatch)
-      return o.payment_status === 'confirmed' || o.payment_status === 'pending'
+      return order.payment_status !== 'sent' && order.payment_status !== 'cancelled'
     }
-    if (activeTab === 'Not Confirmed') return o.payment_status === 'not_confirmed'
-    if (activeTab === 'Confirmed') return o.payment_status === 'confirmed'
-    if (activeTab === 'Sent') return o.payment_status === 'sent'
-    if (activeTab === 'Cancelled') return o.payment_status === 'cancelled'
-    if (activeTab === 'Priority') return Boolean(priorities[o.id])
+    if (activeTab === 'Not Confirmed') return order.payment_status === 'not_confirmed'
+    if (activeTab === 'Confirmed') return order.payment_status === 'confirmed'
+    if (activeTab === 'Sent') return order.payment_status === 'sent'
+    if (activeTab === 'Cancelled') return order.payment_status === 'cancelled'
+    if (activeTab === 'Priority') return Boolean(priorities[order.id])
     return true
   })
 
-  // Sort orders
-  const sortedOrders = [...tabFiltered].sort((a, b) => {
-    const aPri = priorities[a.id] ? 1 : 0
-    const bPri = priorities[b.id] ? 1 : 0
-
+  // Sort filtered orders
+  const sortedOrders = [...filteredOrders].sort((a, b) => {
     if (sortBy === 'priority') {
-      if (aPri !== bPri) return bPri - aPri
+      const aP = priorities[a.id] ? 1 : 0
+      const bP = priorities[b.id] ? 1 : 0
+      if (aP !== bP) return bP - aP
       return new Date(b.created_at) - new Date(a.created_at)
     }
     if (sortBy === 'newest') {
       return new Date(b.created_at) - new Date(a.created_at)
     }
     if (sortBy === 'highest') {
-      return (Number(b.total) || 0) - (Number(a.total) || 0)
+      return (b.total || 0) - (a.total || 0)
     }
     return 0
   })
 
-  // Tab counts
   const tabCount = (tab) => {
     if (tab === 'All') return orders.length
     if (tab === 'Pending') {
-      return orders.filter((o) => o.payment_status === 'confirmed' || o.payment_status === 'pending').length
+      return orders.filter((o) => o.payment_status !== 'sent' && o.payment_status !== 'cancelled').length
     }
     if (tab === 'Not Confirmed') return orders.filter((o) => o.payment_status === 'not_confirmed').length
     if (tab === 'Confirmed') return orders.filter((o) => o.payment_status === 'confirmed').length
@@ -607,14 +550,14 @@ export default function AdminOrders() {
   const priorityCount = orders.filter((o) => priorities[o.id]).length
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 text-[#261710]">
       {/* ── Page Header ─────────────────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#FFFFFF] tracking-wide font-display">
+          <h1 className="text-2xl font-bold text-[#261710] tracking-wide font-serif">
             Customer Orders
           </h1>
-          <p className="text-gray-400 text-xs sm:text-sm mt-0.5">
+          <p className="text-[#6F584A] text-xs sm:text-sm mt-0.5">
             Manage confirmations, dispatch orders, prioritisation, and auto-cleanup.
           </p>
         </div>
@@ -625,9 +568,9 @@ export default function AdminOrders() {
             type="button"
             onClick={handleManualPrune}
             title="Clean Sent and Cancelled orders older than 14 days"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-white/10 hover:border-[#FFFFFF]/40 text-gray-300 hover:text-white text-xs font-medium transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FAF6F0] border border-[#D5C2AE] hover:border-[#8C5E43] text-[#3D261C] text-xs font-semibold transition-colors"
           >
-            <Calendar size={13} className="text-[#FFFFFF]" />
+            <Calendar size={13} className="text-[#784E38]" />
             <span>Auto-Clear: 2 Weeks</span>
           </button>
         </div>
@@ -635,16 +578,16 @@ export default function AdminOrders() {
 
       {/* ── LIVE NEW ORDER ALERT BANNER ─────────────────────────── */}
       {newOrderAlert && (
-        <div className="rounded-xl border border-yellow-500/50 bg-gradient-to-r from-yellow-950/60 via-[#1e1708] to-yellow-950/40 p-4 shadow-[0_0_30px_rgba(255, 255, 255,0.25)] flex items-center justify-between gap-3 animate-pulse">
+        <div className="border-2 border-[#8C5E43] bg-[#FAF6F0] p-4 shadow-md flex items-center justify-between gap-3 animate-pulse">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-full bg-[#FFFFFF] text-[#111111] flex items-center justify-center shrink-0 font-bold shadow-md">
+            <div className="w-9 h-9 bg-[#3D261C] text-[#F7F3EC] flex items-center justify-center shrink-0 font-bold shadow-md">
               <Bell size={18} />
             </div>
             <div className="min-w-0">
-              <p className="text-xs uppercase tracking-widest text-[#FFFFFF] font-black">
+              <p className="text-xs uppercase tracking-widest text-[#784E38] font-black">
                 New Order Received Just Now!
               </p>
-              <p className="text-sm text-white font-medium truncate">
+              <p className="text-sm text-[#261710] font-semibold truncate">
                 #{String(newOrderAlert.id).slice(0, 8).toUpperCase()} &bull; {newOrderAlert.customer_name} &bull; Rs. {Number(newOrderAlert.total || 0).toLocaleString('en-IN')}
               </p>
             </div>
@@ -656,14 +599,14 @@ export default function AdminOrders() {
                 handleTabSelect('Not Confirmed')
                 setNewOrderAlert(null)
               }}
-              className="bg-[#FFFFFF] text-[#111111] font-bold text-xs px-3.5 py-1.5 rounded-lg hover:bg-yellow-400 transition-colors shadow-sm"
+              className="bg-[#3D261C] text-[#F7F3EC] font-bold text-xs px-3.5 py-1.5 hover:bg-[#543729] transition-colors shadow-sm"
             >
               View Order
             </button>
             <button
               type="button"
               onClick={() => setNewOrderAlert(null)}
-              className="p-1.5 text-gray-400 hover:text-white rounded-lg"
+              className="p-1.5 text-[#8A7465] hover:text-[#261710]"
               aria-label="Dismiss alert"
             >
               <X size={16} />
@@ -678,18 +621,18 @@ export default function AdminOrders() {
         <div className="flex flex-wrap items-center gap-2">
           {STATUS_TABS.map((tab) => {
             const isActive = activeTab === tab
-            let activeStyle = 'bg-[#FFFFFF] border-[#FFFFFF] text-[#111111]'
+            let activeStyle = 'bg-[#3D261C] border-[#3D261C] text-[#F7F3EC]'
 
             if (tab === 'Pending') {
-              activeStyle = 'bg-amber-400 border-amber-400 text-black font-bold shadow-[0_0_12px_rgba(251,191,36,0.35)]'
+              activeStyle = 'bg-[#B45309] border-[#B45309] text-white font-bold shadow-sm'
             } else if (tab === 'Not Confirmed') {
-              activeStyle = 'bg-yellow-500 border-yellow-500 text-black'
+              activeStyle = 'bg-[#D97706] border-[#D97706] text-white'
             } else if (tab === 'Confirmed') {
-              activeStyle = 'bg-green-600 border-green-600 text-white'
+              activeStyle = 'bg-[#15803D] border-[#15803D] text-white'
             } else if (tab === 'Sent') {
-              activeStyle = 'bg-blue-600 border-blue-600 text-white'
+              activeStyle = 'bg-[#1D4ED8] border-[#1D4ED8] text-white'
             } else if (tab === 'Cancelled') {
-              activeStyle = 'bg-red-600 border-red-600 text-white'
+              activeStyle = 'bg-[#B91C1C] border-[#B91C1C] text-white'
             }
 
             return (
@@ -697,16 +640,16 @@ export default function AdminOrders() {
                 key={tab}
                 type="button"
                 onClick={() => handleTabSelect(tab)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all ${
+                className={`px-3.5 py-1.5 text-xs font-semibold border transition-all ${
                   isActive
                     ? activeStyle
-                    : 'bg-transparent border-[#2a2a2a] text-gray-400 hover:border-[#FFFFFF] hover:text-[#FFFFFF]'
+                    : 'bg-[#FAF6F0] border-[#DECFC0] text-[#5C4537] hover:border-[#8C5E43] hover:text-[#261710]'
                 }`}
               >
                 <span>{tab}</span>
                 <span
-                  className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] ${
-                    isActive ? 'bg-black/25 text-current' : 'bg-[#1a1a1a] text-gray-500'
+                  className={`ml-1.5 px-1.5 py-0.5 text-[10px] font-bold ${
+                    isActive ? 'bg-black/20 text-current' : 'bg-[#EFE7DC] text-[#6F584A]'
                   }`}
                 >
                   {tabCount(tab)}
@@ -719,16 +662,16 @@ export default function AdminOrders() {
           <button
             type="button"
             onClick={() => handleTabSelect(activeTab === 'Priority' ? 'All' : 'Priority')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold border transition-all ${
               activeTab === 'Priority'
-                ? 'bg-[#FFFFFF] border-[#FFFFFF] text-[#111111]'
-                : 'bg-[#1a170a] border-yellow-500/40 text-yellow-400 hover:border-[#FFFFFF]'
+                ? 'bg-[#784E38] border-[#784E38] text-[#F7F3EC]'
+                : 'bg-[#FAF6F0] border-[#DECFC0] text-[#784E38] hover:border-[#8C5E43]'
             }`}
           >
-            <Star size={12} className={activeTab === 'Priority' ? 'fill-current' : 'fill-yellow-400'} />
+            <Star size={12} className={activeTab === 'Priority' ? 'fill-current' : 'fill-[#784E38]'} />
             <span>Priority</span>
             {priorityCount > 0 && (
-              <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${activeTab === 'Priority' ? 'bg-black/25' : 'bg-yellow-500/20 text-yellow-300'}`}>
+              <span className={`px-1.5 py-0.2 text-[10px] ${activeTab === 'Priority' ? 'bg-black/20' : 'bg-[#EFE7DC] text-[#784E38]'}`}>
                 {priorityCount}
               </span>
             )}
@@ -737,11 +680,11 @@ export default function AdminOrders() {
 
         {/* Sorting Dropdown */}
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-xs text-gray-500">Sort by:</span>
+          <span className="text-xs text-[#6F584A] font-semibold">Sort by:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="bg-[#141414] border border-[#2a2a2a] text-xs text-gray-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#FFFFFF] cursor-pointer"
+            className="bg-[#FFFFFF] border border-[#DECFC0] text-xs text-[#261710] px-2.5 py-1.5 focus:outline-none focus:border-[#784E38] cursor-pointer"
           >
             <option value="priority">Priority First</option>
             <option value="newest">Newest First</option>
@@ -751,30 +694,30 @@ export default function AdminOrders() {
       </div>
 
       {/* ── Auto-Prune 2-Week Notice ────────────────────────────── */}
-      <div className="bg-[#121212] border border-white/5 rounded-lg px-3.5 py-2 flex items-center justify-between text-[11px] text-gray-400">
+      <div className="bg-[#FAF6F0] border border-[#DECFC0] px-3.5 py-2 flex items-center justify-between text-[11px] text-[#6F584A]">
         <span className="flex items-center gap-1.5">
-          <AlertCircle size={13} className="text-[#FFFFFF]" />
+          <AlertCircle size={13} className="text-[#784E38]" />
           <span>Notice: Completed <strong>Sent</strong> &amp; <strong>Cancelled</strong> orders are automatically cleared after 14 days.</span>
         </span>
-        <span className="text-gray-500 hidden sm:inline">Clean database retention active</span>
+        <span className="text-[#8A7465] hidden sm:inline">Clean database retention active</span>
       </div>
 
       {/* ── Loading State ───────────────────────────────────────── */}
       {loading && (
         <div className="flex flex-col items-center justify-center py-20 gap-3">
-          <div className="w-9 h-9 rounded-full border-2 border-[#FFFFFF] border-t-transparent animate-spin" />
-          <p className="text-gray-500 text-xs tracking-wider uppercase">Loading orders...</p>
+          <div className="w-8 h-8 border-2 border-[#784E38] border-t-transparent animate-spin" />
+          <p className="text-[#8A7465] text-xs tracking-wider uppercase font-semibold">Loading orders...</p>
         </div>
       )}
 
       {/* ── Empty State ─────────────────────────────────────────── */}
       {!loading && sortedOrders.length === 0 && (
-        <div className="flex flex-col items-center justify-center py-20 gap-3 text-center rounded-xl border border-white/5 bg-[#101010]">
-          <div className="w-14 h-14 rounded-full bg-[#181818] flex items-center justify-center text-gray-600">
-            <Package size={26} className="text-[#FFFFFF]/60" />
+        <div className="flex flex-col items-center justify-center py-20 gap-3 text-center border border-[#DECFC0] bg-[#FAF6F0] p-6">
+          <div className="w-14 h-14 bg-[#EFE7DC] flex items-center justify-center text-[#784E38]">
+            <Package size={26} className="text-[#784E38]" />
           </div>
-          <p className="text-gray-300 text-sm font-semibold">No orders in this view</p>
-          <p className="text-gray-500 text-xs max-w-sm">
+          <p className="text-[#261710] text-sm font-semibold">No orders in this view</p>
+          <p className="text-[#6F584A] text-xs max-w-sm">
             {activeTab === 'All'
               ? 'No customer orders placed yet. Orders placed via WhatsApp will appear here automatically.'
               : activeTab === 'Priority'

@@ -63,67 +63,67 @@ export default function CartPage() {
   const canProceed = items.length > 0
 
   return (
-    <div className="min-h-screen text-white flex flex-col">
+    <div className="min-h-screen text-[#261710] bg-[#F7F3EC] flex flex-col">
       <Navbar />
 
-      <main className="flex-1 max-w-5xl mx-auto w-full px-3.5 sm:px-6 py-5 sm:py-8">
-        <div className="mb-4 sm:mb-6">
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold mb-1 text-[#FFFFFF]">
+      <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-10">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold mb-1.5 text-[#261710]">
             Your Shopping Cart
           </h1>
-          <p className="text-xs sm:text-sm text-gray-400">
+          <p className="text-xs sm:text-sm text-[#6F584A]">
             Review your items, calculate delivery to your area, and proceed to billing.
           </p>
         </div>
 
         {items.length === 0 ? (
           /* ── Empty State ── */
-          <div className="flex flex-col items-center justify-center py-12 text-center glass-panel rounded-xl p-6 sm:p-8 max-w-md mx-auto">
-            <ShoppingBag size={38} className="text-[#FFFFFF] mb-3 drop-shadow-[0_0_10px_rgba(255, 255, 255,0.3)]" />
-            <p className="text-xs sm:text-sm text-gray-300 max-w-xs mb-5 leading-relaxed">
+          <div className="flex flex-col items-center justify-center py-12 text-center bg-[#FAF6F0] border border-[#DECFC0] p-6 sm:p-10 max-w-md mx-auto shadow-sm">
+            <ShoppingBag size={38} className="text-[#784E38] mb-3" />
+            <p className="text-xs sm:text-sm text-[#5C4537] max-w-xs mb-6 leading-relaxed">
               Your cart is empty right now. Head over to the shop and find something
               that speaks to your heart.
             </p>
             <Link
               to="/catalogue"
-              className="px-5 py-2.5 rounded-lg font-semibold text-xs sm:text-sm bg-[#FFFFFF] text-[#111111] hover:bg-[#E5E5E5] transition-colors shadow-md"
+              className="px-6 py-2.5 font-semibold text-xs sm:text-sm bg-[#3D261C] text-[#F7F3EC] hover:bg-[#543729] transition-colors shadow-sm"
             >
               Browse the Collection
             </Link>
           </div>
         ) : (
-          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
+          <div className="flex flex-col lg:flex-row gap-5 sm:gap-7">
             {/* ── Cart Items ── */}
-            <section className="flex-1 flex flex-col gap-3">
+            <section className="flex-1 flex flex-col gap-3.5">
               {items.map((item) => (
                 <div
                   key={`${item.id}-${item.size}`}
-                  className="rounded-xl p-3 sm:p-4 glass-card glass-card-hover flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm"
+                  className="p-3.5 sm:p-4 bg-[#FFFFFF] border border-[#E8DED1] flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 shadow-sm"
                 >
-                  <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                  <div className="flex items-start sm:items-center gap-3.5 min-w-0 flex-1">
                     {item.image ? (
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-white/10 shrink-0"
+                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover border border-[#DECFC0] shrink-0 bg-[#F0E8DE]"
                       />
                     ) : (
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg glass-card border border-white/10 flex items-center justify-center shrink-0">
-                        <ShoppingBag size={20} className="text-[#FFFFFF]/50" />
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 border border-[#DECFC0] bg-[#FAF6F0] flex items-center justify-center shrink-0">
+                        <ShoppingBag size={20} className="text-[#8C5E43]/60" />
                       </div>
                     )}
 
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-xs sm:text-base text-white leading-snug line-clamp-2">
+                      <p className="font-semibold text-xs sm:text-base text-[#261710] leading-snug line-clamp-2">
                         {item.name}
                       </p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-[11px] text-gray-400">Size:</span>
-                        <span className="text-xs glass-badge text-[#FFFFFF] font-semibold px-2 py-0.5 rounded border border-[#FFFFFF]/30">
+                      <div className="flex items-center gap-2 mt-1.5">
+                        <span className="text-[11px] text-[#6F584A]">Size:</span>
+                        <span className="text-xs font-semibold px-2 py-0.5 border border-[#D5C2AE] bg-[#EFE7DC] text-[#784E38]">
                           {item.size}
                         </span>
                       </div>
-                      <p className="text-xs sm:text-sm font-bold text-[#FFFFFF] mt-1 sm:hidden">
+                      <p className="text-xs sm:text-sm font-bold text-[#261710] mt-1.5 sm:hidden">
                         Rs. {(item.price * item.quantity).toLocaleString('en-IN')}
                       </p>
                     </div>
@@ -131,44 +131,44 @@ export default function CartPage() {
                     <button
                       type="button"
                       onClick={() => removeItem(item.id, item.size)}
-                      className="p-1.5 text-gray-400 hover:text-red-400 transition-colors sm:hidden"
+                      className="p-1.5 text-[#8A7465] hover:text-red-600 transition-colors sm:hidden"
                       aria-label="Remove item"
                     >
                       <Trash2 size={16} />
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t border-white/10 sm:border-0">
-                    <div className="flex items-center gap-1 glass-card border border-white/10 rounded-lg p-0.5">
+                  <div className="flex items-center justify-between sm:justify-end gap-3.5 pt-2.5 sm:pt-0 border-t border-[#E8DED1] sm:border-0">
+                    <div className="flex items-center gap-1 bg-[#FAF6F0] border border-[#D5C2AE] p-0.5">
                       <button
                         type="button"
                         onClick={() => decreaseQuantity(item.id, item.size)}
-                        className="w-8 h-8 flex items-center justify-center rounded text-[#FFFFFF] hover:bg-white/5 active:scale-95 transition-all"
+                        className="w-8 h-8 flex items-center justify-center text-[#3D261C] hover:bg-[#EFE7DC] active:scale-95 transition-all"
                         aria-label="Decrease quantity"
                       >
                         <Minus size={14} />
                       </button>
-                      <span className="w-7 text-center text-xs sm:text-sm font-bold text-white">
+                      <span className="w-7 text-center text-xs sm:text-sm font-bold text-[#261710]">
                         {item.quantity}
                       </span>
                       <button
                         type="button"
                         onClick={() => increaseQuantity(item.id, item.size)}
-                        className="w-8 h-8 flex items-center justify-center rounded text-[#FFFFFF] hover:bg-white/5 active:scale-95 transition-all"
+                        className="w-8 h-8 flex items-center justify-center text-[#3D261C] hover:bg-[#EFE7DC] active:scale-95 transition-all"
                         aria-label="Increase quantity"
                       >
                         <Plus size={14} />
                       </button>
                     </div>
 
-                    <p className="hidden sm:block text-sm sm:text-base font-bold text-[#FFFFFF] min-w-[90px] text-right">
+                    <p className="hidden sm:block text-sm sm:text-base font-bold text-[#261710] min-w-[90px] text-right">
                       Rs. {(item.price * item.quantity).toLocaleString('en-IN')}
                     </p>
 
                     <button
                       type="button"
                       onClick={() => removeItem(item.id, item.size)}
-                      className="hidden sm:block p-1.5 rounded text-gray-400 hover:text-red-400 transition-colors"
+                      className="hidden sm:block p-1.5 text-[#8A7465] hover:text-red-600 transition-colors"
                       aria-label="Remove item"
                     >
                       <Trash2 size={16} />
@@ -180,7 +180,7 @@ export default function CartPage() {
               <div className="mt-2 text-center sm:text-left">
                 <Link
                   to="/catalogue"
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#FFFFFF] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#784E38] hover:text-[#261710] font-semibold"
                 >
                   <span>&larr;</span>
                   <span>Continue browsing other collections</span>
@@ -189,22 +189,22 @@ export default function CartPage() {
             </section>
 
             {/* ── Order Summary & Delivery ── */}
-            <aside className="w-full lg:w-80 flex flex-col gap-3.5 shrink-0">
+            <aside className="w-full lg:w-80 flex flex-col gap-4 shrink-0">
 
               {/* Pincode / Delivery Rate Box */}
-              <div className="rounded-xl p-3.5 sm:p-4 glass-panel">
-                <div className="flex items-center gap-1.5 mb-1.5">
-                  <MapPin size={15} className="text-[#FFFFFF]" />
-                  <h2 className="font-semibold text-xs uppercase tracking-wider text-[#FFFFFF]">
+              <div className="p-4 bg-[#FAF6F0] border border-[#DECFC0] shadow-sm">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <MapPin size={15} className="text-[#784E38]" />
+                  <h2 className="font-semibold text-xs uppercase tracking-wider text-[#784E38] font-display">
                     Check Delivery Charge
                   </h2>
                 </div>
 
-                <p className="text-[11px] text-gray-400 mb-2.5 leading-relaxed">
+                <p className="text-[11px] text-[#6F584A] mb-3 leading-relaxed">
                   Enter your delivery pincode to calculate courier charge automatically.
                 </p>
 
-                {/* Pincode Input — auto-calculates on 6 digits */}
+                {/* Pincode Input */}
                 <div className="relative">
                   <input
                     type="text"
@@ -213,51 +213,51 @@ export default function CartPage() {
                     value={pincode}
                     onChange={handlePincodeChange}
                     maxLength={6}
-                    className="w-full px-3 py-2.5 pr-10 rounded-lg text-xs glass-input text-white outline-none border border-white/10 focus:border-[#FFFFFF]/50 transition-colors"
+                    className="w-full px-3 py-2.5 pr-10 text-xs bg-[#FFFFFF] text-[#261710] border border-[#D5C2AE] focus:border-[#784E38] outline-none transition-colors"
                   />
                   {/* Inline status icon */}
                   <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                    {checking && <Loader2 size={15} className="text-[#FFFFFF] animate-spin" />}
-                    {!checking && deliveryInfo?.serviceable === true && <CheckCircle2 size={15} className="text-emerald-400" />}
-                    {!checking && deliveryInfo?.serviceable === false && <XCircle size={15} className="text-red-400" />}
+                    {checking && <Loader2 size={15} className="text-[#784E38] animate-spin" />}
+                    {!checking && deliveryInfo?.serviceable === true && <CheckCircle2 size={15} className="text-emerald-600" />}
+                    {!checking && deliveryInfo?.serviceable === false && <XCircle size={15} className="text-red-600" />}
                   </span>
                 </div>
 
                 {pincode.length > 0 && pincode.length < 6 && (
-                  <p className="text-[11px] text-gray-500 mt-1.5">
+                  <p className="text-[11px] text-[#8A7465] mt-1.5">
                     {6 - pincode.length} more digit{6 - pincode.length !== 1 ? 's' : ''} needed
                   </p>
                 )}
 
                 {pincodeError && (
-                  <p className="text-xs mt-2 text-red-400">{pincodeError}</p>
+                  <p className="text-xs mt-2 text-red-600">{pincodeError}</p>
                 )}
 
                 {/* Result card */}
                 {deliveryInfo !== null && !checking && (
-                  <div className="mt-2.5">
+                  <div className="mt-3">
                     {deliveryInfo.serviceable ? (
-                      <div className="rounded-lg p-3 text-xs bg-emerald-950/40 border border-emerald-800/50 backdrop-blur-sm space-y-1">
-                        <p className="text-emerald-400 font-semibold flex items-center gap-1.5">
+                      <div className="p-3 text-xs bg-[#EAF2EB] border border-[#BCD4BF] space-y-1">
+                        <p className="text-[#20522B] font-semibold flex items-center gap-1.5">
                           <CheckCircle2 size={13} />
                           Delivery available to {pincode} ({deliveryInfo.zone})
                         </p>
-                        <p className="text-gray-300">
-                          Estimated delivery: <span className="font-medium text-white">{deliveryInfo.days} working days</span>
+                        <p className="text-[#3F4E42]">
+                          Estimated delivery: <span className="font-semibold text-[#183920]">{deliveryInfo.days} working days</span>
                         </p>
-                        <p className="text-gray-300">
+                        <p className="text-[#3F4E42]">
                           Courier charge:{' '}
-                          <span className="font-bold text-[#FFFFFF] text-sm">
+                          <span className="font-bold text-[#183920] text-sm">
                             Rs. {deliveryInfo.charge.toLocaleString('en-IN')}
                           </span>
                         </p>
-                        <p className="text-gray-400 text-[10px] italic pt-1">
+                        <p className="text-[#5A6F5E] text-[10px] italic pt-1">
                           delivery price may differ
                         </p>
                       </div>
                     ) : (
-                      <div className="rounded-lg p-3 text-xs bg-red-950/40 border border-red-800/50 backdrop-blur-sm">
-                        <p className="text-red-400 flex items-center gap-1.5">
+                      <div className="p-3 text-xs bg-[#FDF0ED] border border-[#F3C4BE]">
+                        <p className="text-[#8C2E24] flex items-center gap-1.5 font-medium">
                           <XCircle size={13} />
                           Please enter a valid Indian pincode.
                         </p>
@@ -268,50 +268,50 @@ export default function CartPage() {
               </div>
 
               {/* Price Summary */}
-              <div className="rounded-xl p-3.5 sm:p-4 glass-panel">
-                <h2 className="font-semibold text-xs uppercase tracking-wider mb-2.5 text-[#FFFFFF]">
+              <div className="p-4 bg-[#FAF6F0] border border-[#DECFC0] shadow-sm">
+                <h2 className="font-semibold text-xs uppercase tracking-wider mb-3 text-[#784E38] font-display">
                   Order Total
                 </h2>
 
                 <div className="flex flex-col gap-2 text-xs sm:text-sm">
-                  <div className="flex justify-between text-gray-300">
+                  <div className="flex justify-between text-[#5C4537]">
                     <span>
                       Items ({totalQty} {totalQty === 1 ? 'item' : 'items'})
                     </span>
-                    <span className="text-white font-medium">
+                    <span className="text-[#261710] font-semibold">
                       Rs. {subtotal.toLocaleString('en-IN')}
                     </span>
                   </div>
 
-                  <div className="flex justify-between text-gray-300">
+                  <div className="flex justify-between text-[#5C4537]">
                     <span>Delivery Charge</span>
-                    <span className="font-medium">
+                    <span className="font-semibold">
                       {checking ? (
-                        <span className="text-gray-500 animate-pulse">Calculating...</span>
+                        <span className="text-[#8A7465] animate-pulse">Calculating...</span>
                       ) : deliveryInfo?.serviceable ? (
-                        <span className="text-white">Rs. {deliveryCharge.toLocaleString('en-IN')}</span>
+                        <span className="text-[#261710]">Rs. {deliveryCharge.toLocaleString('en-IN')}</span>
                       ) : (
-                        <span className="text-gray-500 italic">Enter pincode above</span>
+                        <span className="text-[#8A7465] italic">Enter pincode above</span>
                       )}
                     </span>
                   </div>
 
-                  <div className="border-t border-[#2A2A2A] my-1" />
+                  <div className="border-t border-[#DECFC0] my-1" />
 
                   <div className="flex justify-between font-bold text-sm sm:text-base">
-                    <span className="text-white">Grand Total</span>
+                    <span className="text-[#261710]">Grand Total</span>
                     <div className="text-right">
-                      <span className="text-[#FFFFFF]">
+                      <span className="text-[#261710]">
                         Rs. {grandTotal.toLocaleString('en-IN')}
                       </span>
                       {!deliveryInfo?.serviceable && (
-                        <p className="text-[10px] font-normal text-gray-500">+ delivery</p>
+                        <p className="text-[10px] font-normal text-[#8A7465]">+ delivery</p>
                       )}
                     </div>
                   </div>
 
                   {deliveryInfo?.serviceable && (
-                    <p className="text-[10px] text-gray-500 italic text-right -mt-1">
+                    <p className="text-[10px] text-[#8A7465] italic text-right -mt-1">
                       delivery price may differ
                     </p>
                   )}
@@ -321,19 +321,18 @@ export default function CartPage() {
                   type="button"
                   onClick={handleProceedToBilling}
                   disabled={!canProceed}
-                  className="mt-4 w-full py-3 rounded-lg font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200 shadow-md"
-                  style={{
-                    backgroundColor: canProceed ? '#FFFFFF' : '#2A2A2A',
-                    color: canProceed ? '#111111' : '#666',
-                    cursor: canProceed ? 'pointer' : 'not-allowed',
-                  }}
+                  className={`mt-4 w-full py-3 font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200 shadow-sm ${
+                    canProceed
+                      ? 'bg-[#3D261C] text-[#F7F3EC] hover:bg-[#543729] cursor-pointer'
+                      : 'bg-[#DECFC0] text-[#8A7465] cursor-not-allowed'
+                  }`}
                 >
                   <span>Proceed to Billing</span>
                   <ArrowRight size={16} />
                 </button>
 
                 {!canProceed && (
-                  <p className="text-[11px] mt-2 text-center text-gray-500">
+                  <p className="text-[11px] mt-2 text-center text-[#8A7465]">
                     Add items to your cart to continue.
                   </p>
                 )}

@@ -260,37 +260,37 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
   }
 
   const inputClass = (field) =>
-    `w-full glass-input border ${
-      errors[field] ? 'border-red-500' : 'border-white/10'
-    } rounded-lg px-3.5 py-2 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none transition-colors`
+    `w-full bg-[#FFFFFF] border ${
+      errors[field] ? 'border-red-500' : 'border-[#D5C2AE]'
+    } px-3.5 py-2.5 text-xs sm:text-sm text-[#261710] placeholder-[#8A7465] focus:outline-none focus:border-[#784E38] transition-colors`
 
   return (
-    <div className="min-h-screen flex flex-col text-white">
+    <div className="min-h-screen flex flex-col text-[#261710] bg-[#F7F3EC]">
       <Navbar />
 
-      <main className="flex-1 px-4 sm:px-6 py-6 sm:py-8 max-w-6xl mx-auto w-full">
+      <main className="flex-1 px-4 sm:px-6 py-6 sm:py-10 max-w-6xl mx-auto w-full">
         {/* Page heading */}
-        <div className="mb-5 sm:mb-6">
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#FFFFFF] flex items-center gap-2">
-            <CreditCard size={24} />
+        <div className="mb-6 sm:mb-8">
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#261710] flex items-center gap-2.5">
+            <CreditCard size={24} className="text-[#784E38]" />
             Billing &amp; Delivery
           </h1>
-          <p className="text-gray-400 mt-1 text-xs sm:text-sm">
+          <p className="text-[#6F584A] mt-1.5 text-xs sm:text-sm">
             Fill in your delivery details below to proceed with your order.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* ── LEFT: Billing Form ─────────────────────────────────────── */}
-          <section className="glass-panel rounded-xl p-4 sm:p-5 space-y-4">
-            <h2 className="text-base sm:text-lg font-semibold text-white">
+          <section className="bg-[#FAF6F0] border border-[#DECFC0] p-4 sm:p-6 space-y-4 shadow-sm">
+            <h2 className="text-base sm:text-lg font-semibold text-[#261710] font-display border-b border-[#DECFC0] pb-2">
               Your Details
             </h2>
 
             {/* Full Name */}
             <div>
-              <label className="block text-xs text-gray-400 mb-1">
-                Full Name <span className="text-[#FFFFFF]">*</span>
+              <label className="block text-xs font-semibold text-[#5C4537] mb-1.5">
+                Full Name <span className="text-[#784E38]">*</span>
               </label>
               <input
                 type="text"
@@ -301,14 +301,14 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
                 className={inputClass('fullName')}
               />
               {errors.fullName && (
-                <p className="text-red-400 text-xs mt-1">{errors.fullName}</p>
+                <p className="text-red-600 text-xs mt-1">{errors.fullName}</p>
               )}
             </div>
 
             {/* Mobile Number */}
             <div>
-              <label className="block text-xs text-gray-400 mb-1">
-                Mobile Number <span className="text-[#FFFFFF]">*</span>
+              <label className="block text-xs font-semibold text-[#5C4537] mb-1.5">
+                Mobile Number <span className="text-[#784E38]">*</span>
               </label>
               <input
                 type="tel"
@@ -320,14 +320,14 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
                 className={inputClass('mobile')}
               />
               {errors.mobile && (
-                <p className="text-red-400 text-xs mt-1">{errors.mobile}</p>
+                <p className="text-red-600 text-xs mt-1">{errors.mobile}</p>
               )}
             </div>
 
             {/* Full Address */}
             <div>
-              <label className="block text-xs text-gray-400 mb-1">
-                Full Address <span className="text-[#FFFFFF]">*</span>
+              <label className="block text-xs font-semibold text-[#5C4537] mb-1.5">
+                Full Address <span className="text-[#784E38]">*</span>
               </label>
               <textarea
                 name="address"
@@ -338,15 +338,15 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
                 className={`${inputClass('address')} resize-none`}
               />
               {errors.address && (
-                <p className="text-red-400 text-xs mt-1">{errors.address}</p>
+                <p className="text-red-600 text-xs mt-1">{errors.address}</p>
               )}
             </div>
 
             {/* Pincode & Landmark in 2 columns */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
-                <label className="block text-xs text-gray-400 mb-1">
-                  Pincode <span className="text-[#FFFFFF]">*</span>
+                <label className="block text-xs font-semibold text-[#5C4537] mb-1.5">
+                  Pincode <span className="text-[#784E38]">*</span>
                 </label>
                 <input
                   type="text"
@@ -358,12 +358,12 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
                   className={inputClass('pincode')}
                 />
                 {errors.pincode && (
-                  <p className="text-red-400 text-xs mt-1">{errors.pincode}</p>
+                  <p className="text-red-600 text-xs mt-1">{errors.pincode}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-xs text-gray-400 mb-1">
+                <label className="block text-xs font-semibold text-[#5C4537] mb-1.5">
                   Landmark (optional)
                 </label>
                 <input
@@ -379,30 +379,30 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
           </section>
 
           {/* ── RIGHT: Order Summary ────────────────────────────────────── */}
-          <section className="space-y-4">
-            <div className="glass-panel rounded-xl p-4 sm:p-5">
-              <h2 className="text-base sm:text-lg font-semibold text-white mb-3">
+          <section className="space-y-5">
+            <div className="bg-[#FAF6F0] border border-[#DECFC0] p-4 sm:p-6 shadow-sm">
+              <h2 className="text-base sm:text-lg font-semibold text-[#261710] font-display mb-3 border-b border-[#DECFC0] pb-2">
                 Order Summary
               </h2>
 
               {items.length === 0 ? (
-                <p className="text-gray-500 text-xs">Your cart is empty.</p>
+                <p className="text-[#8A7465] text-xs">Your cart is empty.</p>
               ) : (
-                <ul className="divide-y divide-white/10 space-y-0">
+                <ul className="divide-y divide-[#DECFC0] space-y-0">
                   {items.map((item, idx) => (
                     <li
                       key={`${item.id}-${item.size}-${idx}`}
-                      className="py-2.5 flex justify-between items-start gap-3"
+                      className="py-3 flex justify-between items-start gap-3"
                     >
                       <div className="flex-1 min-w-0">
-                        <p className="text-white font-medium text-xs sm:text-sm leading-tight truncate">
+                        <p className="text-[#261710] font-medium text-xs sm:text-sm leading-tight truncate">
                           {item.name}
                         </p>
-                        <p className="text-gray-400 text-[11px] mt-0.5">
+                        <p className="text-[#6F584A] text-[11px] mt-0.5">
                           Size: {item.size} &nbsp;&middot;&nbsp; Qty: {item.quantity}
                         </p>
                       </div>
-                      <span className="text-[#FFFFFF] font-semibold text-xs sm:text-sm whitespace-nowrap">
+                      <span className="text-[#261710] font-semibold text-xs sm:text-sm whitespace-nowrap">
                         Rs. {(item.price * item.quantity).toLocaleString('en-IN')}
                       </span>
                     </li>
@@ -411,28 +411,28 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
               )}
 
               {/* Totals */}
-              <div className="mt-3 pt-3 border-t border-white/10 space-y-1.5 text-xs sm:text-sm">
-                <div className="flex justify-between text-gray-400">
+              <div className="mt-4 pt-4 border-t border-[#DECFC0] space-y-2 text-xs sm:text-sm">
+                <div className="flex justify-between text-[#5C4537]">
                   <span>Subtotal</span>
-                  <span>Rs. {subtotal.toLocaleString('en-IN')}</span>
+                  <span className="font-semibold text-[#261710]">Rs. {subtotal.toLocaleString('en-IN')}</span>
                 </div>
-                <div className="flex justify-between text-gray-400">
+                <div className="flex justify-between text-[#5C4537]">
                   <span>Delivery Charge</span>
-                  <span>
+                  <span className="font-semibold text-[#261710]">
                     {Number(deliveryCharge) === 0 ? (
-                      <span className="text-emerald-400 font-medium">FREE</span>
+                      <span className="text-emerald-700 font-bold">FREE</span>
                     ) : (
                       `Rs. ${Number(deliveryCharge).toLocaleString('en-IN')}`
                     )}
                   </span>
                 </div>
-                <div className="flex justify-between text-white font-bold text-sm sm:text-base pt-2 border-t border-white/10">
+                <div className="flex justify-between text-[#261710] font-bold text-sm sm:text-base pt-2.5 border-t border-[#DECFC0]">
                   <span>Grand Total</span>
                   <div className="text-right">
-                    <span className="text-[#FFFFFF]">
+                    <span>
                       Rs. {grandTotal.toLocaleString('en-IN')}
                     </span>
-                    <p className="text-[10px] text-gray-500 italic font-normal mt-0.5">
+                    <p className="text-[10px] text-[#8A7465] italic font-normal mt-0.5">
                       delivery price may differ
                     </p>
                   </div>
@@ -441,22 +441,22 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
             </div>
 
             {/* ── Payment Section ─────────────────────────────────────── */}
-            <div className="glass-panel rounded-xl p-4 sm:p-5 space-y-3">
-              <h2 className="text-base sm:text-lg font-semibold text-white">Payment &amp; Ordering</h2>
+            <div className="bg-[#FAF6F0] border border-[#DECFC0] p-4 sm:p-6 space-y-4 shadow-sm">
+              <h2 className="text-base sm:text-lg font-semibold text-[#261710] font-display">Payment &amp; Ordering</h2>
 
               {orderPlaced ? (
-                <div className="flex items-center gap-2 justify-center py-3 text-emerald-400 font-semibold text-sm">
+                <div className="flex items-center gap-2 justify-center py-3 text-emerald-700 font-semibold text-sm">
                   <CheckCircle size={18} />
                   Order placed. Redirecting...
                 </div>
               ) : (
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                   {/* Order with WhatsApp Button */}
                   <button
                     type="button"
                     onClick={handleOrderWithWhatsApp}
                     disabled={placing || items.length === 0}
-                    className="w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-200 text-sm shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer"
+                    className="w-full bg-[#3D261C] hover:bg-[#543729] disabled:opacity-50 disabled:cursor-not-allowed text-[#F7F3EC] font-bold py-3 flex items-center justify-center gap-2 transition-all duration-200 text-sm shadow-md cursor-pointer"
                   >
                     <MessageCircle size={18} />
                     {placing
@@ -465,9 +465,9 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
                   </button>
 
                   <div className="relative flex py-1 items-center">
-                    <div className="flex-grow border-t border-white/10"></div>
-                    <span className="flex-shrink mx-3 text-gray-500 text-[11px] uppercase tracking-wider">or pay online</span>
-                    <div className="flex-grow border-t border-white/10"></div>
+                    <div className="flex-grow border-t border-[#DECFC0]"></div>
+                    <span className="flex-shrink mx-3 text-[#8A7465] text-[11px] uppercase tracking-wider font-semibold">or pay online</span>
+                    <div className="flex-grow border-t border-[#DECFC0]"></div>
                   </div>
 
                   {/* Pay Online — Coming Soon */}
@@ -475,12 +475,12 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
                     <button
                       type="button"
                       disabled
-                      className="w-full bg-[#1a1a1a] border border-white/10 text-gray-500 font-bold py-3 rounded-lg flex items-center justify-center gap-2 cursor-not-allowed text-sm"
+                      className="w-full bg-[#EFE7DC] border border-[#D5C2AE] text-[#8A7465] font-bold py-3 flex items-center justify-center gap-2 cursor-not-allowed text-sm"
                     >
                       <CreditCard size={18} />
                       Pay Online
                     </button>
-                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#FFFFFF] text-[#111111] text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full shadow-md whitespace-nowrap">
+                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#3D261C] text-[#F7F3EC] text-[10px] font-bold uppercase tracking-widest px-3 py-0.5 shadow-sm whitespace-nowrap">
                       Coming Soon
                     </span>
                   </div>
@@ -488,14 +488,14 @@ Please confirm my order and share payment instructions. JazakAllah Khair.`
               )}
 
               {/* Note */}
-              <div className="glass-card border border-white/10 rounded-lg p-2.5">
-                <p className="text-gray-400 text-xs leading-relaxed">
-                  <span className="text-[#FFFFFF] font-medium">WhatsApp Ordering:</span>{' '}
+              <div className="bg-[#FFFFFF] border border-[#E8DED1] p-3">
+                <p className="text-[#5C4537] text-xs leading-relaxed">
+                  <span className="text-[#261710] font-semibold">WhatsApp Ordering:</span>{' '}
                   Clicking "Order with WhatsApp" opens WhatsApp with your complete itemized bill and delivery address pre-filled for immediate confirmation.
                 </p>
               </div>
 
-              <p className="text-gray-500 text-[11px] text-center">
+              <p className="text-[#8A7465] text-[11px] text-center">
                 By placing your order, you agree to our terms. JazakAllah Khair
                 for choosing S2 Teespoint.
               </p>

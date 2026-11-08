@@ -36,7 +36,6 @@ export default function AdminSettings() {
     setForm((prev) => ({
       ...prev,
       [name]: value,
-      // If phone is updated and whatsapp isn't customized, sync them conveniently
       ...(name === 'phone' && !prev.whatsapp ? { whatsapp: value } : {}),
     }));
   };
@@ -58,38 +57,38 @@ export default function AdminSettings() {
   const previewWaNumber = cleanWaNumber.length === 10 ? `91${cleanWaNumber}` : cleanWaNumber;
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-4xl mx-auto text-white">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-4xl mx-auto text-[#261710]">
       {/* Page Title */}
-      <div className="mb-6 border-b border-[#222222] pb-4 flex items-center justify-between">
+      <div className="mb-6 border-b border-[#DECFC0] pb-4 flex items-center justify-between">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold font-serif text-[#FFFFFF] flex items-center gap-2">
-            <Settings size={22} />
+          <h1 className="text-xl sm:text-2xl font-bold font-serif text-[#261710] flex items-center gap-2.5">
+            <Settings size={22} className="text-[#784E38]" />
             Store Contact &amp; Business Info
           </h1>
-          <p className="text-gray-400 text-xs sm:text-sm mt-1">
+          <p className="text-[#6F584A] text-xs sm:text-sm mt-1.5 leading-relaxed">
             Updating the phone number, email, or address here immediately updates the website header, footer, catalogue, and all WhatsApp links.
           </p>
         </div>
       </div>
 
       {loading ? (
-        <div className="p-12 text-center text-gray-500">Loading settings...</div>
+        <div className="p-12 text-center text-[#8A7465]">Loading settings...</div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* WhatsApp & Phone Card */}
-          <div className="bg-[#111111] border border-[#222222] p-5 sm:p-6 space-y-4">
-            <h2 className="text-sm sm:text-base font-semibold text-[#FFFFFF] flex items-center gap-2 border-b border-[#1f1f1f] pb-2">
-              <MessageCircle size={18} />
+          <div className="bg-[#FFFFFF] border border-[#DECFC0] p-5 sm:p-6 space-y-4 shadow-sm">
+            <h2 className="text-sm sm:text-base font-semibold text-[#261710] flex items-center gap-2 border-b border-[#DECFC0] pb-2 font-display">
+              <MessageCircle size={18} className="text-[#784E38]" />
               WhatsApp &amp; Phone Contact
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs uppercase tracking-wider text-gray-400 mb-1.5 font-medium">
+                <label className="block text-xs uppercase tracking-wider text-[#5C4537] mb-1.5 font-semibold">
                   Primary Phone / Call Number
                 </label>
                 <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-[#784E38]">
                     <Phone size={14} />
                   </span>
                   <input
@@ -99,18 +98,18 @@ export default function AdminSettings() {
                     onChange={handleChange}
                     placeholder="e.g. 8056234337 or +91 80562 34337"
                     required
-                    className="w-full bg-[#181818] border border-[#333333] pl-9 pr-3 py-2 text-sm text-white focus:border-[#FFFFFF] outline-none"
+                    className="w-full bg-[#FAF6F0] border border-[#D5C2AE] pl-9 pr-3 py-2 text-sm text-[#261710] focus:border-[#784E38] outline-none"
                   />
                 </div>
-                <p className="text-[11px] text-gray-500 mt-1">Displayed in footer for phone calls.</p>
+                <p className="text-[11px] text-[#8A7465] mt-1">Displayed in footer for phone calls.</p>
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-wider text-gray-400 mb-1.5 font-medium">
+                <label className="block text-xs uppercase tracking-wider text-[#5C4537] mb-1.5 font-semibold">
                   WhatsApp Number (Orders &amp; Enquiries)
                 </label>
                 <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-emerald-400">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-emerald-600">
                     <MessageCircle size={14} />
                   </span>
                   <input
@@ -120,10 +119,10 @@ export default function AdminSettings() {
                     onChange={handleChange}
                     placeholder="e.g. 918056234337"
                     required
-                    className="w-full bg-[#181818] border border-[#333333] pl-9 pr-3 py-2 text-sm text-white focus:border-[#FFFFFF] outline-none"
+                    className="w-full bg-[#FAF6F0] border border-[#D5C2AE] pl-9 pr-3 py-2 text-sm text-[#261710] focus:border-[#784E38] outline-none"
                   />
                 </div>
-                <p className="text-[11px] text-gray-500 mt-1">
+                <p className="text-[11px] text-[#8A7465] mt-1">
                   All customer chats and WhatsApp order submissions will be sent to this number.
                 </p>
               </div>
@@ -131,15 +130,15 @@ export default function AdminSettings() {
 
             {/* Live WhatsApp preview link */}
             {previewWaNumber && (
-              <div className="bg-[#161616] border border-[#2a2a2a] p-3 text-xs flex items-center justify-between">
-                <span className="text-gray-400">
-                  Live link preview: <strong className="text-emerald-400">https://wa.me/{previewWaNumber}</strong>
+              <div className="bg-[#FAF6F0] border border-[#DECFC0] p-3 text-xs flex items-center justify-between">
+                <span className="text-[#5C4537]">
+                  Live link preview: <strong className="text-emerald-700">https://wa.me/{previewWaNumber}</strong>
                 </span>
                 <a
                   href={`https://wa.me/${previewWaNumber}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[#FFFFFF] hover:underline"
+                  className="text-[#784E38] font-bold hover:underline"
                 >
                   Test Link &rarr;
                 </a>
@@ -148,18 +147,18 @@ export default function AdminSettings() {
           </div>
 
           {/* Email & Address Card */}
-          <div className="bg-[#111111] border border-[#222222] p-5 sm:p-6 space-y-4">
-            <h2 className="text-sm sm:text-base font-semibold text-[#FFFFFF] flex items-center gap-2 border-b border-[#1f1f1f] pb-2">
-              <Mail size={18} />
+          <div className="bg-[#FFFFFF] border border-[#DECFC0] p-5 sm:p-6 space-y-4 shadow-sm">
+            <h2 className="text-sm sm:text-base font-semibold text-[#261710] flex items-center gap-2 border-b border-[#DECFC0] pb-2 font-display">
+              <Mail size={18} className="text-[#784E38]" />
               Email &amp; Physical Store Address
             </h2>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-gray-400 mb-1.5 font-medium">
+              <label className="block text-xs uppercase tracking-wider text-[#5C4537] mb-1.5 font-semibold">
                 Store Email Address
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-[#784E38]">
                   <Mail size={14} />
                 </span>
                 <input
@@ -169,13 +168,13 @@ export default function AdminSettings() {
                   onChange={handleChange}
                   placeholder="e.g. s2teespoint@gmail.com"
                   required
-                  className="w-full bg-[#181818] border border-[#333333] pl-9 pr-3 py-2 text-sm text-white focus:border-[#FFFFFF] outline-none"
+                  className="w-full bg-[#FAF6F0] border border-[#D5C2AE] pl-9 pr-3 py-2 text-sm text-[#261710] focus:border-[#784E38] outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-gray-400 mb-1.5 font-medium">
+              <label className="block text-xs uppercase tracking-wider text-[#5C4537] mb-1.5 font-semibold">
                 Store / Shop Address
               </label>
               <div className="relative">
@@ -186,10 +185,10 @@ export default function AdminSettings() {
                   rows={3}
                   placeholder="e.g. 11/91, Kamarajar Street, Thiruvalluvar Nagar, Ayanavaram, Chennai - 600023"
                   required
-                  className="w-full bg-[#181818] border border-[#333333] p-3 text-sm text-white focus:border-[#FFFFFF] outline-none"
+                  className="w-full bg-[#FAF6F0] border border-[#D5C2AE] p-3 text-sm text-[#261710] focus:border-[#784E38] outline-none"
                 />
               </div>
-              <p className="text-[11px] text-gray-500 mt-1">Displayed in the footer under Shop Location.</p>
+              <p className="text-[11px] text-[#8A7465] mt-1">Displayed in the footer under Shop Location.</p>
             </div>
           </div>
 
@@ -198,7 +197,7 @@ export default function AdminSettings() {
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-2 bg-[#FFFFFF] text-[#111111] font-bold text-sm px-6 py-2.5 hover:bg-[#E5E5E5] transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-2 bg-[#3D261C] text-[#F7F3EC] font-bold text-sm px-6 py-2.5 hover:bg-[#543729] transition-colors disabled:opacity-50 shadow-sm"
             >
               <Save size={16} />
               {saving ? 'Saving...' : 'Save & Update Everywhere'}

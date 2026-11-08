@@ -103,7 +103,6 @@ export default function AdminCategories() {
     }
 
     try {
-      // 1. Try inserting with types column
       let res = await supabase
         .from('categories')
         .insert([
@@ -117,7 +116,6 @@ export default function AdminCategories() {
         .select()
         .single()
 
-      // 2. If table doesn't have 'types' column, fallback without it
       if (res.error) {
         res = await supabase
           .from('categories')
@@ -160,13 +158,15 @@ export default function AdminCategories() {
       types: editTypesList.length > 0 ? editTypesList : ['Round Neck', 'Hoodies', 'Oversized'],
     }
 
-    saveLocalCategory(updated)
-    setCategories((prev) => prev.map((c) => (c.id === updated.id ? updated : c)))
-
     try {
-      await supabase.from('categories').update({ types: updated.types }).eq('id', updated.id)
+      await supabase
+        .from('categories')
+        .update({ types: updated.types })
+        .eq('id', updated.id)
     } catch (_) {}
 
+    saveLocalCategory(updated)
+    setCategories((prev) => prev.map((c) => (c.id === updated.id ? updated : c)))
     toast.success(`T-Shirt types updated for "${updated.name}"!`)
     setEditingCategoryTypes(null)
   }
@@ -198,15 +198,15 @@ export default function AdminCategories() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0a', color: '#f5f5f5', padding: '2rem 1rem' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#F7F3EC', color: '#261710', padding: '2rem 1rem' }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
 
         {/* Page Header */}
         <div style={{ marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: '700', color: '#FFFFFF', marginBottom: '0.25rem' }}>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: '700', color: '#261710', marginBottom: '0.25rem', fontFamily: 'Cinzel, serif' }}>
             Manage Categories
           </h1>
-          <p style={{ color: '#888', fontSize: '0.9rem' }}>
+          <p style={{ color: '#6F584A', fontSize: '0.9rem' }}>
             Add and manage product categories for your store.
           </p>
         </div>
@@ -214,15 +214,15 @@ export default function AdminCategories() {
         {/* Add Category Form */}
         <div
           style={{
-            backgroundColor: '#111',
-            border: '1px solid #2a2a2a',
-            borderRadius: '0.75rem',
+            backgroundColor: '#FFFFFF',
+            border: '1px solid #DECFC0',
             padding: '1.5rem',
             marginBottom: '2rem',
+            boxShadow: '0 2px 8px rgba(38, 23, 16, 0.04)',
           }}
         >
-          <h2 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#FFFFFF', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Plus size={18} />
+          <h2 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#261710', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'Cinzel, serif' }}>
+            <Plus size={18} color="#784E38" />
             Add New Category
           </h2>
           <form onSubmit={handleSubmit}>
@@ -236,8 +236,8 @@ export default function AdminCategories() {
             >
               {/* Category Name */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                <label style={{ fontSize: '0.8rem', color: '#aaa', fontWeight: '500' }}>
-                  Category Name <span style={{ color: '#FFFFFF' }}>*</span>
+                <label style={{ fontSize: '0.8rem', color: '#5C4537', fontWeight: '600' }}>
+                  Category Name <span style={{ color: '#784E38' }}>*</span>
                 </label>
                 <input
                   type="text"
@@ -247,24 +247,23 @@ export default function AdminCategories() {
                   placeholder="e.g. T-Shirts"
                   required
                   style={{
-                    backgroundColor: '#1a1a1a',
-                    border: '1px solid #333',
-                    borderRadius: '0.5rem',
+                    backgroundColor: '#FAF6F0',
+                    border: '1px solid #D5C2AE',
                     padding: '0.6rem 0.85rem',
-                    color: '#f5f5f5',
+                    color: '#261710',
                     fontSize: '0.9rem',
                     outline: 'none',
                     transition: 'border-color 0.2s',
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = '#FFFFFF')}
-                  onBlur={(e) => (e.target.style.borderColor = '#333')}
+                  onFocus={(e) => (e.target.style.borderColor = '#784E38')}
+                  onBlur={(e) => (e.target.style.borderColor = '#D5C2AE')}
                 />
               </div>
 
               {/* Image URL */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                <label style={{ fontSize: '0.8rem', color: '#aaa', fontWeight: '500' }}>
-                  Image URL <span style={{ color: '#555' }}>(optional)</span>
+                <label style={{ fontSize: '0.8rem', color: '#5C4537', fontWeight: '600' }}>
+                  Image URL <span style={{ color: '#8A7465' }}>(optional)</span>
                 </label>
                 <input
                   type="text"
@@ -273,36 +272,72 @@ export default function AdminCategories() {
                   onChange={handleChange}
                   placeholder="Paste an image URL or leave blank"
                   style={{
-                    backgroundColor: '#1a1a1a',
-                    border: '1px solid #333',
-                    borderRadius: '0.5rem',
+                    backgroundColor: '#FAF6F0',
+                    border: '1px solid #D5C2AE',
                     padding: '0.6rem 0.85rem',
-                    color: '#f5f5f5',
+                    color: '#261710',
                     fontSize: '0.9rem',
                     outline: 'none',
                     transition: 'border-color 0.2s',
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = '#FFFFFF')}
-                  onBlur={(e) => (e.target.style.borderColor = '#333')}
+                  onFocus={(e) => (e.target.style.borderColor = '#784E38')}
+                  onBlur={(e) => (e.target.style.borderColor = '#D5C2AE')}
                 />
               </div>
             </div>
 
-            {/* T-Shirt Types in this Category */}
-            <div
-              style={{
-                marginTop: '1.25rem',
-                borderTop: '1px solid #222',
-                paddingTop: '1rem',
-                marginBottom: '1.25rem',
-              }}
-            >
+            {/* Photo upload option */}
+            <div style={{ marginBottom: '1.25rem' }}>
+              <label style={{ fontSize: '0.8rem', color: '#5C4537', fontWeight: '600', display: 'block', marginBottom: '0.5rem' }}>
+                Category Image (Upload or URL)
+              </label>
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <label
+                  style={{
+                    backgroundColor: '#FAF6F0',
+                    border: '1px dashed #784E38',
+                    color: '#784E38',
+                    padding: '0.5rem 1rem',
+                    fontSize: '0.8rem',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                  }}
+                >
+                  <Upload size={14} />
+                  <span>{uploading ? 'Uploading...' : 'Upload Image File'}</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    disabled={uploading}
+                    style={{ display: 'none' }}
+                  />
+                </label>
+                <span style={{ fontSize: '0.75rem', color: '#8A7465' }}>or use image link above</span>
+              </div>
+              {formData.image_url && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '8px' }}>
+                  <img
+                    src={formData.image_url}
+                    alt="Preview"
+                    style={{ width: '48px', height: '48px', objectFit: 'cover', border: '1px solid #D5C2AE' }}
+                  />
+                  <span style={{ fontSize: '0.75rem', color: '#20522B' }}>Image ready</span>
+                </div>
+              )}
+            </div>
+
+            {/* T-Shirt Types selector */}
+            <div style={{ marginBottom: '1.5rem', backgroundColor: '#FAF6F0', border: '1px solid #DECFC0', padding: '1rem' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', marginBottom: '0.75rem' }}>
-                <label style={{ fontSize: '0.85rem', color: '#FFFFFF', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Tag size={15} />
+                <label style={{ fontSize: '0.85rem', color: '#261710', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Tag size={15} color="#784E38" />
                   T-Shirt Types for this Category (e.g. Hoodies, Round Neck, Oversized)
                 </label>
-                <p style={{ fontSize: '0.75rem', color: '#888', margin: 0 }}>
+                <p style={{ fontSize: '0.75rem', color: '#6F584A', margin: 0 }}>
                   These will appear as a category menu on the shop where customers choose their preferred style.
                 </p>
               </div>
@@ -316,11 +351,10 @@ export default function AdminCategories() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '0.4rem',
-                      backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                      border: '1px solid rgba(255, 255, 255, 0.4)',
-                      color: '#FFFFFF',
+                      backgroundColor: '#FFFFFF',
+                      border: '1px solid #D5C2AE',
+                      color: '#261710',
                       padding: '0.3rem 0.65rem',
-                      borderRadius: '9999px',
                       fontSize: '0.8rem',
                       fontWeight: '600',
                     }}
@@ -329,7 +363,7 @@ export default function AdminCategories() {
                     <button
                       type="button"
                       onClick={() => setFormData((prev) => ({ ...prev, types: prev.types.filter((t) => t !== type) }))}
-                      style={{ background: 'none', border: 'none', color: '#888', cursor: 'pointer', padding: 0, display: 'flex' }}
+                      style={{ background: 'none', border: 'none', color: '#8A7465', cursor: 'pointer', padding: 0, display: 'flex' }}
                       title="Remove type"
                     >
                       <X size={13} />
@@ -337,7 +371,7 @@ export default function AdminCategories() {
                   </span>
                 ))}
                 {formData.types.length === 0 && (
-                  <span style={{ fontSize: '0.8rem', color: '#666', fontStyle: 'italic' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#8A7465', fontStyle: 'italic' }}>
                     No types selected. Click presets below or add a custom type.
                   </span>
                 )}
@@ -345,7 +379,7 @@ export default function AdminCategories() {
 
               {/* Quick Preset Buttons */}
               <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.4rem', marginBottom: '0.75rem' }}>
-                <span style={{ fontSize: '0.75rem', color: '#777', marginRight: '0.25rem' }}>Quick Add:</span>
+                <span style={{ fontSize: '0.75rem', color: '#6F584A', marginRight: '0.25rem', fontWeight: '600' }}>Quick Add:</span>
                 {PRESET_TYPES.map((preset) => {
                   const alreadyAdded = formData.types.includes(preset)
                   return (
@@ -360,14 +394,13 @@ export default function AdminCategories() {
                         }
                       }}
                       style={{
-                        backgroundColor: alreadyAdded ? '#FFFFFF' : '#1a1a1a',
-                        color: alreadyAdded ? '#111' : '#ccc',
-                        border: `1px solid ${alreadyAdded ? '#FFFFFF' : '#333'}`,
-                        borderRadius: '6px',
+                        backgroundColor: alreadyAdded ? '#3D261C' : '#FFFFFF',
+                        color: alreadyAdded ? '#F7F3EC' : '#5C4537',
+                        border: `1px solid ${alreadyAdded ? '#3D261C' : '#D5C2AE'}`,
                         padding: '0.25rem 0.55rem',
                         fontSize: '0.75rem',
                         cursor: 'pointer',
-                        fontWeight: alreadyAdded ? '700' : '400',
+                        fontWeight: alreadyAdded ? '700' : '500',
                         transition: 'all 0.15s ease',
                       }}
                     >
@@ -394,11 +427,10 @@ export default function AdminCategories() {
                   }}
                   placeholder="Type custom style & press Enter..."
                   style={{
-                    backgroundColor: '#1a1a1a',
-                    border: '1px solid #333',
-                    borderRadius: '0.4rem',
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #D5C2AE',
                     padding: '0.4rem 0.7rem',
-                    color: '#f5f5f5',
+                    color: '#261710',
                     fontSize: '0.8rem',
                     flex: 1,
                   }}
@@ -412,11 +444,10 @@ export default function AdminCategories() {
                     }
                   }}
                   style={{
-                    backgroundColor: '#2a2a2a',
-                    border: '1px solid #444',
-                    borderRadius: '0.4rem',
+                    backgroundColor: '#3D261C',
+                    border: '1px solid #3D261C',
                     padding: '0.4rem 0.75rem',
-                    color: '#FFFFFF',
+                    color: '#F7F3EC',
                     fontSize: '0.8rem',
                     fontWeight: '600',
                     cursor: 'pointer',
@@ -431,10 +462,9 @@ export default function AdminCategories() {
               type="submit"
               disabled={submitting}
               style={{
-                backgroundColor: submitting ? '#9a7d20' : '#FFFFFF',
-                color: '#0a0a0a',
+                backgroundColor: submitting ? '#8A7465' : '#3D261C',
+                color: '#F7F3EC',
                 border: 'none',
-                borderRadius: '0.5rem',
                 padding: '0.65rem 1.5rem',
                 fontWeight: '700',
                 fontSize: '0.9rem',
@@ -444,8 +474,8 @@ export default function AdminCategories() {
                 gap: '0.4rem',
                 transition: 'background-color 0.2s',
               }}
-              onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.backgroundColor = '#c9a227' }}
-              onMouseLeave={(e) => { if (!submitting) e.currentTarget.style.backgroundColor = '#FFFFFF' }}
+              onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.backgroundColor = '#543729' }}
+              onMouseLeave={(e) => { if (!submitting) e.currentTarget.style.backgroundColor = '#3D261C' }}
             >
               <Plus size={16} />
               {submitting ? 'Saving...' : 'Save Category'}
@@ -456,29 +486,29 @@ export default function AdminCategories() {
         {/* Categories Table */}
         <div
           style={{
-            backgroundColor: '#111',
-            border: '1px solid #2a2a2a',
-            borderRadius: '0.75rem',
+            backgroundColor: '#FFFFFF',
+            border: '1px solid #DECFC0',
             overflow: 'hidden',
+            boxShadow: '0 2px 8px rgba(38, 23, 16, 0.04)',
           }}
         >
-          <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid #1e1e1e' }}>
-            <h2 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#FFFFFF', margin: 0 }}>
+          <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid #DECFC0', background: '#FAF6F0' }}>
+            <h2 style={{ fontSize: '1.1rem', fontWeight: '600', color: '#261710', margin: 0, fontFamily: 'Cinzel, serif' }}>
               All Categories{' '}
-              <span style={{ color: '#555', fontWeight: '400', fontSize: '0.85rem' }}>
+              <span style={{ color: '#784E38', fontWeight: '600', fontSize: '0.85rem' }}>
                 ({categories.length})
               </span>
             </h2>
           </div>
 
           {loading ? (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4rem', gap: '0.75rem', color: '#888' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4rem', gap: '0.75rem', color: '#8A7465' }}>
               <div
                 style={{
                   width: '28px',
                   height: '28px',
-                  border: '3px solid #2a2a2a',
-                  borderTopColor: '#FFFFFF',
+                  border: '3px solid #DECFC0',
+                  borderTopColor: '#784E38',
                   borderRadius: '50%',
                   animation: 'spin 0.8s linear infinite',
                 }}
@@ -487,9 +517,9 @@ export default function AdminCategories() {
               <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </div>
           ) : categories.length === 0 ? (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4rem 2rem', gap: '1rem', color: '#555' }}>
-              <FolderOpen size={48} color="#333" />
-              <p style={{ fontSize: '0.95rem', margin: 0 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4rem 2rem', gap: '1rem', color: '#8A7465' }}>
+              <FolderOpen size={48} color="#DECFC0" />
+              <p style={{ fontSize: '0.95rem', margin: 0, color: '#6F584A' }}>
                 No categories yet. Add your first one above.
               </p>
             </div>
@@ -497,7 +527,7 @@ export default function AdminCategories() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr style={{ backgroundColor: '#161616' }}>
+                  <tr style={{ backgroundColor: '#FAF6F0' }}>
                     {['Image', 'Name', 'T-Shirt Types (Menu)', 'Slug', 'Date Added', 'Actions'].map((col) => (
                       <th
                         key={col}
@@ -505,11 +535,11 @@ export default function AdminCategories() {
                           padding: '0.75rem 1.25rem',
                           textAlign: 'left',
                           fontSize: '0.75rem',
-                          fontWeight: '600',
-                          color: '#888',
+                          fontWeight: '700',
+                          color: '#784E38',
                           textTransform: 'uppercase',
                           letterSpacing: '0.05em',
-                          borderBottom: '1px solid #1e1e1e',
+                          borderBottom: '1px solid #DECFC0',
                           whiteSpace: 'nowrap',
                         }}
                       >
@@ -528,10 +558,10 @@ export default function AdminCategories() {
                       <tr
                         key={category.id}
                         style={{
-                          borderBottom: index < categories.length - 1 ? '1px solid #1a1a1a' : 'none',
+                          borderBottom: index < categories.length - 1 ? '1px solid #E8DED1' : 'none',
                           transition: 'background-color 0.15s',
                         }}
-                        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#161616')}
+                        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#FAF6F0')}
                         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                       >
                         {/* Image */}
@@ -548,8 +578,7 @@ export default function AdminCategories() {
                                 width: '44px',
                                 height: '44px',
                                 objectFit: 'cover',
-                                borderRadius: '0.4rem',
-                                border: '1px solid #2a2a2a',
+                                border: '1px solid #DECFC0',
                                 display: 'block',
                               }}
                             />
@@ -558,20 +587,19 @@ export default function AdminCategories() {
                             style={{
                               width: '44px',
                               height: '44px',
-                              borderRadius: '0.4rem',
-                              border: '1px solid #2a2a2a',
-                              backgroundColor: '#1a1a1a',
+                              border: '1px solid #DECFC0',
+                              backgroundColor: '#FAF6F0',
                               display: category.image_url ? 'none' : 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
                             }}
                           >
-                            <FolderOpen size={18} color="#444" />
+                            <FolderOpen size={18} color="#784E38" />
                           </div>
                         </td>
 
                         {/* Name */}
-                        <td style={{ padding: '0.85rem 1.25rem', fontWeight: '600', color: '#f0f0f0', fontSize: '0.9rem' }}>
+                        <td style={{ padding: '0.85rem 1.25rem', fontWeight: '600', color: '#261710', fontSize: '0.9rem' }}>
                           {category.name}
                         </td>
 
@@ -583,12 +611,11 @@ export default function AdminCategories() {
                                 key={t}
                                 style={{
                                   fontSize: '0.72rem',
-                                  backgroundColor: 'rgba(255, 255, 255, 0.12)',
-                                  border: '1px solid rgba(255, 255, 255, 0.3)',
-                                  color: '#FFFFFF',
+                                  backgroundColor: '#FAF6F0',
+                                  border: '1px solid #D5C2AE',
+                                  color: '#3D261C',
                                   padding: '0.15rem 0.45rem',
-                                  borderRadius: '4px',
-                                  fontWeight: '500',
+                                  fontWeight: '600',
                                 }}
                               >
                                 {t}
@@ -603,18 +630,18 @@ export default function AdminCategories() {
                               title="Edit T-Shirt Types for this category"
                               style={{
                                 background: 'transparent',
-                                border: '1px dashed #555',
-                                color: '#aaa',
+                                border: '1px dashed #784E38',
+                                color: '#784E38',
                                 fontSize: '0.7rem',
                                 padding: '0.15rem 0.45rem',
-                                borderRadius: '4px',
                                 cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '0.2rem',
+                                fontWeight: '600',
                               }}
-                              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#FFFFFF'; e.currentTarget.style.color = '#FFFFFF' }}
-                              onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#555'; e.currentTarget.style.color = '#aaa' }}
+                              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#FAF6F0' }}
+                              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent' }}
                             >
                               <Edit3 size={10} />
                               Edit Types
@@ -626,13 +653,13 @@ export default function AdminCategories() {
                         <td style={{ padding: '0.85rem 1.25rem' }}>
                           <code
                             style={{
-                              backgroundColor: '#1a1a1a',
-                              border: '1px solid #2a2a2a',
-                              borderRadius: '0.3rem',
+                              backgroundColor: '#FAF6F0',
+                              border: '1px solid #DECFC0',
                               padding: '0.2rem 0.5rem',
                               fontSize: '0.78rem',
-                              color: '#FFFFFF',
+                              color: '#784E38',
                               fontFamily: 'monospace',
+                              fontWeight: '600',
                             }}
                           >
                             {category.slug}
@@ -640,7 +667,7 @@ export default function AdminCategories() {
                         </td>
 
                         {/* Date Added */}
-                        <td style={{ padding: '0.85rem 1.25rem', color: '#888', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
+                        <td style={{ padding: '0.85rem 1.25rem', color: '#8A7465', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
                           {formatDate(category.created_at)}
                         </td>
 
@@ -651,25 +678,22 @@ export default function AdminCategories() {
                             title="Delete category"
                             style={{
                               backgroundColor: 'transparent',
-                              border: '1px solid #3a1a1a',
-                              borderRadius: '0.4rem',
+                              border: '1px solid rgba(192, 57, 43, 0.4)',
                               padding: '0.45rem 0.7rem',
-                              color: '#e05a5a',
+                              color: '#c0392b',
                               cursor: 'pointer',
                               display: 'flex',
                               alignItems: 'center',
                               gap: '0.35rem',
                               fontSize: '0.8rem',
-                              fontWeight: '500',
+                              fontWeight: '600',
                               transition: 'all 0.2s',
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor = '#2a0e0e'
-                              e.currentTarget.style.borderColor = '#e05a5a'
+                              e.currentTarget.style.backgroundColor = '#FDF0ED'
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.backgroundColor = 'transparent'
-                              e.currentTarget.style.borderColor = '#3a1a1a'
                             }}
                           >
                             <Trash2 size={14} />
@@ -691,8 +715,8 @@ export default function AdminCategories() {
             style={{
               position: 'fixed',
               inset: 0,
-              backgroundColor: 'rgba(0,0,0,0.8)',
-              backdropFilter: 'blur(4px)',
+              backgroundColor: 'rgba(38, 23, 16, 0.6)',
+              backdropFilter: 'blur(3px)',
               zIndex: 50,
               display: 'flex',
               alignItems: 'center',
@@ -702,29 +726,28 @@ export default function AdminCategories() {
           >
             <div
               style={{
-                backgroundColor: '#121212',
-                border: '1px solid #FFFFFF',
-                borderRadius: '0.75rem',
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #DECFC0',
                 padding: '1.5rem',
                 maxWidth: '480px',
                 width: '100%',
-                boxShadow: '0 10px 40px rgba(0,0,0,0.8)',
+                boxShadow: '0 10px 40px rgba(38, 23, 16, 0.2)',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <h3 style={{ fontSize: '1.1rem', color: '#FFFFFF', fontWeight: '700', margin: 0 }}>
+                <h3 style={{ fontSize: '1.1rem', color: '#261710', fontWeight: '700', margin: 0, fontFamily: 'Cinzel, serif' }}>
                   Edit T-Shirt Types for &ldquo;{editingCategoryTypes.name}&rdquo;
                 </h3>
                 <button
                   type="button"
                   onClick={() => setEditingCategoryTypes(null)}
-                  style={{ background: 'none', border: 'none', color: '#888', cursor: 'pointer' }}
+                  style={{ background: 'none', border: 'none', color: '#8A7465', cursor: 'pointer' }}
                 >
                   <X size={18} />
                 </button>
               </div>
 
-              <p style={{ fontSize: '0.8rem', color: '#aaa', marginBottom: '1rem' }}>
+              <p style={{ fontSize: '0.8rem', color: '#6F584A', marginBottom: '1rem', lineHeight: '1.5' }}>
                 Add or remove types (Hoodies, Round Neck, Oversized, etc.). These appear as the style selection menu inside this category on the shop.
               </p>
 
@@ -737,11 +760,10 @@ export default function AdminCategories() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '0.4rem',
-                      backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                      border: '1px solid rgba(255, 255, 255, 0.4)',
-                      color: '#FFFFFF',
+                      backgroundColor: '#FAF6F0',
+                      border: '1px solid #D5C2AE',
+                      color: '#261710',
                       padding: '0.3rem 0.65rem',
-                      borderRadius: '9999px',
                       fontSize: '0.8rem',
                       fontWeight: '600',
                     }}
@@ -750,7 +772,7 @@ export default function AdminCategories() {
                     <button
                       type="button"
                       onClick={() => setEditTypesList((prev) => prev.filter((item) => item !== t))}
-                      style={{ background: 'none', border: 'none', color: '#888', cursor: 'pointer', padding: 0, display: 'flex' }}
+                      style={{ background: 'none', border: 'none', color: '#8A7465', cursor: 'pointer', padding: 0, display: 'flex' }}
                     >
                       <X size={13} />
                     </button>
@@ -774,14 +796,13 @@ export default function AdminCategories() {
                         }
                       }}
                       style={{
-                        backgroundColor: has ? '#FFFFFF' : '#1c1c1c',
-                        color: has ? '#111' : '#ccc',
-                        border: `1px solid ${has ? '#FFFFFF' : '#333'}`,
-                        borderRadius: '4px',
+                        backgroundColor: has ? '#3D261C' : '#FAF6F0',
+                        color: has ? '#F7F3EC' : '#5C4537',
+                        border: `1px solid ${has ? '#3D261C' : '#D5C2AE'}`,
                         padding: '0.2rem 0.5rem',
                         fontSize: '0.72rem',
                         cursor: 'pointer',
-                        fontWeight: has ? '700' : '400',
+                        fontWeight: has ? '700' : '500',
                       }}
                     >
                       {has ? `✓ ${preset}` : `+ ${preset}`}
@@ -807,11 +828,10 @@ export default function AdminCategories() {
                   }}
                   placeholder="Custom type..."
                   style={{
-                    backgroundColor: '#1c1c1c',
-                    border: '1px solid #333',
-                    borderRadius: '0.4rem',
+                    backgroundColor: '#FAF6F0',
+                    border: '1px solid #D5C2AE',
                     padding: '0.4rem 0.6rem',
-                    color: '#fff',
+                    color: '#261710',
                     fontSize: '0.8rem',
                     flex: 1,
                   }}
@@ -825,11 +845,10 @@ export default function AdminCategories() {
                     }
                   }}
                   style={{
-                    backgroundColor: '#2a2a2a',
-                    border: '1px solid #444',
-                    borderRadius: '0.4rem',
+                    backgroundColor: '#3D261C',
+                    border: '1px solid #3D261C',
                     padding: '0.4rem 0.75rem',
-                    color: '#FFFFFF',
+                    color: '#F7F3EC',
                     fontSize: '0.8rem',
                     fontWeight: '600',
                     cursor: 'pointer',
@@ -845,13 +864,13 @@ export default function AdminCategories() {
                   type="button"
                   onClick={() => setEditingCategoryTypes(null)}
                   style={{
-                    backgroundColor: '#222',
-                    border: '1px solid #333',
-                    borderRadius: '0.4rem',
+                    backgroundColor: '#FAF6F0',
+                    border: '1px solid #D5C2AE',
                     padding: '0.5rem 1rem',
-                    color: '#aaa',
+                    color: '#5C4537',
                     fontSize: '0.85rem',
                     cursor: 'pointer',
+                    fontWeight: '600',
                   }}
                 >
                   Cancel
@@ -860,11 +879,10 @@ export default function AdminCategories() {
                   type="button"
                   onClick={handleSaveEditedTypes}
                   style={{
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: '#3D261C',
                     border: 'none',
-                    borderRadius: '0.4rem',
                     padding: '0.5rem 1.25rem',
-                    color: '#111',
+                    color: '#F7F3EC',
                     fontSize: '0.85rem',
                     fontWeight: '700',
                     cursor: 'pointer',

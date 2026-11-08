@@ -7,23 +7,22 @@ const StatCard = ({ icon: Icon, label, value, to }) => {
   const content = (
     <div
       style={{
-        background: 'linear-gradient(135deg, #181818 0%, #0f0f0f 100%)',
-        border: '1px solid rgba(255, 255, 255, 0.25)',
-        borderRadius: '12px',
+        background: '#FFFFFF',
+        border: '1px solid #E8DED1',
         padding: '22px 24px',
         display: 'flex',
         alignItems: 'center',
         gap: '20px',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+        boxShadow: '0 2px 8px rgba(38, 23, 16, 0.04)',
         transition: 'all 0.2s ease',
         cursor: to ? 'pointer' : 'default',
       }}
-      className="hover:border-[#FFFFFF] hover:scale-[1.02]"
+      className="hover:border-[#8C5E43] hover:shadow-md"
     >
       <div
         style={{
-          background: 'rgba(255, 255, 255, 0.12)',
-          borderRadius: '10px',
+          background: '#FAF6F0',
+          border: '1px solid #DECFC0',
           padding: '14px',
           display: 'flex',
           alignItems: 'center',
@@ -31,14 +30,14 @@ const StatCard = ({ icon: Icon, label, value, to }) => {
           flexShrink: 0,
         }}
       >
-        <Icon size={26} color="#FFFFFF" strokeWidth={1.8} />
+        <Icon size={26} color="#784E38" strokeWidth={1.8} />
       </div>
       <div>
         <div
           style={{
             fontSize: '2rem',
             fontWeight: '700',
-            color: '#FFFFFF',
+            color: '#261710',
             lineHeight: 1,
             marginBottom: '6px',
             fontFamily: 'monospace',
@@ -46,7 +45,7 @@ const StatCard = ({ icon: Icon, label, value, to }) => {
         >
           {value === null ? '--' : value}
         </div>
-        <div style={{ fontSize: '0.85rem', color: '#ccc', fontWeight: '500', letterSpacing: '0.03em' }}>
+        <div style={{ fontSize: '0.85rem', color: '#6F584A', fontWeight: '600', letterSpacing: '0.03em' }}>
           {label}
         </div>
       </div>
@@ -65,20 +64,19 @@ const StatCard = ({ icon: Icon, label, value, to }) => {
 
 const StatusBadge = ({ status }) => {
   const config = {
-    not_confirmed: { bg: 'rgba(234,179,8,0.15)', color: '#facc15', border: 'rgba(234,179,8,0.4)', label: 'Not Confirmed' },
-    confirmed:     { bg: 'rgba(34,197,94,0.15)', color: '#4ade80', border: 'rgba(34,197,94,0.4)', label: 'Confirmed' },
-    sent:          { bg: 'rgba(59,130,246,0.15)', color: '#60a5fa', border: 'rgba(59,130,246,0.4)', label: 'Sent' },
-    cancelled:     { bg: 'rgba(239,68,68,0.15)', color: '#f87171', border: 'rgba(239,68,68,0.4)', label: 'Cancelled' },
-    pending:       { bg: 'rgba(234,179,8,0.15)', color: '#facc15', border: 'rgba(234,179,8,0.4)', label: 'Pending' },
+    not_confirmed: { bg: '#FDF5E6', color: '#9A6700', border: '#E6CD97', label: 'Not Confirmed' },
+    confirmed:     { bg: '#EAF2EB', color: '#20522B', border: '#BCD4BF', label: 'Confirmed' },
+    sent:          { bg: '#EBF2FA', color: '#1D4ED8', border: '#BFDBFE', label: 'Sent' },
+    cancelled:     { bg: '#FDF0ED', color: '#8C2E24', border: '#F3C4BE', label: 'Cancelled' },
+    pending:       { bg: '#FDF5E6', color: '#9A6700', border: '#E6CD97', label: 'Pending' },
   }
-  const s = config[status?.toLowerCase()] || { bg: '#33333322', color: '#aaa', border: '#555', label: status || 'Unknown' }
+  const s = config[status?.toLowerCase()] || { bg: '#FAF6F0', color: '#5C4537', border: '#DECFC0', label: status || 'Unknown' }
   return (
     <span
       style={{
         background: s.bg,
         color: s.color,
         border: `1px solid ${s.border}`,
-        borderRadius: '6px',
         padding: '3px 10px',
         fontSize: '0.75rem',
         fontWeight: '600',
@@ -208,16 +206,16 @@ export default function AdminDashboard() {
   ]
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0d0d0d', color: '#f0f0f0', padding: '32px 24px' }}>
+    <div style={{ minHeight: '100vh', background: '#F7F3EC', color: '#261710' }}>
       {/* Header */}
-      <div style={{ marginBottom: '32px' }}>
+      <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-          <LayoutDashboard size={28} color="#b8963e" />
-          <h1 style={{ fontSize: '1.6rem', fontWeight: '700', color: '#f5c842', margin: 0 }}>
+          <LayoutDashboard size={26} color="#784E38" />
+          <h1 style={{ fontSize: '1.6rem', fontWeight: '700', color: '#261710', margin: 0, fontFamily: 'Cinzel, serif' }}>
             Admin Dashboard
           </h1>
         </div>
-        <p style={{ color: '#aaa', fontSize: '0.95rem', margin: 0, paddingLeft: '40px' }}>
+        <p style={{ color: '#6F584A', fontSize: '0.95rem', margin: 0, paddingLeft: '38px' }}>
           Assalamu Alaikum, Admin. Here is a quick look at your store today.
         </p>
       </div>
@@ -228,7 +226,7 @@ export default function AdminDashboard() {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
           gap: '20px',
-          marginBottom: '40px',
+          marginBottom: '36px',
         }}
       >
         {statCards.map((card) => (
@@ -239,24 +237,25 @@ export default function AdminDashboard() {
       {/* Recent Orders */}
       <div
         style={{
-          background: '#111',
-          border: '1px solid #2a2a2a',
-          borderRadius: '12px',
+          background: '#FFFFFF',
+          border: '1px solid #E8DED1',
           overflow: 'hidden',
+          boxShadow: '0 2px 8px rgba(38, 23, 16, 0.04)',
         }}
       >
         {/* Table Header */}
         <div
           style={{
-            padding: '20px 24px',
-            borderBottom: '1px solid #2a2a2a',
+            padding: '18px 24px',
+            borderBottom: '1px solid #E8DED1',
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
+            background: '#FAF6F0',
           }}
         >
-          <ShoppingBag size={20} color="#b8963e" />
-          <h2 style={{ margin: 0, fontSize: '1rem', fontWeight: '600', color: '#f5c842' }}>
+          <ShoppingBag size={20} color="#784E38" />
+          <h2 style={{ margin: 0, fontSize: '1rem', fontWeight: '600', color: '#261710', fontFamily: 'Cinzel, serif' }}>
             Recent Orders
           </h2>
         </div>
@@ -272,19 +271,19 @@ export default function AdminDashboard() {
             }}
           >
             <thead>
-              <tr style={{ background: '#1a1a1a' }}>
+              <tr style={{ background: '#FAF6F0' }}>
                 {['Order ID', 'Customer Name', 'Contact', 'Total (Rs.)', 'Status', 'Date'].map((col) => (
                   <th
                     key={col}
                     style={{
                       padding: '12px 20px',
                       textAlign: 'left',
-                      color: '#b8963e',
+                      color: '#784E38',
                       fontWeight: '600',
                       fontSize: '0.8rem',
                       letterSpacing: '0.05em',
                       textTransform: 'uppercase',
-                      borderBottom: '1px solid #2a2a2a',
+                      borderBottom: '1px solid #E8DED1',
                       whiteSpace: 'nowrap',
                     }}
                   >
@@ -298,7 +297,7 @@ export default function AdminDashboard() {
                 <tr>
                   <td
                     colSpan={6}
-                    style={{ padding: '40px', textAlign: 'center', color: '#555' }}
+                    style={{ padding: '40px', textAlign: 'center', color: '#8A7465' }}
                   >
                     Loading orders…
                   </td>
@@ -307,7 +306,7 @@ export default function AdminDashboard() {
                 <tr>
                   <td
                     colSpan={6}
-                    style={{ padding: '40px', textAlign: 'center', color: '#555' }}
+                    style={{ padding: '40px', textAlign: 'center', color: '#8A7465' }}
                   >
                     No orders found.
                   </td>
@@ -317,21 +316,21 @@ export default function AdminDashboard() {
                   <tr
                     key={order.id}
                     style={{
-                      background: idx % 2 === 0 ? '#111' : '#131313',
+                      background: idx % 2 === 0 ? '#FFFFFF' : '#FAF6F0',
                       transition: 'background 0.15s',
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = '#1c1c1c')}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = '#F0E8DE')}
                     onMouseLeave={(e) =>
-                      (e.currentTarget.style.background = idx % 2 === 0 ? '#111' : '#131313')
+                      (e.currentTarget.style.background = idx % 2 === 0 ? '#FFFFFF' : '#FAF6F0')
                     }
                   >
                     <td
                       style={{
                         padding: '13px 20px',
-                        color: '#f5c842',
+                        color: '#784E38',
                         fontFamily: 'monospace',
-                        fontWeight: '600',
-                        borderBottom: '1px solid #1e1e1e',
+                        fontWeight: '700',
+                        borderBottom: '1px solid #E8DED1',
                         whiteSpace: 'nowrap',
                       }}
                     >
@@ -340,8 +339,9 @@ export default function AdminDashboard() {
                     <td
                       style={{
                         padding: '13px 20px',
-                        color: '#f0f0f0',
-                        borderBottom: '1px solid #1e1e1e',
+                        color: '#261710',
+                        fontWeight: '500',
+                        borderBottom: '1px solid #E8DED1',
                         whiteSpace: 'nowrap',
                       }}
                     >
@@ -350,8 +350,8 @@ export default function AdminDashboard() {
                     <td
                       style={{
                         padding: '13px 20px',
-                        color: '#ccc',
-                        borderBottom: '1px solid #1e1e1e',
+                        color: '#5C4537',
+                        borderBottom: '1px solid #E8DED1',
                         whiteSpace: 'nowrap',
                       }}
                     >
@@ -360,9 +360,9 @@ export default function AdminDashboard() {
                     <td
                       style={{
                         padding: '13px 20px',
-                        color: '#4ade80',
-                        fontWeight: '600',
-                        borderBottom: '1px solid #1e1e1e',
+                        color: '#261710',
+                        fontWeight: '700',
+                        borderBottom: '1px solid #E8DED1',
                         whiteSpace: 'nowrap',
                       }}
                     >
@@ -371,7 +371,7 @@ export default function AdminDashboard() {
                     <td
                       style={{
                         padding: '13px 20px',
-                        borderBottom: '1px solid #1e1e1e',
+                        borderBottom: '1px solid #E8DED1',
                         whiteSpace: 'nowrap',
                       }}
                     >
@@ -380,8 +380,8 @@ export default function AdminDashboard() {
                     <td
                       style={{
                         padding: '13px 20px',
-                        color: '#888',
-                        borderBottom: '1px solid #1e1e1e',
+                        color: '#8A7465',
+                        borderBottom: '1px solid #E8DED1',
                         whiteSpace: 'nowrap',
                       }}
                     >

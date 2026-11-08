@@ -11,7 +11,6 @@ const ALL_SIZES = [
   '2', '4', '6', '8', '10', '12', '14', '16', '18', '20',
 ]
 
-
 const initialForm = {
   category_id: '',
   name: '',
@@ -26,7 +25,6 @@ export default function AdminProducts() {
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
   const [form, setForm] = useState(initialForm)
-  const [customTypeInput, setCustomTypeInput] = useState('')
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [deleteTarget, setDeleteTarget] = useState(null)
@@ -99,7 +97,6 @@ export default function AdminProducts() {
         .upload(filePath, file)
 
       if (error) {
-        console.warn('Supabase storage not connected yet, using local data URL:', error.message)
         const reader = new FileReader()
         reader.onloadend = () => {
           setForm((prev) => ({ ...prev, image_url: reader.result }))
@@ -141,57 +138,79 @@ export default function AdminProducts() {
       category_id: form.category_id,
       name: form.name.trim(),
       description: form.description.trim() || null,
-      price: Number(form.price),
+      price: parseFloat(form.price),
       image_url: form.image_url.trim() || null,
       sizes: form.sizes,
-      tshirt_type: form.tshirt_type || null,
+      tshirt_type: form.tshirt_type.trim() || null,
       created_at: new Date().toISOString(),
-      categories: { name: categories.find((c) => c.id === form.category_id)?.name || 'Custom' },
     }
 
     try {
-      const { data, error } = await supabase.from('products').insert([
-        {
-          category_id: form.category_id,
-          name: newProd.name,
-          description: newProd.description,
-          price: newProd.price,
-          image_url: newProd.image_url,
-          sizes: newProd.sizes,
-          tshirt_type: newProd.tshirt_type,
-        },
-      ]).select().single()
+      let res = await supabase
+        .from('products')
+        .insert([
+          {
+            category_id: newProd.category_id,
+            name: newProd.name,
+            description: newProd.description,
+            price: newProd.price,
+            image_url: newProd.image_url,
+            sizes: newProd.sizes,
+            tshirt_type: newProd.tshirt_type,
+          },
+        ])
+        .select('*, categories(name)')
+        .single()
 
-      if (error) {
-        saveLocalProduct(newProd)
-        setProducts((prev) => [newProd, ...prev])
-        toast.success(`Product "${newProd.name}" added!`)
-      } else {
-        saveLocalProduct(data || newProd)
-        toast.success(`Product "${newProd.name}" added to Supabase!`)
-        await fetchProducts()
+      if (res.error) {
+        res = await supabase
+          .from('products')
+          .insert([
+            {
+              category_id: newProd.category_id,
+              name: newProd.name,
+              description: newProd.description,
+              price: newProd.price,
+              image_url: newProd.image_url,
+              sizes: newProd.sizes,
+            },
+          ])
+          .select('*, categories(name)')
+          .single()
       }
+
+      if (res.error) {
+        saveLocalProduct(newProd)
+        const cat = categories.find((c) => c.id === form.category_id)
+        setProducts((prev) => [{ ...newProd, categories: { name: cat?.name } }, ...prev])
+        toast.success(`"${newProd.name}" saved!`)
+      } else {
+        saveLocalProduct(res.data || newProd)
+        setProducts((prev) => [res.data, ...prev])
+        toast.success(`"${newProd.name}" created successfully!`)
+      }
+
+      setForm(initialForm)
+      setShowForm(false)
     } catch {
       saveLocalProduct(newProd)
-      setProducts((prev) => [newProd, ...prev])
-      toast.success(`Product "${newProd.name}" added!`)
+      const cat = categories.find((c) => c.id === form.category_id)
+      setProducts((prev) => [{ ...newProd, categories: { name: cat?.name } }, ...prev])
+      toast.success(`"${newProd.name}" added!`)
+      setForm(initialForm)
+      setShowForm(false)
+    } finally {
+      setSaving(false)
     }
-
-    setForm(initialForm)
-    setShowForm(false)
-    setSaving(false)
   }
 
-  /* ─── Delete handlers ────────────────────────────────────────────────── */
   async function confirmDelete() {
     if (!deleteTarget) return
     setDeleting(true)
+
     deleteLocalProduct(deleteTarget.id)
     try {
-      await supabase
-        .from('products')
-        .delete()
-        .eq('id', deleteTarget.id)
+      await supabase.from('products').delete().eq('id', deleteTarget.id)
     } catch {
       // ignore
     }
@@ -202,7 +221,6 @@ export default function AdminProducts() {
     setDeleting(false)
   }
 
-  /* ─── Helpers ────────────────────────────────────────────────────────── */
   function formatDate(iso) {
     if (!iso) return '—'
     return new Date(iso).toLocaleDateString('en-IN', {
@@ -212,13 +230,12 @@ export default function AdminProducts() {
     })
   }
 
-  /* ─── Render ─────────────────────────────────────────────────────────── */
   return (
     <div style={styles.page}>
       {/* Header */}
       <div style={styles.header}>
         <div style={styles.titleRow}>
-          <Package size={26} color="#FFFFFF" />
+          <Package size={26} color="#784E38" />
           <h1 style={styles.title}>Manage Products</h1>
         </div>
         <button
@@ -253,7 +270,7 @@ export default function AdminProducts() {
                 ))}
               </select>
               {categories.length === 0 && (
-                <p style={{ color: '#f87171', fontSize: '0.8rem', marginTop: '6px' }}>
+                <p style={{ color: '#c0392b', fontSize: '0.8rem', marginTop: '6px' }}>
                   No categories exist yet. Please go to the <strong>Categories</strong> tab to create your categories first.
                 </p>
               )}
@@ -309,11 +326,10 @@ export default function AdminProducts() {
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <label
                     style={{
-                      backgroundColor: '#1E1E1E',
-                      border: '1px dashed #FFFFFF',
-                      color: '#FFFFFF',
+                      backgroundColor: '#FAF6F0',
+                      border: '1px dashed #784E38',
+                      color: '#784E38',
                       padding: '8px 14px',
-                      borderRadius: '8px',
                       fontSize: '0.8rem',
                       fontWeight: '600',
                       cursor: 'pointer',
@@ -331,7 +347,7 @@ export default function AdminProducts() {
                       style={{ display: 'none' }}
                     />
                   </label>
-                  <span style={{ color: '#777', fontSize: '0.75rem' }}>or enter image link below</span>
+                  <span style={{ color: '#8A7465', fontSize: '0.75rem' }}>or enter image link below</span>
                 </div>
                 <input
                   type="text"
@@ -346,9 +362,9 @@ export default function AdminProducts() {
                     <img
                       src={form.image_url}
                       alt="Preview"
-                      style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: '6px', border: '1px solid #333' }}
+                      style={{ width: '48px', height: '48px', objectFit: 'cover', border: '1px solid #D5C2AE' }}
                     />
-                    <span style={{ fontSize: '0.75rem', color: '#4ade80' }}>Photo selected</span>
+                    <span style={{ fontSize: '0.75rem', color: '#20522B' }}>Photo selected</span>
                   </div>
                 )}
               </div>
@@ -378,7 +394,7 @@ export default function AdminProducts() {
               </div>
             </div>
 
-            {/* T-Shirt Type — always visible; preset chips from category + free-text fallback */}
+            {/* T-Shirt Type */}
             {(() => {
               const selectedCat = categories.find((c) => c.id === form.category_id)
               const catTypes = Array.isArray(selectedCat?.types) && selectedCat.types.length > 0
@@ -390,7 +406,7 @@ export default function AdminProducts() {
                   <label style={styles.label}>
                     T-Shirt Type
                   </label>
-                  <p style={{ fontSize: '0.78rem', color: '#888', marginBottom: '10px' }}>
+                  <p style={{ fontSize: '0.78rem', color: '#6F584A', marginBottom: '10px' }}>
                     Pick the style for this product. Customers will use this to filter products inside the category.
                   </p>
 
@@ -410,10 +426,9 @@ export default function AdminProducts() {
                           }
                           style={{
                             padding: '6px 14px',
-                            borderRadius: '4px',
-                            border: `1px solid ${isActive ? '#FFFFFF' : '#333'}`,
-                            backgroundColor: isActive ? '#FFFFFF' : '#1a1a1a',
-                            color: isActive ? '#111' : '#aaa',
+                            border: `1px solid ${isActive ? '#3D261C' : '#D5C2AE'}`,
+                            backgroundColor: isActive ? '#3D261C' : '#FAF6F0',
+                            color: isActive ? '#F7F3EC' : '#5C4537',
                             fontSize: '0.82rem',
                             fontWeight: isActive ? '700' : '500',
                             cursor: 'pointer',
@@ -448,12 +463,12 @@ export default function AdminProducts() {
                         onClick={() => setForm((prev) => ({ ...prev, tshirt_type: '' }))}
                         style={{
                           padding: '6px 10px',
-                          borderRadius: '4px',
-                          border: '1px solid #333',
-                          backgroundColor: '#1a1a1a',
-                          color: '#aaa',
+                          border: '1px solid #D5C2AE',
+                          backgroundColor: '#FAF6F0',
+                          color: '#5C4537',
                           fontSize: '0.78rem',
                           cursor: 'pointer',
+                          fontWeight: '600',
                         }}
                       >
                         Clear
@@ -462,7 +477,7 @@ export default function AdminProducts() {
                   </div>
 
                   {form.tshirt_type && (
-                    <p style={{ fontSize: '0.75rem', color: '#4ade80', marginTop: '6px' }}>
+                    <p style={{ fontSize: '0.75rem', color: '#20522B', marginTop: '6px', fontWeight: '600' }}>
                       Type set to: <strong>{form.tshirt_type}</strong>
                     </p>
                   )}
@@ -493,13 +508,13 @@ export default function AdminProducts() {
 
         {loading ? (
           <div style={styles.emptyState}>
-            <Package size={40} color="#FFFFFF" />
+            <Package size={40} color="#784E38" />
             <p>Loading products…</p>
           </div>
         ) : products.length === 0 ? (
           <div style={styles.emptyState}>
-            <Package size={40} color="#555" />
-            <p style={{ color: '#888' }}>No products yet. Add your first product above.</p>
+            <Package size={40} color="#DECFC0" />
+            <p style={{ color: '#8A7465' }}>No products yet. Add your first product above.</p>
           </div>
         ) : (
           <div style={styles.tableWrapper}>
@@ -531,7 +546,7 @@ export default function AdminProducts() {
                         />
                       ) : (
                         <div style={styles.imgPlaceholder}>
-                          <Package size={20} color="#555" />
+                          <Package size={20} color="#784E38" />
                         </div>
                       )}
                     </td>
@@ -562,18 +577,17 @@ export default function AdminProducts() {
                           style={{
                             display: 'inline-block',
                             padding: '2px 10px',
-                            borderRadius: '4px',
                             fontSize: '0.75rem',
                             fontWeight: '600',
-                            backgroundColor: 'rgba(255, 255, 255,0.12)',
-                            border: '1px solid rgba(255, 255, 255,0.3)',
-                            color: '#FFFFFF',
+                            backgroundColor: '#FAF6F0',
+                            border: '1px solid #D5C2AE',
+                            color: '#3D261C',
                           }}
                         >
                           {product.tshirt_type}
                         </span>
                       ) : (
-                        <span style={{ color: '#555', fontSize: '0.8rem' }}>—</span>
+                        <span style={{ color: '#8A7465', fontSize: '0.8rem' }}>—</span>
                       )}
                     </td>
 
@@ -588,7 +602,7 @@ export default function AdminProducts() {
                           ))}
                         </div>
                       ) : (
-                        <span style={{ color: '#666', fontSize: '0.8rem' }}>None</span>
+                        <span style={{ color: '#8A7465', fontSize: '0.8rem' }}>None</span>
                       )}
                     </td>
 
@@ -599,7 +613,7 @@ export default function AdminProducts() {
 
                     {/* Date */}
                     <td style={styles.td}>
-                      <span style={{ color: '#aaa', fontSize: '0.8rem' }}>
+                      <span style={{ color: '#8A7465', fontSize: '0.8rem' }}>
                         {formatDate(product.created_at)}
                       </span>
                     </td>
@@ -629,7 +643,7 @@ export default function AdminProducts() {
             <h3 style={styles.dialogTitle}>Delete Product?</h3>
             <p style={styles.dialogBody}>
               Are you sure you want to delete{' '}
-              <strong style={{ color: '#FFFFFF' }}>{deleteTarget.name}</strong>?
+              <strong style={{ color: '#261710' }}>{deleteTarget.name}</strong>?
               This action cannot be undone.
             </p>
             <div style={styles.dialogActions}>
@@ -659,8 +673,8 @@ export default function AdminProducts() {
 const styles = {
   page: {
     minHeight: '100vh',
-    backgroundColor: '#0a0a0a',
-    color: '#f0f0f0',
+    backgroundColor: '#F7F3EC',
+    color: '#261710',
     padding: '2rem 1.5rem',
     fontFamily: "'Segoe UI', sans-serif",
     maxWidth: '1200px',
@@ -682,18 +696,18 @@ const styles = {
   title: {
     fontSize: '1.8rem',
     fontWeight: 700,
-    color: '#FFFFFF',
+    color: '#261710',
     margin: 0,
     letterSpacing: '0.04em',
+    fontFamily: 'Cinzel, serif',
   },
   addBtn: {
     display: 'flex',
     alignItems: 'center',
     gap: '0.4rem',
-    backgroundColor: '#FFFFFF',
-    color: '#0a0a0a',
+    backgroundColor: '#3D261C',
+    color: '#F7F3EC',
     border: 'none',
-    borderRadius: '8px',
     padding: '0.55rem 1.2rem',
     fontWeight: 700,
     fontSize: '0.9rem',
@@ -701,21 +715,22 @@ const styles = {
     transition: 'opacity 0.2s',
   },
   formCard: {
-    backgroundColor: '#111',
-    border: '1px solid #2a2a2a',
-    borderRadius: '12px',
+    backgroundColor: '#FFFFFF',
+    border: '1px solid #DECFC0',
     padding: '1.8rem',
     marginBottom: '2rem',
+    boxShadow: '0 2px 8px rgba(38, 23, 16, 0.04)',
   },
   formTitle: {
     fontSize: '1.1rem',
     fontWeight: 700,
-    color: '#FFFFFF',
+    color: '#261710',
     marginTop: 0,
     marginBottom: '1.2rem',
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
+    fontFamily: 'Cinzel, serif',
   },
   form: {
     display: 'grid',
@@ -729,16 +744,15 @@ const styles = {
   },
   label: {
     fontSize: '0.82rem',
-    color: '#bbb',
+    color: '#5C4537',
     fontWeight: 600,
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   },
   input: {
-    backgroundColor: '#1a1a1a',
-    border: '1px solid #333',
-    borderRadius: '8px',
-    color: '#f0f0f0',
+    backgroundColor: '#FAF6F0',
+    border: '1px solid #D5C2AE',
+    color: '#261710',
     padding: '0.65rem 0.9rem',
     fontSize: '0.95rem',
     outline: 'none',
@@ -747,10 +761,9 @@ const styles = {
     fontFamily: "'Segoe UI', sans-serif",
   },
   select: {
-    backgroundColor: '#1a1a1a',
-    border: '1px solid #333',
-    borderRadius: '8px',
-    color: '#f0f0f0',
+    backgroundColor: '#FAF6F0',
+    border: '1px solid #D5C2AE',
+    color: '#261710',
     padding: '0.65rem 0.9rem',
     fontSize: '0.95rem',
     outline: 'none',
@@ -760,7 +773,7 @@ const styles = {
   },
   sizeHint: {
     fontSize: '0.78rem',
-    color: '#888',
+    color: '#6F584A',
     margin: '0 0 0.5rem 0',
     fontStyle: 'italic',
   },
@@ -771,22 +784,20 @@ const styles = {
   },
   sizeLabel: (checked) => ({
     padding: '0.35rem 0.85rem',
-    borderRadius: '20px',
     fontSize: '0.82rem',
     fontWeight: 700,
     cursor: 'pointer',
-    border: `2px solid ${checked ? '#FFFFFF' : '#333'}`,
-    backgroundColor: checked ? '#FFFFFF' : 'transparent',
-    color: checked ? '#0a0a0a' : '#aaa',
+    border: `2px solid ${checked ? '#3D261C' : '#D5C2AE'}`,
+    backgroundColor: checked ? '#3D261C' : '#FAF6F0',
+    color: checked ? '#F7F3EC' : '#5C4537',
     transition: 'all 0.15s',
     userSelect: 'none',
   }),
   saveBtn: {
     gridColumn: '1 / -1',
-    backgroundColor: '#FFFFFF',
-    color: '#0a0a0a',
+    backgroundColor: '#3D261C',
+    color: '#F7F3EC',
     border: 'none',
-    borderRadius: '8px',
     padding: '0.75rem 1.5rem',
     fontWeight: 700,
     fontSize: '1rem',
@@ -794,15 +805,14 @@ const styles = {
     marginTop: '0.5rem',
   },
   tableCard: {
-    backgroundColor: '#111',
-    border: '1px solid #2a2a2a',
-    borderRadius: '12px',
+    backgroundColor: '#FFFFFF',
+    border: '1px solid #DECFC0',
     padding: '1.8rem',
+    boxShadow: '0 2px 8px rgba(38, 23, 16, 0.04)',
   },
   countBadge: {
-    backgroundColor: '#FFFFFF',
-    color: '#0a0a0a',
-    borderRadius: '12px',
+    backgroundColor: '#EFE7DC',
+    color: '#784E38',
     padding: '0.1rem 0.55rem',
     fontSize: '0.75rem',
     fontWeight: 700,
@@ -819,8 +829,9 @@ const styles = {
   th: {
     textAlign: 'left',
     padding: '0.75rem 1rem',
-    borderBottom: '2px solid #2a2a2a',
-    color: '#FFFFFF',
+    borderBottom: '2px solid #DECFC0',
+    color: '#784E38',
+    backgroundColor: '#FAF6F0',
     fontWeight: 700,
     fontSize: '0.78rem',
     textTransform: 'uppercase',
@@ -828,7 +839,7 @@ const styles = {
     whiteSpace: 'nowrap',
   },
   tr: {
-    borderBottom: '1px solid #1e1e1e',
+    borderBottom: '1px solid #E8DED1',
   },
   td: {
     padding: '0.85rem 1rem',
@@ -838,16 +849,14 @@ const styles = {
     width: '52px',
     height: '52px',
     objectFit: 'cover',
-    borderRadius: '8px',
-    border: '1px solid #2a2a2a',
+    border: '1px solid #DECFC0',
     display: 'block',
   },
   imgPlaceholder: {
     width: '52px',
     height: '52px',
-    borderRadius: '8px',
-    border: '1px solid #2a2a2a',
-    backgroundColor: '#1a1a1a',
+    border: '1px solid #DECFC0',
+    backgroundColor: '#FAF6F0',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -855,21 +864,20 @@ const styles = {
   productName: {
     display: 'block',
     fontWeight: 700,
-    color: '#f0f0f0',
+    color: '#261710',
   },
   productDesc: {
     display: 'block',
     fontSize: '0.78rem',
-    color: '#888',
+    color: '#6F584A',
     marginTop: '0.2rem',
   },
   categoryBadge: {
-    backgroundColor: '#1e1e1e',
-    border: '1px solid #333',
-    borderRadius: '6px',
+    backgroundColor: '#FAF6F0',
+    border: '1px solid #D5C2AE',
     padding: '0.25rem 0.6rem',
     fontSize: '0.8rem',
-    color: '#ccc',
+    color: '#5C4537',
     whiteSpace: 'nowrap',
   },
   sizesWrap: {
@@ -878,23 +886,21 @@ const styles = {
     gap: '0.3rem',
   },
   sizeChip: {
-    backgroundColor: '#1e1e1e',
-    border: '1px solid #FFFFFF',
-    borderRadius: '12px',
+    backgroundColor: '#FAF6F0',
+    border: '1px solid #D5C2AE',
     padding: '0.18rem 0.55rem',
     fontSize: '0.72rem',
     fontWeight: 700,
-    color: '#FFFFFF',
+    color: '#3D261C',
   },
   priceText: {
-    color: '#FFFFFF',
+    color: '#261710',
     fontWeight: 700,
     whiteSpace: 'nowrap',
   },
   deleteBtn: {
     background: 'transparent',
     border: '1px solid #c0392b',
-    borderRadius: '8px',
     color: '#c0392b',
     padding: '0.4rem 0.6rem',
     cursor: 'pointer',
@@ -909,25 +915,25 @@ const styles = {
     alignItems: 'center',
     gap: '0.8rem',
     padding: '3rem 1rem',
-    color: '#FFFFFF',
+    color: '#784E38',
   },
   /* Delete Dialog */
   overlay: {
     position: 'fixed',
     inset: 0,
-    backgroundColor: 'rgba(0,0,0,0.75)',
+    backgroundColor: 'rgba(38, 23, 16, 0.6)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 1000,
   },
   dialog: {
-    backgroundColor: '#111',
-    border: '1px solid #2a2a2a',
-    borderRadius: '12px',
+    backgroundColor: '#FFFFFF',
+    border: '1px solid #DECFC0',
     padding: '2rem',
     maxWidth: '400px',
     width: '90%',
+    boxShadow: '0 8px 30px rgba(38, 23, 16, 0.2)',
   },
   dialogTitle: {
     margin: '0 0 0.8rem',
@@ -936,7 +942,7 @@ const styles = {
     fontWeight: 700,
   },
   dialogBody: {
-    color: '#ccc',
+    color: '#5C4537',
     fontSize: '0.95rem',
     marginBottom: '1.5rem',
     lineHeight: 1.6,
@@ -947,10 +953,9 @@ const styles = {
     justifyContent: 'flex-end',
   },
   cancelBtn: {
-    backgroundColor: 'transparent',
-    border: '1px solid #444',
-    color: '#ccc',
-    borderRadius: '8px',
+    backgroundColor: '#FAF6F0',
+    border: '1px solid #D5C2AE',
+    color: '#5C4537',
     padding: '0.6rem 1.2rem',
     cursor: 'pointer',
     fontWeight: 600,
@@ -960,7 +965,6 @@ const styles = {
     backgroundColor: '#c0392b',
     border: 'none',
     color: '#fff',
-    borderRadius: '8px',
     padding: '0.6rem 1.2rem',
     cursor: 'pointer',
     fontWeight: 700,

@@ -2,27 +2,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold-50: #fffbeb;
-  --color-gold-100: #fef3c7;
-  --color-gold-200: #fde68a;
-  --color-gold-300: #fcd34d;
-  --color-gold-400: #fbbf24;
-  --color-gold-500: #FFFFFF;
-  --color-gold-600: #E5E5E5;
-  --color-gold-700: #d97706;
-  --color-gold-800: #92400e;
-  --color-gold-900: #78350f;
+  --color-beige-50: #FCFAF7;
+  --color-beige-100: #F7F3EC;
+  --color-beige-200: #EFE7DC;
+  --color-beige-300: #E4D7C7;
+  --color-beige-400: #D5C2AE;
+  --color-beige-500: #C2AB96;
 
-  --color-dark-50: #f8f8f8;
-  --color-dark-100: #e0e0e0;
-  --color-dark-200: #c0c0c0;
-  --color-dark-300: #888888;
-  --color-dark-400: #555555;
-  --color-dark-500: #333333;
-  --color-dark-600: #222222;
-  --color-dark-700: #1A1A1A;
-  --color-dark-800: #111111;
-  --color-dark-900: #0a0a0a;
+  --color-brown-50: #FAF6F0;
+  --color-brown-100: #EFE2D4;
+  --color-brown-200: #DEC1A8;
+  --color-brown-300: #C9A184;
+  --color-brown-400: #AB7B5E;
+  --color-brown-500: #8C5E43;
+  --color-brown-600: #6F4935;
+  --color-brown-700: #543729;
+  --color-brown-800: #3D261C;
+  --color-brown-900: #261710;
 
   --font-arabic: "Amiri", serif;
   --font-display: "Cinzel", Georgia, serif;
@@ -31,20 +27,20 @@
 }
 
 @layer base {
-  /* ── Global: strip all border-radius site-wide ── */
+  /* ── Global: sharp edges site-wide ── */
   *, *::before, *::after {
     box-sizing: border-box;
     border-radius: 0 !important;
   }
 
   body {
-    background-color: #0c0c0c;
+    background-color: #F7F3EC;
     background-image:
-      radial-gradient(at 20% 15%, rgba(255, 255, 255, 0.07) 0px, transparent 55%),
-      radial-gradient(at 80% 55%, rgba(255, 255, 255, 0.04) 0px, transparent 50%),
-      radial-gradient(at 40% 85%, rgba(255, 255, 255, 0.05) 0px, transparent 60%);
+      radial-gradient(at 15% 15%, rgba(171, 123, 94, 0.08) 0px, transparent 55%),
+      radial-gradient(at 85% 45%, rgba(140, 94, 67, 0.05) 0px, transparent 50%),
+      radial-gradient(at 40% 85%, rgba(222, 193, 168, 0.12) 0px, transparent 60%);
     background-attachment: fixed;
-    color: #ffffff;
+    color: #261710;
     font-family: 'Plus Jakarta Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -52,6 +48,7 @@
 
   h1, h2, h3, .font-serif {
     font-family: 'Playfair Display', Georgia, serif;
+    color: #261710;
   }
 
   .font-display {
@@ -68,13 +65,13 @@
     -webkit-touch-callout: none;
   }
 
-  /* Glass system — radius stripped by global rule, rest unchanged */
+  /* Glass & card system in warm beige & brown shades */
   .glass-card {
-    background: rgba(22, 22, 22, 0.65);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.37);
+    border: 1px solid #E8DED1;
+    box-shadow: 0 4px 20px 0 rgba(61, 38, 28, 0.05);
   }
 
   .glass-card-hover {
@@ -82,56 +79,58 @@
   }
 
   .glass-card-hover:hover {
-    background: rgba(28, 28, 28, 0.8);
-    border-color: rgba(255, 255, 255, 0.45);
-    box-shadow: 0 6px 20px 0 rgba(255, 255, 255, 0.10);
+    background: #FFFFFF;
+    border-color: #AB7B5E;
+    box-shadow: 0 8px 24px 0 rgba(61, 38, 28, 0.09);
     transform: translateY(-1px);
   }
 
   .glass-panel {
-    background: rgba(18, 18, 18, 0.7);
+    background: rgba(250, 246, 240, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.45);
+    border: 1px solid #E2D7CA;
+    box-shadow: 0 6px 24px 0 rgba(61, 38, 28, 0.07);
   }
 
   .glass-badge {
-    background: rgba(255, 255, 255, 0.08);
+    background: #EFE7DC;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid #D5C2AE;
+    color: #3D261C;
   }
 
   .glass-nav {
-    background: rgba(10, 10, 10, 0.75);
+    background: rgba(247, 243, 236, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid #E5DAD0;
   }
 
   .glass-input {
-    background: rgba(24, 24, 24, 0.6);
+    background: #FFFFFF;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #D5C2AE;
+    color: #261710;
   }
 
   .glass-input:focus {
-    border-color: #FFFFFF;
-    box-shadow: 0 0 0 1px #FFFFFF;
+    border-color: #6F4935;
+    box-shadow: 0 0 0 1px #6F4935;
   }
 
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #111111;
+    background: #EFE7DC;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #FFFFFF;
+    background: #AB7B5E;
   }
 }
 
@@ -140,24 +139,24 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #FFFFFF;
-    color: #111111;
+    background-color: #3D261C;
+    color: #F7F3EC;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.1s;
-    border: none;
+    border: 1px solid #3D261C;
     text-decoration: none;
   }
-  .btn-primary:hover { background-color: #E5E5E5; }
+  .btn-primary:hover { background-color: #543729; }
   .btn-primary:active { transform: scale(0.97); }
 
   .btn-outline {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #FFFFFF;
-    color: #FFFFFF;
+    border: 1.5px solid #3D261C;
+    color: #3D261C;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
     cursor: pointer;
@@ -165,40 +164,40 @@
     background: transparent;
     text-decoration: none;
   }
-  .btn-outline:hover { background-color: #FFFFFF; color: #111111; }
+  .btn-outline:hover { background-color: #3D261C; color: #F7F3EC; }
   .btn-outline:active { transform: scale(0.97); }
 
   .card {
-    background-color: #1A1A1A;
-    border: 1px solid #333333;
+    background-color: #FFFFFF;
+    border: 1px solid #E8DED1;
     overflow: hidden;
   }
 
   .input-field {
     width: 100%;
-    background-color: #222222;
-    border: 1px solid #555555;
-    color: white;
+    background-color: #FFFFFF;
+    border: 1px solid #D5C2AE;
+    color: #261710;
     padding: 0.75rem 1rem;
     transition: border-color 0.2s, box-shadow 0.2s;
     outline: none;
   }
-  .input-field::placeholder { color: #888888; }
+  .input-field::placeholder { color: #9F8B7D; }
   .input-field:focus {
-    border-color: #FFFFFF;
-    box-shadow: 0 0 0 1px #FFFFFF;
+    border-color: #6F4935;
+    box-shadow: 0 0 0 1px #6F4935;
   }
 
   .section-title {
     font-size: 1.75rem;
     font-weight: 700;
-    color: white;
+    color: #261710;
   }
 
   .gold-divider {
     width: 4rem;
     height: 2px;
-    background-color: #FFFFFF;
+    background-color: #6F4935;
     margin: 1rem auto;
   }
 }
